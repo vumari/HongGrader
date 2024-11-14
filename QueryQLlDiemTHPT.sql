@@ -115,7 +115,7 @@ WHERE
     MaHS = 1 AND MaMon = 'Văn' AND MaHK = 'HK1_24-25';
 
 
---Xóa điểm theo thứ thự vào sau ra trước
+
 
 --================================================
 --Thêm một số dữ liệu mặc định
@@ -215,7 +215,7 @@ INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, TenNamHoc, Diem15p_1, Diem15p_2, Die
 (4, 'Sinh', 2, '2024-2025', 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
 (5, 'Su', 2, '2024-2025', 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
 
-select *from DiemTongHop
+
 
 
 
