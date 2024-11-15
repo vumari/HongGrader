@@ -112,7 +112,7 @@ SET
     DiemTB = (8.0 + 7.0) / 2,  -- Ví dụ tính điểm trung bình từ điểm 15p và 45p
     KetQua = 'Dat'
 WHERE 
-    MaHS = 1 AND MaMon = 'Văn' AND MaHK = 'HK1_24-25';
+    MaHS = 1 AND MaMon = 'Van' AND MaHK = 1;
 
 
 
