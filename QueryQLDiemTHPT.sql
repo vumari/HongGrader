@@ -49,7 +49,7 @@ CREATE TABLE DiemTongHop (
     MaHS int NOT NULL REFERENCES HocSinh(MaHS),
     MaMon varchar(20) NOT NULL REFERENCES Mon(MaMon),
     MaHK int NOT NULL REFERENCES HocKi(MaHK),
-	TenNamHoc varchar(30) not null references NamHoc(TenNamHoc),
+	MaLop int not null references Lop(MaLop),
     Diem15p_1 float NULL,  -- Điểm 15 phút lần 1
     Diem15p_2 float NULL,  -- Điểm 15 phút lần 2
     Diem15p_3 float NULL,  -- Điểm 15 phút lần 3
@@ -57,7 +57,7 @@ CREATE TABLE DiemTongHop (
     Diem45p_2 float NULL,  -- Điểm 45 phút lần 2
     DiemTB float NULL,     -- Điểm trung bình
     KetQua nvarchar(10) CHECK (KetQua IN ('Dat', 'Khong Dat')),  -- Kết quả đạt/không đạt
-    PRIMARY KEY (MaHS, MaMon, MaHK,TenNamHoc)
+    PRIMARY KEY (MaHS, MaMon, MaHK,MaLop)
 );
 
 
@@ -72,26 +72,14 @@ SELECT
     hs.HoTen,
     mon.TenMon,
     hk.TenHK,               -- Học kỳ
-    dt.TenNamHoc,           -- Năm học
-    -- Điểm 15 phút lần 1
+    l.TenNamHoc,            -- Năm học
     dt.Diem15p_1 AS Diem15P_Lan1,
-    -- Điểm 15 phút lần 2
     dt.Diem15p_2 AS Diem15P_Lan2,
-    -- Điểm 15 phút lần 3
     dt.Diem15p_3 AS Diem15P_Lan3,
-    -- Điểm 45 phút lần 1
     dt.Diem45p_1 AS Diem45P_Lan1,
-    -- Điểm 45 phút lần 2
     dt.Diem45p_2 AS Diem45P_Lan2,
-    -- Tính điểm trung bình từ các điểm 15p và 45p
-    CASE 
-        WHEN dt.Diem15p_1 IS NOT NULL AND dt.Diem45p_1 IS NOT NULL THEN (dt.Diem15p_1 + dt.Diem45p_1) / 2
-        WHEN dt.Diem15p_2 IS NOT NULL AND dt.Diem45p_2 IS NOT NULL THEN (dt.Diem15p_2 + dt.Diem45p_2) / 2
-        WHEN dt.Diem15p_3 IS NOT NULL THEN dt.Diem15p_3
-        ELSE NULL
-    END AS DiemTB,
-    -- Kết quả đạt/không đạt
-    dt.KetQua
+    dt.DiemTB,              -- Điểm trung bình đã có sẵn trong bảng DiemTongHop
+    dt.KetQua               -- Kết quả đạt/không đạt
 FROM 
     HocSinh hs
 JOIN 
@@ -100,10 +88,11 @@ JOIN
     Mon mon ON dt.MaMon = mon.MaMon
 JOIN 
     HocKi hk ON dt.MaHK = hk.MaHK
+JOIN 
+    Lop l ON dt.MaLop = l.MaLop
 WHERE 
-    mon.MaMon = 'Toan'  -- thay tùy mã
-GROUP BY 
-    hs.MaHS, hs.HoTen, mon.TenMon, hk.TenHK, dt.TenNamHoc, dt.Diem15p_1, dt.Diem15p_2, dt.Diem15p_3, dt.Diem45p_1, dt.Diem45p_2, dt.DiemTB, dt.KetQua;
+    mon.MaMon = 'Toan';  -- Lọc theo tên môn học là 'Toán'
+
 
 --=============================================--
 -- Cập nhật điểm cho học sinh
@@ -117,6 +106,7 @@ SET
     KetQua = 'Dat'
 WHERE 
     MaHS = 1 AND MaMon = 'Van' AND MaHK = 1;
+
 
 --Khi một học sinh chuyển lớp :
 DELETE FROM ChiTietHocSinh_Lop
@@ -216,12 +206,13 @@ INSERT INTO TaiKhoan (userName, passWord) VALUES
 ('1', '1')
 --Thêm điểm
 -- Them diem cho hoc sinh vao bang DiemTongHop
-INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, TenNamHoc, Diem15p_1, Diem15p_2, Diem15p_3, Diem45p_1, Diem45p_2, DiemTB, KetQua) VALUES
-(1, 'Toan', 1, '2024-2025', 7.5, 8.0, NULL, 6.5, 7.0, 7.25, 'Dat'),
-(2, 'Ly', 1, '2024-2025', 8.0, 7.5, 9.0, 8.5, 7.0, 7.75, 'Dat'),
-(3, 'Hoa', 1, '2024-2025', NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
-(4, 'Sinh', 2, '2024-2025', 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
-(5, 'Su', 2, '2024-2025', 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
+INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, MaLop, Diem15p_1, Diem15p_2, Diem15p_3, Diem45p_1, Diem45p_2, DiemTB, KetQua) VALUES
+(1, 'Toan', 1, 1, 7.5, 8.0, NULL, 6.5, 7.0, 7.25, 'Dat'),
+(2, 'Ly', 1, 2, 8.0, 7.5, 9.0, 8.5, 7.0, 7.75, 'Dat'),
+(3, 'Hoa', 1, 3, NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
+(4, 'Sinh', 2, 4, 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
+(5, 'Su', 2, 5, 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
+
 --
 -- Học sinh 1
 INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
