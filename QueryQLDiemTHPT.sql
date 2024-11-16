@@ -32,6 +32,11 @@ use QLDiemTHPT
  DanToc nvarchar(10) not null,
  NoiSinh nvarchar(100) not null
  )
+ CREATE TABLE ChiTietHocSinh_Lop (
+    MaHS INT NOT NULL REFERENCES HocSinh(MaHS),      
+    MaLop INT NOT NULL REFERENCES Lop(MaLop),       
+    PRIMARY KEY (MaHS, MaLop)                     
+);
 
  create table HocKi (
  MaHK int IDENTITY PRIMARY KEY not null,
@@ -112,9 +117,13 @@ SET
 WHERE 
     MaHS = 1 AND MaMon = 'Van' AND MaHK = 1;
 
-select * from DiemTongHop
+--Khi một học sinh chuyển lớp :
+DELETE FROM ChiTietHocSinh_Lop
+WHERE MaHS = 1;  -- Xóa học sinh có mã 1 khỏi các lớp cũ
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop)
+VALUES (1, 6);  -- Thêm học sinh vào lớp mới
 
---Xóa điểm theo thứ thự vào sau ra trước
+
 
 --================================================
 --Thêm một số dữ liệu mặc định
@@ -214,4 +223,32 @@ INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, TenNamHoc, Diem15p_1, Diem15p_2, Die
 (4, 'Sinh', 2, '2024-2025', 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
 (5, 'Su', 2, '2024-2025', 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
 --
+-- Học sinh 1
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(1, 1),  -- Học sinh 1 học lớp 10C1
+(1, 6),  -- Học sinh 1 học lớp 11B1
+(1, 11); -- Học sinh 1 học lớp 12A1
+-- Học sinh 2
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(2, 2),  -- Học sinh 2 học lớp 10C2
+(2, 7),  -- Học sinh 2 học lớp 11B2
+(2, 12); -- Học sinh 2 học lớp 12A2
+
+-- Học sinh 3
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(3, 3),  -- Học sinh 3 học lớp 10C3
+(3, 8),  -- Học sinh 3 học lớp 11B3
+(3, 13); -- Học sinh 3 học lớp 12A3
+
+-- Học sinh 4
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(4, 4),  -- Học sinh 4 học lớp 10C4
+(4, 9),  -- Học sinh 4 học lớp 11B4
+(4, 14); -- Học sinh 4 học lớp 12A4
+
+-- Học sinh 5
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(5, 5),  -- Học sinh 5 học lớp 10C5
+(5, 10), -- Học sinh 5 học lớp 11B5
+(5, 15); -- Học sinh 5 học lớp 12A5
 
