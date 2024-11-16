@@ -24,11 +24,6 @@ use QLDiemTHPT
  MaGVCN int not null references GiaoVien(MaGV),
  TenNamHoc varchar(30) not null references NamHoc(TenNamHoc)
  )
- CREATE TABLE PhanCongDay ( --Giáo viên nào dạy lớp nào
-    MaGV INT NOT NULL REFERENCES GiaoVien(MaGV),
-    MaLop INT NOT NULL REFERENCES Lop(MaLop),
-    PRIMARY KEY (MaGV, MaLop)
-);
 
  create table HocSinh (
  MaHS int IDENTITY PRIMARY KEY not null,--chuỗi tự tăng 
@@ -257,44 +252,3 @@ INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
 (5, 10), -- Học sinh 5 học lớp 11B5
 (5, 15); -- Học sinh 5 học lớp 12A5
 
--- Phân công dạy các lớp cho giáo viên
-INSERT INTO PhanCongDay (MaGV, MaLop) VALUES
-(1, 1), -- Giáo viên Toán dạy lớp 10C1
-(1, 6), -- Giáo viên Toán dạy lớp 11B1
-(1, 11), -- Giáo viên Toán dạy lớp 12A1
-
-(2, 2), -- Giáo viên Vật Lý dạy lớp 10C2
-(2, 7), -- Giáo viên Vật Lý dạy lớp 11B2
-(2, 12), -- Giáo viên Vật Lý dạy lớp 12A2
-
-(3, 3), -- Giáo viên Hóa Học dạy lớp 10C3
-(3, 8), -- Giáo viên Hóa Học dạy lớp 11B3
-(3, 13), -- Giáo viên Hóa Học dạy lớp 12A3
-
-(4, 4), -- Giáo viên Sinh Học dạy lớp 10C4
-(4, 9), -- Giáo viên Sinh Học dạy lớp 11B4
-(4, 14), -- Giáo viên Sinh Học dạy lớp 12A4
-
-(5, 5), -- Giáo viên Lịch Sử dạy lớp 10C5
-(5, 10), -- Giáo viên Lịch Sử dạy lớp 11B5
-(5, 15), -- Giáo viên Lịch Sử dạy lớp 12A5
-
-(6, 1), -- Giáo viên Địa Lý dạy lớp 10C1
-(6, 6), -- Giáo viên Địa Lý dạy lớp 11B1
-(6, 11), -- Giáo viên Địa Lý dạy lớp 12A1
-
-(7, 2), -- Giáo viên Giáo Dục Công Dân dạy lớp 10C2
-(7, 7), -- Giáo viên Giáo Dục Công Dân dạy lớp 11B2
-(7, 12), -- Giáo viên Giáo Dục Công Dân dạy lớp 12A2
-
-(8, 3), -- Giáo viên Tin Học dạy lớp 10C3
-(8, 8), -- Giáo viên Tin Học dạy lớp 11B3
-(8, 13), -- Giáo viên Tin Học dạy lớp 12A3
-
-(9, 4), -- Giáo viên Công Nghệ dạy lớp 10C4
-(9, 9), -- Giáo viên Công Nghệ dạy lớp 11B4
-(9, 14), -- Giáo viên Công Nghệ dạy lớp 12A4
-
-(10, 5), -- Giáo viên Ngoại Ngữ Khác dạy lớp 10C5
-(10, 10), -- Giáo viên Ngoại Ngữ Khác dạy lớp 11B5
-(10, 15); -- Giáo viên Ngoại Ngữ Khác dạy lớp 12A5
