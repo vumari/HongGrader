@@ -1,4 +1,4 @@
-﻿create database QLDiemTHPT
+create database QLDiemTHPT
 use QLDiemTHPT
  
  create table Mon (
@@ -13,18 +13,17 @@ use QLDiemTHPT
  DiaChi nvarchar(100) not null,
  SDT int not null,
  Email nvarchar(50) not null,
+ MaMon varchar(20) not null references Mon(MaMon)
  )
  create table NamHoc(
  TenNamHoc varchar(30) primary key not null
  )
-
  create table Lop (
  MaLop int IDENTITY PRIMARY KEY not null,
  TenLop varchar(20) not null,
  MaGVCN int not null references GiaoVien(MaGV),
  TenNamHoc varchar(30) not null references NamHoc(TenNamHoc)
  )
-
  create table HocSinh (
  MaHS int IDENTITY PRIMARY KEY not null,--chuỗi tự tăng 
  HoTen nvarchar(50) not null,
@@ -33,11 +32,11 @@ use QLDiemTHPT
  DanToc nvarchar(10) not null,
  NoiSinh nvarchar(100) not null
  )
+
  create table HocKi (
  MaHK int IDENTITY PRIMARY KEY not null,
  TenHK nvarchar(20) not null, --"Học kì 1" và "Học kì 2"--
  )
- 
 -- Bảng Diem 
 -- Cập nhật bảng DiemTongHop với các cột mới cho các lần điểm
 CREATE TABLE DiemTongHop (
@@ -109,13 +108,13 @@ SET
     Diem15p_3 = 8.5,
     Diem45p_1 = 7.0, 
     Diem45p_2 = 8.0,
-    DiemTB = (8.0 + 7.0) / 2,  -- Ví dụ tính điểm trung bình từ điểm 15p và 45p
     KetQua = 'Dat'
 WHERE 
     MaHS = 1 AND MaMon = 'Van' AND MaHK = 1;
 
+select * from DiemTongHop
 
-
+--Xóa điểm theo thứ thự vào sau ra trước
 
 --================================================
 --Thêm một số dữ liệu mặc định
@@ -135,20 +134,20 @@ INSERT INTO Mon (MaMon, TenMon) VALUES
 ('NN', 'Ngoại Ngữ Khác'),
 ('TheDuc', 'Thể Dục');
 --Giáo viên
-INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email) VALUES
-( 'Nguyen Van A', '1980-03-12', 'Nam', 'Hà Nội', 1234567890, 'nguyenvana@gmail.com'),
-('Tran Thi B', '1985-07-23', 'Nữ', 'Hà Nội', 1234567891, 'tranthib@gmail.com'),
-('Le Van C', '1978-11-02', 'Nam', 'Hải Phòng', 1234567892, 'levanc@gmail.com'),
-('Hoang Thi D', '1983-09-05', 'Nữ', 'Đà Nẵng', 1234567893, 'hoangthid@gmail.com'),
-('Pham Van E', '1979-06-20', 'Nam', 'TP.HCM', 1234567894, 'phamvane@gmail.com'),
-('Đo Thi F', '1986-02-14', 'Nữ', 'Hà Nội', 1234567895, 'dothif@gmail.com'),
-('Nguyen Thi G', '1981-01-01', 'Nữ', 'Huế', 1234567896, 'nguyenthig@gmail.com'),
-( 'Truong Văn H', '1977-12-11', 'Nam', 'Cần Thơ', 1234567897, 'truongvanh@gmail.com'),
-('Vu Văn I', '1982-05-18', 'Nam', 'Quảng Ninh', 1234567898, 'vuvani@gmail.com'),
-('Luong Thị J', '1984-08-29', 'Nữ', 'Hà Nội', 1234567899, 'luongthij@gmail.com'),
-('Phan Văn K', '1987-04-22', 'Nam', 'Hà Tĩnh', 1234567800, 'phanvank@gmail.com'),
-( 'Nguyen Thị L', '1980-10-30', 'Nữ', 'Đà Lạt', 1234567801, 'nguyenthil@gmail.com'),
-('Bui Van M', '1983-03-03', 'Nam', 'Phú Thọ', 1234567802, 'buivanm@gmail.com');
+INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email,MaMon) VALUES
+( 'Nguyen Van A', '1980-03-12', 'Nam', 'Hà Nội', 1234567890, 'nguyenvana@gmail.com','Toan'),
+('Tran Thi B', '1985-07-23', 'Nữ', 'Hà Nội', 1234567891, 'tranthib@gmail.com','Ly'),
+('Le Van C', '1978-11-02', 'Nam', 'Hải Phòng', 1234567892, 'levanc@gmail.com','Hoa'),
+('Hoang Thi D', '1983-09-05', 'Nữ', 'Đà Nẵng', 1234567893, 'hoangthid@gmail.com','Sinh'),
+('Pham Van E', '1979-06-20', 'Nam', 'TP.HCM', 1234567894, 'phamvane@gmail.com','Su'),
+('Đo Thi F', '1986-02-14', 'Nữ', 'Hà Nội', 1234567895, 'dothif@gmail.com','Dia'),
+('Nguyen Thi G', '1981-01-01', 'Nữ', 'Huế', 1234567896, 'nguyenthig@gmail.com','GDCD'),
+( 'Truong Văn H', '1977-12-11', 'Nam', 'Cần Thơ', 1234567897, 'truongvanh@gmail.com','Tin'),
+('Vu Văn I', '1982-05-18', 'Nam', 'Quảng Ninh', 1234567898, 'vuvani@gmail.com','CN'),
+('Luong Thị J', '1984-08-29', 'Nữ', 'Hà Nội', 1234567899, 'luongthij@gmail.com','NN'),
+('Phan Văn K', '1987-04-22', 'Nam', 'Hà Tĩnh', 1234567800, 'phanvank@gmail.com','TheDuc'),
+( 'Nguyen Thị L', '1980-10-30', 'Nữ', 'Đà Lạt', 1234567801, 'nguyenthil@gmail.com','Van'),
+('Bui Van M', '1983-03-03', 'Nam', 'Phú Thọ', 1234567802, 'buivanm@gmail.com','Anh');
 -- Thêm các năm học vào bảng NamHoc
 INSERT INTO NamHoc (TenNamHoc) VALUES
 ('2024-2025'),
@@ -214,9 +213,5 @@ INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, TenNamHoc, Diem15p_1, Diem15p_2, Die
 (3, 'Hoa', 1, '2024-2025', NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
 (4, 'Sinh', 2, '2024-2025', 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
 (5, 'Su', 2, '2024-2025', 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
-
-
-
-
-
+--
 
