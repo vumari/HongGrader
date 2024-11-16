@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>quanlydiem</class>
+ <widget class="QMainWindow" name="quanlydiem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Quản lý điểm</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="styleSheet">
+       <string notr="true">alternate-background-color: rgb(255, 255, 0);</string>
+      </property>
+      <property name="title">
+       <string>Thông tin Điểm của học sinh</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Mã học sinh</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="LEmaHS">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="2" rowspan="5" colspan="2">
+        <widget class="QGroupBox" name="groupBox_HS">
+         <property name="title">
+          <string>Tra cứu mã học sinh</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Kết quả</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="CBketqua"/>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Tên học sinh</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="LETenHS"/>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Lớp</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="CBlop"/>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Năm học</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="CBtracuunamhoc"/>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1" rowspan="2">
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>Tra cứu 
+ mã học sinh</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Mã môn học</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="CBmonhoc"/>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Học kì</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="RBHK1">
+           <property name="text">
+            <string>Học kì I</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="RBHK2">
+           <property name="text">
+            <string>Học kì II</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Năm học</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="CBnamhoc"/>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Bài kiểm tra</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="CBbaikt"/>
+         </item>
+        </layout>
+       </item>
+       <item row="5" column="0">
+        <widget class="QPushButton" name="BThienthi">
+         <property name="text">
+          <string>Hiển thị</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QPushButton" name="BTthem">
+         <property name="text">
+          <string>Thêm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QPushButton" name="BTsua">
+         <property name="text">
+          <string>Sửa</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QPushButton" name="Btxoa">
+         <property name="text">
+          <string>Xóa</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableView" name="tableView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="QMenu" name="menuTaikhoan">
+    <property name="title">
+     <string>Tài Khoản</string>
+    </property>
+    <addaction name="actionEdit"/>
+    <addaction name="actionLog_out"/>
+   </widget>
+   <widget class="QMenu" name="menuquanly">
+    <property name="title">
+     <string>Quản lý danh mục</string>
+    </property>
+    <addaction name="actiongiaovien"/>
+    <addaction name="actionhocsinh"/>
+    <addaction name="actionlop"/>
+   </widget>
+   <widget class="QMenu" name="menuthongke">
+    <property name="title">
+     <string>Thống kê - Báo cáo</string>
+    </property>
+    <addaction name="actionstudentlist"/>
+    <addaction name="actionscoreboard"/>
+   </widget>
+   <addaction name="menuTaikhoan"/>
+   <addaction name="menuquanly"/>
+   <addaction name="menuthongke"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionEdit">
+   <property name="text">
+    <string>Thông tin tài khoản</string>
+   </property>
+  </action>
+  <action name="actionLog_out">
+   <property name="text">
+    <string>Đăng xuất</string>
+   </property>
+  </action>
+  <action name="actiongiaovien">
+   <property name="text">
+    <string>Danh mục giáo viên</string>
+   </property>
+  </action>
+  <action name="actionhocsinh">
+   <property name="text">
+    <string>Danh mục học sinh</string>
+   </property>
+  </action>
+  <action name="actionlop">
+   <property name="text">
+    <string>Danh mục lớp học</string>
+   </property>
+  </action>
+  <action name="actionnienkhoa">
+   <property name="text">
+    <string>Danh mục niên khóa</string>
+   </property>
+  </action>
+  <action name="actiontkhocsinh">
+   <property name="text">
+    <string>tkhocsinh</string>
+   </property>
+  </action>
+  <action name="actionbangdiem">
+   <property name="text">
+    <string>bangdiem</string>
+   </property>
+  </action>
+  <action name="actionstudentlist">
+   <property name="text">
+    <string>Danh sách học sinh</string>
+   </property>
+  </action>
+  <action name="actionscoreboard">
+   <property name="text">
+    <string>Bảng điểm</string>
+   </property>
+  </action>
+  <action name="actionnamhoc">
+   <property name="text">
+    <string/>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

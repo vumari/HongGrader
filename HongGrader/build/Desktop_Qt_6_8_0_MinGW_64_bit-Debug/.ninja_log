@@ -1,0 +1,25 @@
+# ninja log v6
+2902	3102	7534538910111193	HongGrader.exe	d5706f00ae3f7dba
+24	534	7534538885826479	HongGrader_autogen/timestamp	ee883891ea95b9c
+24	534	7534538885826479	HongGrader_autogen/mocs_compilation.cpp	ee883891ea95b9c
+24	534	7534538885826479	D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/HongGrader_autogen/timestamp	ee883891ea95b9c
+535	2460	7534538886445544	CMakeFiles/HongGrader.dir/HongGrader_autogen/mocs_compilation.cpp.obj	bc2a868829e703c3
+24	534	7534538885826479	D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/HongGrader_autogen/mocs_compilation.cpp	ee883891ea95b9c
+538	2672	7534538886445544	CMakeFiles/HongGrader.dir/dangnhap.cpp.obj	34e26c3ade1affa5
+707	2944	7534528870569866	CMakeFiles/HongGrader.dir/main.cpp.obj	f5002bb41425c9c9
+636	2568	7534433363227330	CMakeFiles/HongGrader.dir/mainwindow.cpp.obj	803eb9dda41f9165
+541	2902	7534538886445544	CMakeFiles/HongGrader.dir/quanlydiem.cpp.obj	6170c6052eaa8f92
+544	2451	7534538886445544	CMakeFiles/HongGrader.dir/quanlygiaovien.cpp.obj	2a6f6c10d4f34c0
+547	2487	7534538886445544	CMakeFiles/HongGrader.dir/quanlyhocsinh.cpp.obj	caa3e0c6bcb0e8d9
+22	755	7534541263274173	HongGrader_autogen/timestamp	ee883891ea95b9c
+22	755	7534541263274173	HongGrader_autogen/mocs_compilation.cpp	ee883891ea95b9c
+22	755	7534541263274173	D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/HongGrader_autogen/timestamp	ee883891ea95b9c
+22	755	7534541263274173	D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/HongGrader_autogen/mocs_compilation.cpp	ee883891ea95b9c
+759	3019	7534541264000308	CMakeFiles/HongGrader.dir/main.cpp.obj	f5002bb41425c9c9
+781	3034	7534541264156892	CMakeFiles/HongGrader.dir/quanlylophoc.cpp.obj	5d56f5b0ca112259
+777	3052	7534541264156892	CMakeFiles/HongGrader.dir/quanlyhocsinh.cpp.obj	caa3e0c6bcb0e8d9
+755	3071	7534541264000308	CMakeFiles/HongGrader.dir/HongGrader_autogen/mocs_compilation.cpp.obj	bc2a868829e703c3
+770	3125	7534541264000308	CMakeFiles/HongGrader.dir/quanlygiaovien.cpp.obj	2a6f6c10d4f34c0
+763	3285	7534541264000308	CMakeFiles/HongGrader.dir/dangnhap.cpp.obj	34e26c3ade1affa5
+766	3423	7534541264000308	CMakeFiles/HongGrader.dir/quanlydiem.cpp.obj	6170c6052eaa8f92
+3423	3640	7534541290549686	HongGrader.exe	9062d2a6bcec6aae
