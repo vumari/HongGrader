@@ -42,3 +42,24 @@ void quanlydiem::on_actionlop_triggered()
     formlophoc->show();
 }
 
+
+void quanlydiem::on_actionEdit_triggered()
+{
+    formtaikhoan = new quanlytaikhoan(this);
+    formtaikhoan->show();
+}
+
+
+void quanlydiem::on_actionscoreboard_triggered()
+{
+    formtkdiem = new thongkediem(this);
+    formtkdiem->show();
+}
+
+
+void quanlydiem::on_actionstudentlist_triggered()
+{
+    formtkhocsinh = new thongkehocsinh(this);
+    formtkhocsinh->show();
+}
+

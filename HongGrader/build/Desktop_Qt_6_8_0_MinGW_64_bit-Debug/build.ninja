@@ -105,6 +105,30 @@ build CMakeFiles/HongGrader.dir/quanlylophoc.cpp.obj: CXX_COMPILER__HongGrader_u
   OBJECT_DIR = CMakeFiles\HongGrader.dir
   OBJECT_FILE_DIR = CMakeFiles\HongGrader.dir
 
+build CMakeFiles/HongGrader.dir/quanlytaikhoan.cpp.obj: CXX_COMPILER__HongGrader_unscanned_Debug D$:/ManYinHong$ 96044/MNM/HongGrader/HongGrader/quanlytaikhoan.cpp || cmake_object_order_depends_target_HongGrader
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\HongGrader.dir\quanlytaikhoan.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/HongGrader_autogen/include" -isystem C:/Qt/6.8.0/mingw_64/include/QtCore -isystem C:/Qt/6.8.0/mingw_64/include -isystem C:/Qt/6.8.0/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.0/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.0/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\HongGrader.dir
+  OBJECT_FILE_DIR = CMakeFiles\HongGrader.dir
+
+build CMakeFiles/HongGrader.dir/thongkediem.cpp.obj: CXX_COMPILER__HongGrader_unscanned_Debug D$:/ManYinHong$ 96044/MNM/HongGrader/HongGrader/thongkediem.cpp || cmake_object_order_depends_target_HongGrader
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\HongGrader.dir\thongkediem.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/HongGrader_autogen/include" -isystem C:/Qt/6.8.0/mingw_64/include/QtCore -isystem C:/Qt/6.8.0/mingw_64/include -isystem C:/Qt/6.8.0/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.0/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.0/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\HongGrader.dir
+  OBJECT_FILE_DIR = CMakeFiles\HongGrader.dir
+
+build CMakeFiles/HongGrader.dir/thongkehocsinh.cpp.obj: CXX_COMPILER__HongGrader_unscanned_Debug D$:/ManYinHong$ 96044/MNM/HongGrader/HongGrader/thongkehocsinh.cpp || cmake_object_order_depends_target_HongGrader
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\HongGrader.dir\thongkehocsinh.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/HongGrader_autogen/include" -isystem C:/Qt/6.8.0/mingw_64/include/QtCore -isystem C:/Qt/6.8.0/mingw_64/include -isystem C:/Qt/6.8.0/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.0/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.0/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\HongGrader.dir
+  OBJECT_FILE_DIR = CMakeFiles\HongGrader.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target HongGrader
@@ -113,7 +137,7 @@ build CMakeFiles/HongGrader.dir/quanlylophoc.cpp.obj: CXX_COMPILER__HongGrader_u
 #############################################
 # Link the executable HongGrader.exe
 
-build HongGrader.exe: CXX_EXECUTABLE_LINKER__HongGrader_Debug CMakeFiles/HongGrader.dir/HongGrader_autogen/mocs_compilation.cpp.obj CMakeFiles/HongGrader.dir/main.cpp.obj CMakeFiles/HongGrader.dir/dangnhap.cpp.obj CMakeFiles/HongGrader.dir/quanlydiem.cpp.obj CMakeFiles/HongGrader.dir/quanlygiaovien.cpp.obj CMakeFiles/HongGrader.dir/quanlyhocsinh.cpp.obj CMakeFiles/HongGrader.dir/quanlylophoc.cpp.obj | C$:/Qt/6.8.0/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.8.0/mingw_64/lib/libQt6Gui.a C$:/Qt/6.8.0/mingw_64/lib/libQt6Core.a C$:/Qt/6.8.0/mingw_64/lib/libQt6EntryPoint.a || HongGrader_autogen HongGrader_autogen_timestamp_deps
+build HongGrader.exe: CXX_EXECUTABLE_LINKER__HongGrader_Debug CMakeFiles/HongGrader.dir/HongGrader_autogen/mocs_compilation.cpp.obj CMakeFiles/HongGrader.dir/main.cpp.obj CMakeFiles/HongGrader.dir/dangnhap.cpp.obj CMakeFiles/HongGrader.dir/quanlydiem.cpp.obj CMakeFiles/HongGrader.dir/quanlygiaovien.cpp.obj CMakeFiles/HongGrader.dir/quanlyhocsinh.cpp.obj CMakeFiles/HongGrader.dir/quanlylophoc.cpp.obj CMakeFiles/HongGrader.dir/quanlytaikhoan.cpp.obj CMakeFiles/HongGrader.dir/thongkediem.cpp.obj CMakeFiles/HongGrader.dir/thongkehocsinh.cpp.obj | C$:/Qt/6.8.0/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.8.0/mingw_64/lib/libQt6Gui.a C$:/Qt/6.8.0/mingw_64/lib/libQt6Core.a C$:/Qt/6.8.0/mingw_64/lib/libQt6EntryPoint.a || HongGrader_autogen HongGrader_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.8.0/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.8.0/mingw_64/lib/libQt6Gui.a  C:/Qt/6.8.0/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.8.0/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -200,7 +224,7 @@ build HongGrader_autogen_timestamp_deps: phony
 #############################################
 # Utility command for HongGrader_autogen
 
-build HongGrader_autogen: phony CMakeFiles/HongGrader_autogen HongGrader_autogen/include/ui_dangnhap.h HongGrader_autogen/include/ui_quanlydiem.h HongGrader_autogen/include/ui_quanlygiaovien.h HongGrader_autogen/include/ui_quanlyhocsinh.h HongGrader_autogen/include/ui_quanlylophoc.h HongGrader_autogen/timestamp HongGrader_autogen/mocs_compilation.cpp HongGrader_autogen_timestamp_deps
+build HongGrader_autogen: phony CMakeFiles/HongGrader_autogen HongGrader_autogen/include/ui_dangnhap.h HongGrader_autogen/include/ui_quanlydiem.h HongGrader_autogen/include/ui_quanlygiaovien.h HongGrader_autogen/include/ui_quanlyhocsinh.h HongGrader_autogen/include/ui_quanlylophoc.h HongGrader_autogen/include/ui_quanlytaikhoan.h HongGrader_autogen/include/ui_thongkediem.h HongGrader_autogen/include/ui_thongkehocsinh.h HongGrader_autogen/timestamp HongGrader_autogen/mocs_compilation.cpp HongGrader_autogen_timestamp_deps
 
 
 #############################################
@@ -217,7 +241,7 @@ build HongGrader_autogen/timestamp HongGrader_autogen/mocs_compilation.cpp | ${c
 #############################################
 # Phony custom command for CMakeFiles\HongGrader_autogen
 
-build CMakeFiles/HongGrader_autogen HongGrader_autogen/include/ui_dangnhap.h HongGrader_autogen/include/ui_quanlydiem.h HongGrader_autogen/include/ui_quanlygiaovien.h HongGrader_autogen/include/ui_quanlyhocsinh.h HongGrader_autogen/include/ui_quanlylophoc.h | ${cmake_ninja_workdir}CMakeFiles/HongGrader_autogen ${cmake_ninja_workdir}HongGrader_autogen/include/ui_dangnhap.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlydiem.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlygiaovien.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlyhocsinh.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlylophoc.h: phony HongGrader_autogen/timestamp || HongGrader_autogen_timestamp_deps
+build CMakeFiles/HongGrader_autogen HongGrader_autogen/include/ui_dangnhap.h HongGrader_autogen/include/ui_quanlydiem.h HongGrader_autogen/include/ui_quanlygiaovien.h HongGrader_autogen/include/ui_quanlyhocsinh.h HongGrader_autogen/include/ui_quanlylophoc.h HongGrader_autogen/include/ui_quanlytaikhoan.h HongGrader_autogen/include/ui_thongkediem.h HongGrader_autogen/include/ui_thongkehocsinh.h | ${cmake_ninja_workdir}CMakeFiles/HongGrader_autogen ${cmake_ninja_workdir}HongGrader_autogen/include/ui_dangnhap.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlydiem.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlygiaovien.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlyhocsinh.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlylophoc.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_quanlytaikhoan.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_thongkediem.h ${cmake_ninja_workdir}HongGrader_autogen/include/ui_thongkehocsinh.h: phony HongGrader_autogen/timestamp || HongGrader_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

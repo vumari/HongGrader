@@ -361,4 +361,7 @@ D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_b
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlygiaovien.h \
   D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlyhocsinh.h \
-  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlylophoc.h
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlylophoc.h \
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlytaikhoan.h \
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/thongkediem.h \
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/thongkehocsinh.h

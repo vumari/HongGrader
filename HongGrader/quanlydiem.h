@@ -5,6 +5,9 @@
 #include "quanlygiaovien.h"
 #include "quanlyhocsinh.h"
 #include "quanlylophoc.h"
+#include "quanlytaikhoan.h"
+#include "thongkediem.h"
+#include "thongkehocsinh.h"
 
 namespace Ui {
 class quanlydiem;
@@ -27,12 +30,21 @@ private slots:
 
     void on_actionlop_triggered();
 
+    void on_actionEdit_triggered();
+
+    void on_actionscoreboard_triggered();
+
+    void on_actionstudentlist_triggered();
+
 private:
     Ui::quanlydiem *ui;
     dangnhap *formlogin;
     quanlygiaovien *formgiaovien;
     quanlyhocsinh *formhocsinh;
     quanlylophoc *formlophoc;
+    quanlytaikhoan *formtaikhoan;
+    thongkediem *formtkdiem;
+    thongkehocsinh *formtkhocsinh;
 };
 
 #endif // QUANLYDIEM_H

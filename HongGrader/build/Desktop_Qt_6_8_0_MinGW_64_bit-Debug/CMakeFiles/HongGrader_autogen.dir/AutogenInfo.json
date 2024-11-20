@@ -294,6 +294,24 @@
 			"MU",
 			"EWIEGA46WW/moc_quanlylophoc.cpp",
 			null
+		],
+		[
+			"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/quanlytaikhoan.h",
+			"MU",
+			"EWIEGA46WW/moc_quanlytaikhoan.cpp",
+			null
+		],
+		[
+			"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/thongkediem.h",
+			"MU",
+			"EWIEGA46WW/moc_thongkediem.cpp",
+			null
+		],
+		[
+			"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/thongkehocsinh.h",
+			"MU",
+			"EWIEGA46WW/moc_thongkehocsinh.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -390,6 +408,21 @@
 		],
 		[
 			"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/quanlylophoc.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/quanlytaikhoan.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/thongkediem.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/ManYinHong 96044/MNM/HongGrader/HongGrader/thongkehocsinh.cpp",
 			"MU",
 			null
 		]

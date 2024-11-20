@@ -1,4 +1,4 @@
-﻿create database QLDiemTHPT
+create database QLDiemTHPT
 use QLDiemTHPT
  
  create table Mon (
@@ -13,11 +13,11 @@ use QLDiemTHPT
  DiaChi nvarchar(100) not null,
  SDT int not null,
  Email nvarchar(50) not null,
+ MaMon varchar(20) not null references Mon(MaMon)
  )
  create table NamHoc(
  TenNamHoc varchar(30) primary key not null
  )
-
  create table Lop (
  MaLop int IDENTITY PRIMARY KEY not null,
  TenLop varchar(20) not null,
@@ -33,26 +33,31 @@ use QLDiemTHPT
  DanToc nvarchar(10) not null,
  NoiSinh nvarchar(100) not null
  )
+ CREATE TABLE ChiTietHocSinh_Lop (
+    MaHS INT NOT NULL REFERENCES HocSinh(MaHS),      
+    MaLop INT NOT NULL REFERENCES Lop(MaLop),       
+    PRIMARY KEY (MaHS, MaLop)                     
+);
+
  create table HocKi (
  MaHK int IDENTITY PRIMARY KEY not null,
  TenHK nvarchar(20) not null, --"Học kì 1" và "Học kì 2"--
  )
- 
 -- Bảng Diem 
 -- Cập nhật bảng DiemTongHop với các cột mới cho các lần điểm
 CREATE TABLE DiemTongHop (
     MaHS int NOT NULL REFERENCES HocSinh(MaHS),
     MaMon varchar(20) NOT NULL REFERENCES Mon(MaMon),
     MaHK int NOT NULL REFERENCES HocKi(MaHK),
-	TenNamHoc varchar(30) not null references NamHoc(TenNamHoc),
-    Diem15p_1 float NULL,  -- Điểm 15 phút lần 1
-    Diem15p_2 float NULL,  -- Điểm 15 phút lần 2
-    Diem15p_3 float NULL,  -- Điểm 15 phút lần 3
-    Diem45p_1 float NULL,  -- Điểm 45 phút lần 1
-    Diem45p_2 float NULL,  -- Điểm 45 phút lần 2
+	MaLop int not null references Lop(MaLop),
+    tx1 float NULL,  -- Điểm thường xuyên lần 1
+    tx2 float NULL,  -- Điểm thường xuyên lần 2
+    tx3 float NULL,  --
+    gk float NULL,  -- Giua ki
+    ck float NULL,  -- Cuoi Ki
     DiemTB float NULL,     -- Điểm trung bình
     KetQua nvarchar(10) CHECK (KetQua IN ('Dat', 'Khong Dat')),  -- Kết quả đạt/không đạt
-    PRIMARY KEY (MaHS, MaMon, MaHK,TenNamHoc)
+    PRIMARY KEY (MaHS, MaMon, MaHK,MaLop)
 );
 
 
@@ -61,32 +66,20 @@ userName nvarchar(50) primary key not null,
 passWord nvarchar(50) not null
 )
 
--- truy xuất mã hs, họ tên,tên môn,học kì,tên năm học, điểm 15p,45p,điểm tb,kết quả của môn văn
+-- truy xuất mã hs, họ tên,tên môn,học kì,tên năm học, điểm tx1,tx2.yx3,gk,ck,điểm tb,kết quả của môn toán
 SELECT 
     hs.MaHS,
     hs.HoTen,
     mon.TenMon,
     hk.TenHK,               -- Học kỳ
-    dt.TenNamHoc,           -- Năm học
-    -- Điểm 15 phút lần 1
-    dt.Diem15p_1 AS Diem15P_Lan1,
-    -- Điểm 15 phút lần 2
-    dt.Diem15p_2 AS Diem15P_Lan2,
-    -- Điểm 15 phút lần 3
-    dt.Diem15p_3 AS Diem15P_Lan3,
-    -- Điểm 45 phút lần 1
-    dt.Diem45p_1 AS Diem45P_Lan1,
-    -- Điểm 45 phút lần 2
-    dt.Diem45p_2 AS Diem45P_Lan2,
-    -- Tính điểm trung bình từ các điểm 15p và 45p
-    CASE 
-        WHEN dt.Diem15p_1 IS NOT NULL AND dt.Diem45p_1 IS NOT NULL THEN (dt.Diem15p_1 + dt.Diem45p_1) / 2
-        WHEN dt.Diem15p_2 IS NOT NULL AND dt.Diem45p_2 IS NOT NULL THEN (dt.Diem15p_2 + dt.Diem45p_2) / 2
-        WHEN dt.Diem15p_3 IS NOT NULL THEN dt.Diem15p_3
-        ELSE NULL
-    END AS DiemTB,
-    -- Kết quả đạt/không đạt
-    dt.KetQua
+    l.TenNamHoc,            -- Năm học
+    dt.tx1 AS DiemTX_Lan1,
+    dt.tx2 AS DiemTX_Lan2,
+    dt.tx3 AS DiemTX_Lan3,
+    dt.gk AS DiemGiuaKi,
+    dt.ck AS DiemCuoiKi,
+    dt.DiemTB,              -- Điểm trung bình đã có sẵn trong bảng DiemTongHop
+    dt.KetQua               -- Kết quả đạt/không đạt
 FROM 
     HocSinh hs
 JOIN 
@@ -95,26 +88,33 @@ JOIN
     Mon mon ON dt.MaMon = mon.MaMon
 JOIN 
     HocKi hk ON dt.MaHK = hk.MaHK
+JOIN 
+    Lop l ON dt.MaLop = l.MaLop
 WHERE 
-    mon.MaMon = 'Toan'  -- thay tùy mã
-GROUP BY 
-    hs.MaHS, hs.HoTen, mon.TenMon, hk.TenHK, dt.TenNamHoc, dt.Diem15p_1, dt.Diem15p_2, dt.Diem15p_3, dt.Diem45p_1, dt.Diem45p_2, dt.DiemTB, dt.KetQua;
+    mon.MaMon = 'Toan';  -- Lọc theo mã môn học là 'Toán'
+
+
 
 --=============================================--
 -- Cập nhật điểm cho học sinh
 UPDATE DiemTongHop
 SET 
-    Diem15p_1 = 8.0, 
-    Diem15p_2 = 7.5, 
-    Diem15p_3 = 8.5,
-    Diem45p_1 = 7.0, 
-    Diem45p_2 = 8.0,
-    DiemTB = (8.0 + 7.0) / 2,  -- Ví dụ tính điểm trung bình từ điểm 15p và 45p
-    KetQua = 'Dat'
+    tx1 = 8.0,     -- Điểm thường xuyên lần 1
+    tx2 = 7.5,     -- Điểm thường xuyên lần 2
+    tx3 = 8.5,     -- Điểm thường xuyên lần 3
+    gk = 7.0,      -- Điểm giữa kỳ
+    ck = 8.0,      -- Điểm cuối kỳ
+    KetQua = 'Dat' -- Kết quả đạt
 WHERE 
     MaHS = 1 AND MaMon = 'Van' AND MaHK = 1;
 
 
+
+--Khi một học sinh chuyển lớp :
+DELETE FROM ChiTietHocSinh_Lop
+WHERE MaHS = 1;  -- Xóa học sinh có mã 1 khỏi các lớp cũ
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop)
+VALUES (1, 6);  -- Thêm học sinh vào lớp mới
 
 
 --================================================
@@ -135,20 +135,20 @@ INSERT INTO Mon (MaMon, TenMon) VALUES
 ('NN', 'Ngoại Ngữ Khác'),
 ('TheDuc', 'Thể Dục');
 --Giáo viên
-INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email) VALUES
-( 'Nguyen Van A', '1980-03-12', 'Nam', 'Hà Nội', 1234567890, 'nguyenvana@gmail.com'),
-('Tran Thi B', '1985-07-23', 'Nữ', 'Hà Nội', 1234567891, 'tranthib@gmail.com'),
-('Le Van C', '1978-11-02', 'Nam', 'Hải Phòng', 1234567892, 'levanc@gmail.com'),
-('Hoang Thi D', '1983-09-05', 'Nữ', 'Đà Nẵng', 1234567893, 'hoangthid@gmail.com'),
-('Pham Van E', '1979-06-20', 'Nam', 'TP.HCM', 1234567894, 'phamvane@gmail.com'),
-('Đo Thi F', '1986-02-14', 'Nữ', 'Hà Nội', 1234567895, 'dothif@gmail.com'),
-('Nguyen Thi G', '1981-01-01', 'Nữ', 'Huế', 1234567896, 'nguyenthig@gmail.com'),
-( 'Truong Văn H', '1977-12-11', 'Nam', 'Cần Thơ', 1234567897, 'truongvanh@gmail.com'),
-('Vu Văn I', '1982-05-18', 'Nam', 'Quảng Ninh', 1234567898, 'vuvani@gmail.com'),
-('Luong Thị J', '1984-08-29', 'Nữ', 'Hà Nội', 1234567899, 'luongthij@gmail.com'),
-('Phan Văn K', '1987-04-22', 'Nam', 'Hà Tĩnh', 1234567800, 'phanvank@gmail.com'),
-( 'Nguyen Thị L', '1980-10-30', 'Nữ', 'Đà Lạt', 1234567801, 'nguyenthil@gmail.com'),
-('Bui Van M', '1983-03-03', 'Nam', 'Phú Thọ', 1234567802, 'buivanm@gmail.com');
+INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email,MaMon) VALUES
+( 'Nguyen Van A', '1980-03-12', 'Nam', 'Hà Nội', 1234567890, 'nguyenvana@gmail.com','Toan'),
+('Tran Thi B', '1985-07-23', 'Nữ', 'Hà Nội', 1234567891, 'tranthib@gmail.com','Ly'),
+('Le Van C', '1978-11-02', 'Nam', 'Hải Phòng', 1234567892, 'levanc@gmail.com','Hoa'),
+('Hoang Thi D', '1983-09-05', 'Nữ', 'Đà Nẵng', 1234567893, 'hoangthid@gmail.com','Sinh'),
+('Pham Van E', '1979-06-20', 'Nam', 'TP.HCM', 1234567894, 'phamvane@gmail.com','Su'),
+('Đo Thi F', '1986-02-14', 'Nữ', 'Hà Nội', 1234567895, 'dothif@gmail.com','Dia'),
+('Nguyen Thi G', '1981-01-01', 'Nữ', 'Huế', 1234567896, 'nguyenthig@gmail.com','GDCD'),
+( 'Truong Văn H', '1977-12-11', 'Nam', 'Cần Thơ', 1234567897, 'truongvanh@gmail.com','Tin'),
+('Vu Văn I', '1982-05-18', 'Nam', 'Quảng Ninh', 1234567898, 'vuvani@gmail.com','CN'),
+('Luong Thị J', '1984-08-29', 'Nữ', 'Hà Nội', 1234567899, 'luongthij@gmail.com','NN'),
+('Phan Văn K', '1987-04-22', 'Nam', 'Hà Tĩnh', 1234567800, 'phanvank@gmail.com','TheDuc'),
+( 'Nguyen Thị L', '1980-10-30', 'Nữ', 'Đà Lạt', 1234567801, 'nguyenthil@gmail.com','Van'),
+('Bui Van M', '1983-03-03', 'Nam', 'Phú Thọ', 1234567802, 'buivanm@gmail.com','Anh');
 -- Thêm các năm học vào bảng NamHoc
 INSERT INTO NamHoc (TenNamHoc) VALUES
 ('2024-2025'),
@@ -208,15 +208,40 @@ INSERT INTO TaiKhoan (userName, passWord) VALUES
 ('1', '1')
 --Thêm điểm
 -- Them diem cho hoc sinh vao bang DiemTongHop
-INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, TenNamHoc, Diem15p_1, Diem15p_2, Diem15p_3, Diem45p_1, Diem45p_2, DiemTB, KetQua) VALUES
-(1, 'Toan', 1, '2024-2025', 7.5, 8.0, NULL, 6.5, 7.0, 7.25, 'Dat'),
-(2, 'Ly', 1, '2024-2025', 8.0, 7.5, 9.0, 8.5, 7.0, 7.75, 'Dat'),
-(3, 'Hoa', 1, '2024-2025', NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
-(4, 'Sinh', 2, '2024-2025', 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
-(5, 'Su', 2, '2024-2025', 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
+INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, MaLop, tx1, tx2, tx3, gk, ck, DiemTB, KetQua) VALUES
+(1, 'Toan', 1, 1, 7.5, 8.0, NULL, 6.5, 7.0, 7.25, 'Dat'),
+(2, 'Ly', 1, 2, 8.0, 7.5, 9.0, 8.5, 7.0, 7.75, 'Dat'),
+(3, 'Hoa', 1, 3, NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
+(4, 'Sinh', 2, 4, 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
+(5, 'Su', 2, 5, 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
 
+--
+-- Học sinh 1
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(1, 1),  -- Học sinh 1 học lớp 10C1
+(1, 6),  -- Học sinh 1 học lớp 11B1
+(1, 11); -- Học sinh 1 học lớp 12A1
+-- Học sinh 2
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(2, 2),  -- Học sinh 2 học lớp 10C2
+(2, 7),  -- Học sinh 2 học lớp 11B2
+(2, 12); -- Học sinh 2 học lớp 12A2
 
+-- Học sinh 3
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(3, 3),  -- Học sinh 3 học lớp 10C3
+(3, 8),  -- Học sinh 3 học lớp 11B3
+(3, 13); -- Học sinh 3 học lớp 12A3
 
+-- Học sinh 4
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(4, 4),  -- Học sinh 4 học lớp 10C4
+(4, 9),  -- Học sinh 4 học lớp 11B4
+(4, 14); -- Học sinh 4 học lớp 12A4
 
-
+-- Học sinh 5
+INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop) VALUES
+(5, 5),  -- Học sinh 5 học lớp 10C5
+(5, 10), -- Học sinh 5 học lớp 11B5
+(5, 15); -- Học sinh 5 học lớp 12A5
 

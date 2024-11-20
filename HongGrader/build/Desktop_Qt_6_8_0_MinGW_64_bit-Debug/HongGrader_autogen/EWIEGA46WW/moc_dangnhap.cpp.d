@@ -362,4 +362,7 @@ D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_b
   D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlydiem.h \
   D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlygiaovien.h \
   D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlyhocsinh.h \
-  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlylophoc.h
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlylophoc.h \
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/quanlytaikhoan.h \
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/thongkediem.h \
+  D:/ManYinHong\ 96044/MNM/HongGrader/HongGrader/thongkehocsinh.h

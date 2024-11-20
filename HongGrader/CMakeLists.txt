@@ -27,6 +27,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         quanlygiaovien.h quanlygiaovien.cpp quanlygiaovien.ui
         quanlyhocsinh.h quanlyhocsinh.cpp quanlyhocsinh.ui
         quanlylophoc.h quanlylophoc.cpp quanlylophoc.ui
+        quanlytaikhoan.h quanlytaikhoan.cpp quanlytaikhoan.ui
+        thongkediem.h thongkediem.cpp thongkediem.ui
+        thongkehocsinh.h thongkehocsinh.cpp thongkehocsinh.ui
 
 
 

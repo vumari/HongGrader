@@ -4,3 +4,6 @@
 #include "EWIEGA46WW/moc_quanlygiaovien.cpp"
 #include "EWIEGA46WW/moc_quanlyhocsinh.cpp"
 #include "EWIEGA46WW/moc_quanlylophoc.cpp"
+#include "EWIEGA46WW/moc_quanlytaikhoan.cpp"
+#include "EWIEGA46WW/moc_thongkediem.cpp"
+#include "EWIEGA46WW/moc_thongkehocsinh.cpp"
