@@ -10,7 +10,7 @@ TenMon nvarchar(50) not null
  MaGV int IDENTITY PRIMARY KEY not null,
  TenGV nvarchar(50) not null,
  NgaySinh date not null,
- GioiTinh nvarchar(10) not null,
+ GioiTinh bit not null,
  DiaChi nvarchar(100) not null,
  SDT int not null,
  Email nvarchar(50) not null,
@@ -64,8 +64,8 @@ CREATE TABLE DiemTongHop (
 
 
 create table TaiKhoan (
-userName nvarchar(50) primary key not null,
-passWord nvarchar(50) not null
+userName varchar(50) primary key not null,
+passWord varchar(50) not null
 )
 
 --================================================
