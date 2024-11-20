@@ -1,9 +1,0 @@
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/HongGrader.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/install.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/HongGrader_autogen_timestamp_deps.dir
-D:/ManYinHong 96044/MNM/HongGrader/HongGrader/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/HongGrader_autogen.dir
