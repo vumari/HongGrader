@@ -50,11 +50,11 @@ CREATE TABLE DiemTongHop (
     MaMon varchar(20) NOT NULL REFERENCES Mon(MaMon),
     MaHK int NOT NULL REFERENCES HocKi(MaHK),
 	MaLop int not null references Lop(MaLop),
-    Diem15p_1 float NULL,  -- Điểm 15 phút lần 1
-    Diem15p_2 float NULL,  -- Điểm 15 phút lần 2
-    Diem15p_3 float NULL,  -- Điểm 15 phút lần 3
-    Diem45p_1 float NULL,  -- Điểm 45 phút lần 1
-    Diem45p_2 float NULL,  -- Điểm 45 phút lần 2
+    tx1 float NULL,  -- Điểm thường xuyên lần 1
+    tx2 float NULL,  -- Điểm thường xuyên lần 2
+    tx3 float NULL,  --
+    gk float NULL,  -- Giua ki
+    ck float NULL,  -- Cuoi Ki
     DiemTB float NULL,     -- Điểm trung bình
     KetQua nvarchar(10) CHECK (KetQua IN ('Dat', 'Khong Dat')),  -- Kết quả đạt/không đạt
     PRIMARY KEY (MaHS, MaMon, MaHK,MaLop)
@@ -66,18 +66,18 @@ userName nvarchar(50) primary key not null,
 passWord nvarchar(50) not null
 )
 
--- truy xuất mã hs, họ tên,tên môn,học kì,tên năm học, điểm 15p,45p,điểm tb,kết quả của môn văn
+-- truy xuất mã hs, họ tên,tên môn,học kì,tên năm học, điểm tx1,tx2.yx3,gk,ck,điểm tb,kết quả của môn toán
 SELECT 
     hs.MaHS,
     hs.HoTen,
     mon.TenMon,
     hk.TenHK,               -- Học kỳ
     l.TenNamHoc,            -- Năm học
-    dt.Diem15p_1 AS Diem15P_Lan1,
-    dt.Diem15p_2 AS Diem15P_Lan2,
-    dt.Diem15p_3 AS Diem15P_Lan3,
-    dt.Diem45p_1 AS Diem45P_Lan1,
-    dt.Diem45p_2 AS Diem45P_Lan2,
+    dt.tx1 AS DiemTX_Lan1,
+    dt.tx2 AS DiemTX_Lan2,
+    dt.tx3 AS DiemTX_Lan3,
+    dt.gk AS DiemGiuaKi,
+    dt.ck AS DiemCuoiKi,
     dt.DiemTB,              -- Điểm trung bình đã có sẵn trong bảng DiemTongHop
     dt.KetQua               -- Kết quả đạt/không đạt
 FROM 
@@ -91,21 +91,23 @@ JOIN
 JOIN 
     Lop l ON dt.MaLop = l.MaLop
 WHERE 
-    mon.MaMon = 'Toan';  -- Lọc theo tên môn học là 'Toán'
+    mon.MaMon = 'Toan';  -- Lọc theo mã môn học là 'Toán'
+
 
 
 --=============================================--
 -- Cập nhật điểm cho học sinh
 UPDATE DiemTongHop
 SET 
-    Diem15p_1 = 8.0, 
-    Diem15p_2 = 7.5, 
-    Diem15p_3 = 8.5,
-    Diem45p_1 = 7.0, 
-    Diem45p_2 = 8.0,
-    KetQua = 'Dat'
+    tx1 = 8.0,     -- Điểm thường xuyên lần 1
+    tx2 = 7.5,     -- Điểm thường xuyên lần 2
+    tx3 = 8.5,     -- Điểm thường xuyên lần 3
+    gk = 7.0,      -- Điểm giữa kỳ
+    ck = 8.0,      -- Điểm cuối kỳ
+    KetQua = 'Dat' -- Kết quả đạt
 WHERE 
     MaHS = 1 AND MaMon = 'Van' AND MaHK = 1;
+
 
 
 --Khi một học sinh chuyển lớp :
@@ -206,7 +208,7 @@ INSERT INTO TaiKhoan (userName, passWord) VALUES
 ('1', '1')
 --Thêm điểm
 -- Them diem cho hoc sinh vao bang DiemTongHop
-INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, MaLop, Diem15p_1, Diem15p_2, Diem15p_3, Diem45p_1, Diem45p_2, DiemTB, KetQua) VALUES
+INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, MaLop, tx1, tx2, tx3, gk, ck, DiemTB, KetQua) VALUES
 (1, 'Toan', 1, 1, 7.5, 8.0, NULL, 6.5, 7.0, 7.25, 'Dat'),
 (2, 'Ly', 1, 2, 8.0, 7.5, 9.0, 8.5, 7.0, 7.75, 'Dat'),
 (3, 'Hoa', 1, 3, NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
