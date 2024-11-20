@@ -217,6 +217,11 @@
       </row>
       <row>
        <property name="text">
+        <string>Thường xuyên 4</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
         <string>Giữa kỳ </string>
        </property>
       </row>
@@ -277,7 +282,7 @@
       </column>
       <column>
        <property name="text">
-        <string>GDCD</string>
+        <string>GDKT-PL</string>
        </property>
       </column>
       <column>
@@ -293,6 +298,31 @@
       <column>
        <property name="text">
         <string>Công nghệ</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>GDQP-AN</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Âm nhạc</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Mỹ thuật</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tiếng DTTS</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ngoại Ngữ 2</string>
        </property>
       </column>
      </widget>

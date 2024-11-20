@@ -137,7 +137,98 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="CBmon"/>
+          <widget class="QComboBox" name="CBmon">
+           <item>
+            <property name="text">
+             <string>Toán</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Ngữ văn</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Ngoại ngữ 1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Lịch sử</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Địa lý</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>GDKT-PL</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Vật lý</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hoá học</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Sinh học</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Công nghệ</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Tin học</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Âm nhạc</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mỹ thuật</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Tiếng DTTS</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Ngoại ngữ 2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>GDQP-AN</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>HDTN-HN</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>GD địa phương</string>
+            </property>
+           </item>
+          </widget>
          </item>
         </layout>
        </item>
