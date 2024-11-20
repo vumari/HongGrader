@@ -3,8 +3,13 @@
 
 #include <QMainWindow>
 
+QT_BEGIN_NAMESPACE
+class QSqlRelationalTableModel;
+class QDataWidgetMapper;
+QT_END_NAMESPACE
+
 namespace Ui {
-class quanlygiaovien;
+    class quanlygiaovien;
 }
 
 class quanlygiaovien : public QMainWindow
@@ -17,6 +22,13 @@ public:
 
 private:
     Ui::quanlygiaovien *ui;
+    QSqlRelationalTableModel *model = nullptr;
+    QDataWidgetMapper *mapper       = nullptr;
+
+    bool checkValidInputs();
+    void onAddRow();
+    void onEditCurrentRow();
+    void onDeleteCurrentRow();
 };
 
 #endif // QUANLYGIAOVIEN_H

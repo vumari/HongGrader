@@ -17,102 +17,97 @@
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <widget class="QGroupBox" name="groupBox">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
       </property>
       <property name="title">
        <string>Thông tin Giáo viên</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Địa chỉ</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="LEdiachi"/>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item>
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Điện thoại</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="LEdienthoai"/>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Email</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="LEemail"/>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
        <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
+        <layout class="QFormLayout" name="formLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Họ Tên</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="LEtenGV"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Ngày sinh</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDateEdit" name="DEngaysinh"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Giới tính</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Họ Tên</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="LEtenGV"/>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Ngày sinh</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDateEdit" name="DEngaysinh"/>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Giới tính</string>
-             </property>
-            </widget>
-           </item>
            <item>
             <widget class="QRadioButton" name="RBnam">
              <property name="text">
               <string>Nam</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -127,108 +122,47 @@
          </item>
         </layout>
        </item>
-       <item row="1" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
+       <item row="0" column="1" rowspan="2">
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Địa chỉ</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="LEdiachi"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Điện thoại</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="LEdienthoai"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Email</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="LEemail"/>
+         </item>
+         <item row="3" column="0">
           <widget class="QLabel" name="label_7">
            <property name="text">
             <string>Môn dạy</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QComboBox" name="CBmon">
-           <item>
-            <property name="text">
-             <string>Toán</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Ngữ văn</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Ngoại ngữ 1</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Lịch sử</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Địa lý</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>GDKT-PL</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Vật lý</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Hoá học</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Sinh học</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Công nghệ</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Tin học</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Âm nhạc</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Mỹ thuật</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Tiếng DTTS</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Ngoại ngữ 2</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>GDQP-AN</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>HDTN-HN</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>GD địa phương</string>
-            </property>
-           </item>
-          </widget>
+         <item row="3" column="1">
+          <widget class="QComboBox" name="CBmon"/>
          </item>
         </layout>
        </item>
@@ -261,50 +195,19 @@
      </widget>
     </item>
     <item>
-     <widget class="QTableWidget" name="tablegiaovien">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <widget class="QTableView" name="tablegiaovien">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <column>
-       <property name="text">
-        <string>Mã GV</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Họ Tên</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Ngày sinh</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Giới tính</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Môn dạy</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Địa chỉ</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Điện thoại</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Email</string>
-       </property>
-      </column>
+      <property name="editTriggers">
+       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+      </property>
      </widget>
     </item>
    </layout>
