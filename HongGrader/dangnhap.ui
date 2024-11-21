@@ -87,6 +87,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
+        </property>
        </widget>
       </item>
       <item row="3" column="0" colspan="2">
@@ -140,38 +143,5 @@
   <tabstop>btdangnhap</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>linematkhau</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btdangnhap</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>133</x>
-     <y>76</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>258</x>
-     <y>145</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>linetendangnhap</sender>
-   <signal>returnPressed()</signal>
-   <receiver>btdangnhap</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>381</x>
-     <y>56</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>384</x>
-     <y>219</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

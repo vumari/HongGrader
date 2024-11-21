@@ -57,7 +57,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>Quản lý điểm</string>
+   <string>Quản lý điểm – HongGrader</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -387,7 +387,7 @@ selection-color: rgb(0, 0, 0);
    </widget>
    <widget class="QMenu" name="menuthongke">
     <property name="title">
-     <string>Thống kê - Báo cáo</string>
+     <string>Thống kê – báo cáo</string>
     </property>
     <addaction name="actionstudentlist"/>
     <addaction name="actionscoreboard"/>

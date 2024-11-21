@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Quản lý giáo viên</string>
+   <string>Quản lý giáo viên – HongGrader</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -80,7 +80,11 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="LEtenGV"/>
+          <widget class="QLineEdit" name="LEtenGV">
+           <property name="maxLength">
+            <number>50</number>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
@@ -132,7 +136,11 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="LEdiachi"/>
+          <widget class="QLineEdit" name="LEdiachi">
+           <property name="maxLength">
+            <number>100</number>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_5">
@@ -142,7 +150,14 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="LEdienthoai"/>
+          <widget class="QLineEdit" name="LEdienthoai">
+           <property name="inputMask">
+            <string>\0999999999</string>
+           </property>
+           <property name="maxLength">
+            <number>10</number>
+           </property>
+          </widget>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_6">
@@ -152,7 +167,11 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="LEemail"/>
+          <widget class="QLineEdit" name="LEemail">
+           <property name="maxLength">
+            <number>50</number>
+           </property>
+          </widget>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_7">

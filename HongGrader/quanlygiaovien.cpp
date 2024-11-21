@@ -9,6 +9,7 @@
 #include <QSqlField>
 #include <QSqlError>
 #include <QMessageBox>
+#include <QRegularExpressionValidator>
 
 quanlygiaovien::quanlygiaovien(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::quanlygiaovien) {
@@ -76,6 +77,11 @@ quanlygiaovien::quanlygiaovien(QWidget *parent)
             this, &quanlygiaovien::onEditCurrentRow);
     connect(ui->BTxoa, &QPushButton::clicked,
             this, &quanlygiaovien::onDeleteCurrentRow);
+
+    QRegularExpression regex;
+    regex.setPattern(
+        R"((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))");
+    ui->LEemail->setValidator(new QRegularExpressionValidator(regex, this));
 }
 
 quanlygiaovien::~quanlygiaovien() {
@@ -97,10 +103,18 @@ bool quanlygiaovien::checkValidInputs() {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập số điện thoại");
         return false;
+    } else if (!ui->LEdienthoai->hasAcceptableInput()) {
+        QMessageBox::critical(this, "Lỗi nhập liệu",
+                              "Số điện thoại không hợp lệ");
+        return false;
     }
     if (ui->LEemail->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập địa chỉ e-mail.");
+        return false;
+    } else if (!ui->LEemail->hasAcceptableInput()) {
+        QMessageBox::critical(this, "Lỗi nhập liệu",
+                              "Địa chỉ e-mail không hợp lệ.");
         return false;
     }
     return true;
