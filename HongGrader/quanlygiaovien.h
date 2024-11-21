@@ -2,6 +2,7 @@
 #define QUANLYGIAOVIEN_H
 
 #include <QMainWindow>
+#include <QSqlRecord>
 
 QT_BEGIN_NAMESPACE
 class QSqlRelationalTableModel;
@@ -24,6 +25,7 @@ private:
     Ui::quanlygiaovien *ui;
     QSqlRelationalTableModel *model = nullptr;
     QDataWidgetMapper *mapper       = nullptr;
+    QSqlRecord recordToInsert;
 
     bool checkValidInputs();
     void onAddRow();

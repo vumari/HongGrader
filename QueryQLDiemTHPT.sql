@@ -30,7 +30,7 @@ TenMon nvarchar(50) not null
  MaHS int IDENTITY PRIMARY KEY not null,--chuỗi tự tăng 
  HoTen nvarchar(50) not null,
  NgaySinh date not null,
- GioiTinh nvarchar(10) not null,
+ GioiTinh bit not null,
  DanToc nvarchar(10) not null,
  NoiSinh nvarchar(100) not null
  )
@@ -100,19 +100,19 @@ INSERT INTO Mon (MaMon, TenMon) VALUES
 
 --Giáo viên
 INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email,MaMon) VALUES
-(N'Nguyễn Văn A', '1980-03-12', N'Nam', N'Hà Nội', '1234567890', 'nguyenvana@gmail.com','Toan'),
-(N'Trần Thị B', '1985-07-23', N'Nữ', N'Hà Nội', '1234567891', 'tranthib@gmail.com','Ly'),
-(N'Lê Văn C', '1978-11-02', N'Nam', N'Hải Phòng', '1234567892', 'levanc@gmail.com','Hoa'),
-(N'Hoàng Thị D', '1983-09-05', N'Nữ', N'Đà Nẵng', '1234567893', 'hoangthid@gmail.com','Sinh'),
-(N'Phạm Văn E', '1979-06-20', N'Nam', N'TP.HCM', '1234567894', 'phamvane@gmail.com','Su'),
-(N'Đỗ Thị F', '1986-02-14', N'Nữ', N'Hà Nội', '1234567895', 'dothif@gmail.com','Dia'),
-(N'Nguyễn Thị G', '1981-01-01', N'Nữ', N'Huế', '1234567896', 'nguyenthig@gmail.com','KTPL'),
-(N'Trương Văn H', '1977-12-11', N'Nam', N'Cần Thơ', '1234567897', 'truongvanh@gmail.com','Tin'),
-(N'Vũ Văn I', '1982-05-18', N'Nam', N'Quảng Ninh', '1234567898', 'vuvani@gmail.com','CN'),
-(N'Lường Thị J', '1984-08-29', N'Nữ', N'Hà Nội', '1234567899', 'luongthij@gmail.com','NN1'),
-(N'Phan Văn K', '1987-04-22', N'Nam', N'Hà Tĩnh', '1234567800', 'phanvank@gmail.com','TD'),
-(N'Nguyễn Thị L', '1980-10-30', N'Nữ', N'Đà Lạt', '1234567801', 'nguyenthil@gmail.com','Van'),
-(N'Bùi Văn M', '1983-03-03', N'Nam', N'Phú Thọ', '1234567802', 'buivanm@gmail.com','QPAN');
+(N'Nguyễn Văn A', '1980-03-12', 0, N'Hà Nội', '1234567890', 'nguyenvana@gmail.com','Toan'),
+(N'Trần Thị B', '1985-07-23', 1, N'Hà Nội', '1234567891', 'tranthib@gmail.com','Ly'),
+(N'Lê Văn C', '1978-11-02', 0, N'Hải Phòng', '1234567892', 'levanc@gmail.com','Hoa'),
+(N'Hoàng Thị D', '1983-09-05', 1, N'Đà Nẵng', '1234567893', 'hoangthid@gmail.com','Sinh'),
+(N'Phạm Văn E', '1979-06-20', 0, N'TP.HCM', '1234567894', 'phamvane@gmail.com','Su'),
+(N'Đỗ Thị F', '1986-02-14', 1, N'Hà Nội', '1234567895', 'dothif@gmail.com','Dia'),
+(N'Nguyễn Thị G', '1981-01-01', 1, N'Huế', '1234567896', 'nguyenthig@gmail.com','KTPL'),
+(N'Trương Văn H', '1977-12-11', 0, N'Cần Thơ', '1234567897', 'truongvanh@gmail.com','Tin'),
+(N'Vũ Văn I', '1982-05-18', 0, N'Quảng Ninh', '1234567898', 'vuvani@gmail.com','CN'),
+(N'Lường Thị J', '1984-08-29', 1, N'Hà Nội', '1234567899', 'luongthij@gmail.com','NN1'),
+(N'Phan Văn K', '1987-04-22', 0, N'Hà Tĩnh', '1234567800', 'phanvank@gmail.com','TD'),
+(N'Nguyễn Thị L', '1980-10-30', 1, N'Đà Lạt', '1234567801', 'nguyenthil@gmail.com','Van'),
+(N'Bùi Văn M', '1983-03-03', 0, N'Phú Thọ', '1234567802', 'buivanm@gmail.com','QPAN');
 -- Thêm các năm học vào bảng NamHoc
 INSERT INTO NamHoc (TenNamHoc) VALUES
 ('2024-2025'),
@@ -157,14 +157,14 @@ INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
 --Học sinh( Mã học sinh sẽ là chuỗi int tự tăng nên ko cần nhập
 -- Them hoc sinh vao bang HocSinh
 INSERT INTO HocSinh (HoTen, NgaySinh, GioiTinh, DanToc, NoiSinh) VALUES
-(N'Nguyễn Văn A', '2007-05-10', N'Nam', N'Kinh', N'Hà Nội'),
-(N'Trần Thị B', '2007-03-12', N'Nữ', N'Kinh', N'TP. Hồ Chí Minh'),
-(N'Phan Minh C', '2007-07-22', N'Nam', N'Tày', N'Lào Cai'),
-(N'Lò Thu D', '2007-09-15', N'Nữ', N'H''Mông', N'Hà Giang'),
-(N'Đoàn Hương E', '2007-01-20', N'Nữ', N'Mường', N'Thanh Hoá');
+(N'Nguyễn Văn A', '2007-05-10', 0, N'Kinh', N'Hà Nội'),
+(N'Trần Thị B', '2007-03-12', 1, N'Kinh', N'TP. Hồ Chí Minh'),
+(N'Phan Minh C', '2007-07-22', 0, N'Tày', N'Lào Cai'),
+(N'Lò Thu D', '2007-09-15', 1, N'H''Mông', N'Hà Giang'),
+(N'Đoàn Hương E', '2007-01-20', 1, N'Mường', N'Thanh Hoá');
 
 --Học kì
-INSERT INTO HocKi ( TenHK) VALUES
+INSERT INTO HocKi (TenHK) VALUES
 ('I'),
 ('II');
 --Tài khoản

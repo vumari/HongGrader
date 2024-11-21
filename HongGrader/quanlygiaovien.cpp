@@ -4,7 +4,7 @@
 #include <QSqlRelationalTableModel>
 #include <QSqlRelationalDelegate>
 #include <QDataWidgetMapper>
-#include <QSqlRecord>
+#include <QSqlField>
 #include <QSqlError>
 #include <QMessageBox>
 
@@ -17,8 +17,19 @@ quanlygiaovien::quanlygiaovien(QWidget *parent)
     if (db.open()) {
         model = new QSqlRelationalTableModel(this, db);
         model->setTable("GiaoVien");
+
+        QSqlRecord &&record = model->record();
+        for (int i = 0; i < record.count(); ++i) {
+            QSqlField &&field = record.field(i);
+            if (i == 0) {
+                field.setAutoValue(true);
+            }
+            field.setTableName("GiaoVien");
+            recordToInsert.append(field);
+        }
+
         model->setRelation(7, QSqlRelation("Mon", "MaMon", "TenMon"));
-        model->setEditStrategy(QSqlTableModel::OnRowChange);
+        model->setEditStrategy(QSqlTableModel::OnManualSubmit);
         model->select();
         model->setHeaderData(1, Qt::Horizontal, "Tên");
         model->setHeaderData(2, Qt::Horizontal, "Ngày sinh");
@@ -96,23 +107,18 @@ void quanlygiaovien::onAddRow() {
 
     QSqlRecord newRecord = model->record();
     newRecord.setGenerated("MaGV", false);
-    // newRecord.setGenerated("TenGV", false);
-    // newRecord.setGenerated("NgaySinh", false);
-    // newRecord.setGenerated("GioiTinh", false);
-    // newRecord.setGenerated("DiaChi", false);
-    // newRecord.setGenerated("SDT", false);
-    // newRecord.setGenerated("Email", false);
-    // newRecord.setGenerated("MaMon", false);
     newRecord.setValue(1, ui->LEtenGV->text().trimmed());
     newRecord.setValue(2, ui->DEngaysinh->date());
-    QString gender = ui->RBnam->isChecked() ? "Nam" : "Nữ";
-    newRecord.setValue(3, gender);
+    newRecord.setValue(3, ui->RBnam->isChecked());
     newRecord.setValue(4, ui->LEdiachi->text().trimmed());
     newRecord.setValue(5, ui->LEdienthoai->text().trimmed());
     newRecord.setValue(6, ui->LEemail->text().trimmed());
-    newRecord.setValue(7, ui->CBmon->currentIndex());
-    if (!model->insertRecord(-1, newRecord)) {
+    newRecord.setValue(7, ui->CBmon->model()->data(
+                           ui->CBmon->model()->index(
+                               ui->CBmon->currentIndex(), 0)));
+    if (!model->insertRecord(-1, newRecord) || !model->submitAll()) {
         QMessageBox::critical(this, "Loi them dong", model->lastError().text());
+        model->revertAll();
     }
 }
 
@@ -122,7 +128,12 @@ void quanlygiaovien::onEditCurrentRow() {
             return;
         }
 
-        mapper->submit();
+        if (!mapper->submit() || !model->submitAll()) {
+            QMessageBox::critical(this,
+                                  "Loi sua dong",
+                                  model->lastError().text());
+            model->revertAll();
+        }
     }
 }
 
@@ -130,10 +141,12 @@ void quanlygiaovien::onDeleteCurrentRow() {
     const auto *selectionModel = ui->tablegiaovien->selectionModel();
 
     if (selectionModel->hasSelection()) {
-        if (!model->removeRow(selectionModel->currentIndex().row())) {
+        if (!model->removeRow(selectionModel->currentIndex().row())
+            || !model->submitAll()) {
             QMessageBox::critical(this,
-                                  "Loi xofa dong",
+                                  "Loi xoa dong",
                                   model->lastError().text());
+            model->revertAll();
         }
     }
 }
