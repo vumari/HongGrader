@@ -12,7 +12,7 @@ TenMon nvarchar(50) not null
  NgaySinh date not null,
  GioiTinh bit not null,
  DiaChi nvarchar(100) not null,
- SDT int not null,
+ SDT varchar(10) not null,
  Email nvarchar(50) not null,
  MaMon varchar(20) not null references Mon(MaMon)
  )
@@ -100,19 +100,19 @@ INSERT INTO Mon (MaMon, TenMon) VALUES
 
 --Giáo viên
 INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email,MaMon) VALUES
-(N'Nguyễn Văn A', '1980-03-12', N'Nam', N'Hà Nội', 1234567890, 'nguyenvana@gmail.com','Toan'),
-(N'Trần Thị B', '1985-07-23', N'Nữ', N'Hà Nội', 1234567891, 'tranthib@gmail.com','Ly'),
-(N'Lê Văn C', '1978-11-02', N'Nam', N'Hải Phòng', 1234567892, 'levanc@gmail.com','Hoa'),
-(N'Hoàng Thị D', '1983-09-05', N'Nữ', N'Đà Nẵng', 1234567893, 'hoangthid@gmail.com','Sinh'),
-(N'Phạm Văn E', '1979-06-20', N'Nam', N'TP.HCM', 1234567894, 'phamvane@gmail.com','Su'),
-(N'Đỗ Thị F', '1986-02-14', N'Nữ', N'Hà Nội', 1234567895, 'dothif@gmail.com','Dia'),
-(N'Nguyễn Thị G', '1981-01-01', N'Nữ', N'Huế', 1234567896, 'nguyenthig@gmail.com','KTPL'),
-(N'Trương Văn H', '1977-12-11', N'Nam', N'Cần Thơ', 1234567897, 'truongvanh@gmail.com','Tin'),
-(N'Vũ Văn I', '1982-05-18', N'Nam', N'Quảng Ninh', 1234567898, 'vuvani@gmail.com','CN'),
-(N'Lường Thị J', '1984-08-29', N'Nữ', N'Hà Nội', 1234567899, 'luongthij@gmail.com','NN1'),
-(N'Phan Văn K', '1987-04-22', N'Nam', N'Hà Tĩnh', 1234567800, 'phanvank@gmail.com','TD'),
-(N'Nguyễn Thị L', '1980-10-30', N'Nữ', N'Đà Lạt', 1234567801, 'nguyenthil@gmail.com','Van'),
-(N'Bùi Văn M', '1983-03-03', N'Nam', N'Phú Thọ', 1234567802, 'buivanm@gmail.com','QPAN');
+(N'Nguyễn Văn A', '1980-03-12', N'Nam', N'Hà Nội', '1234567890', 'nguyenvana@gmail.com','Toan'),
+(N'Trần Thị B', '1985-07-23', N'Nữ', N'Hà Nội', '1234567891', 'tranthib@gmail.com','Ly'),
+(N'Lê Văn C', '1978-11-02', N'Nam', N'Hải Phòng', '1234567892', 'levanc@gmail.com','Hoa'),
+(N'Hoàng Thị D', '1983-09-05', N'Nữ', N'Đà Nẵng', '1234567893', 'hoangthid@gmail.com','Sinh'),
+(N'Phạm Văn E', '1979-06-20', N'Nam', N'TP.HCM', '1234567894', 'phamvane@gmail.com','Su'),
+(N'Đỗ Thị F', '1986-02-14', N'Nữ', N'Hà Nội', '1234567895', 'dothif@gmail.com','Dia'),
+(N'Nguyễn Thị G', '1981-01-01', N'Nữ', N'Huế', '1234567896', 'nguyenthig@gmail.com','KTPL'),
+(N'Trương Văn H', '1977-12-11', N'Nam', N'Cần Thơ', '1234567897', 'truongvanh@gmail.com','Tin'),
+(N'Vũ Văn I', '1982-05-18', N'Nam', N'Quảng Ninh', '1234567898', 'vuvani@gmail.com','CN'),
+(N'Lường Thị J', '1984-08-29', N'Nữ', N'Hà Nội', '1234567899', 'luongthij@gmail.com','NN1'),
+(N'Phan Văn K', '1987-04-22', N'Nam', N'Hà Tĩnh', '1234567800', 'phanvank@gmail.com','TD'),
+(N'Nguyễn Thị L', '1980-10-30', N'Nữ', N'Đà Lạt', '1234567801', 'nguyenthil@gmail.com','Van'),
+(N'Bùi Văn M', '1983-03-03', N'Nam', N'Phú Thọ', '1234567802', 'buivanm@gmail.com','QPAN');
 -- Thêm các năm học vào bảng NamHoc
 INSERT INTO NamHoc (TenNamHoc) VALUES
 ('2024-2025'),
