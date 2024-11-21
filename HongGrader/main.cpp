@@ -1,9 +1,9 @@
-#include "dangnhap.h"
-
 #include <QApplication>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QMessageBox>
+
+#include "quanlydiem.h"
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
@@ -16,6 +16,10 @@ int main(int argc, char *argv[]) {
     db.setDatabaseName(connectionString);
     if (db.open()) {
         db.close();
+
+        quanlydiem w;
+        w.show();
+        return a.exec();
     } else {
         QMessageBox msgBox;
         msgBox.setText("Lỗi kết nối CSDL");
@@ -26,7 +30,5 @@ int main(int argc, char *argv[]) {
         msgBox.exec();
     }
 
-    dangnhap w;
-    w.show();
-    return a.exec();
+    return 1;
 }

@@ -10,7 +10,7 @@
 #include "thongkehocsinh.h"
 
 namespace Ui {
-class quanlydiem;
+    class quanlydiem;
 }
 class dangnhap;
 class quanlydiem : public QMainWindow
@@ -22,29 +22,20 @@ public:
     ~quanlydiem();
 
 private slots:
+    void login();
+
     void on_actionLog_out_triggered();
-
     void on_actiongiaovien_triggered();
-
     void on_actionhocsinh_triggered();
-
     void on_actionlop_triggered();
-
     void on_actionEdit_triggered();
-
     void on_actionscoreboard_triggered();
-
     void on_actionstudentlist_triggered();
 
 private:
     Ui::quanlydiem *ui;
-    dangnhap *formlogin;
-    quanlygiaovien *formgiaovien;
-    quanlyhocsinh *formhocsinh;
-    quanlylophoc *formlophoc;
-    quanlytaikhoan *formtaikhoan;
-    thongkediem *formtkdiem;
-    thongkehocsinh *formtkhocsinh;
+
+    QString username;
 };
 
 #endif // QUANLYDIEM_H

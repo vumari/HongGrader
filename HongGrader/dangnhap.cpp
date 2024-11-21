@@ -1,11 +1,12 @@
 #include "dangnhap.h"
 #include "./ui_dangnhap.h"
 
+#include <QMessageBox>
+
 dangnhap::dangnhap(QWidget *parent)
-    : QMainWindow(parent)
+    : QDialog(parent)
     , ui(new Ui::dangnhap) {
     ui->setupUi(this);
-    setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
 dangnhap::~dangnhap() {
@@ -13,20 +14,16 @@ dangnhap::~dangnhap() {
 }
 
 void dangnhap::on_btdangnhap_clicked() {
-    QString username = ui->linetendangnhap->text();
-    QString password = ui->linematkhau->text();
+    QString &&uname = ui->linetendangnhap->text();
+    QString &&pass  = ui->linematkhau->text();
 
-    if (username == "123" && password == "123") {
-        hide();
-        formdiem = new quanlydiem(this);
-
-        connect(formdiem, &QObject::destroyed, this, [this](){
-            qApp->quit();
-        });
-
-        formdiem->show();
+    if (uname == "123" && pass == "123") {
+        username = uname;
+        accept();
     } else {
-        ui->statusbar->showMessage("Tên người dùng và mật khẩu không đúng");
+        QMessageBox::critical(this,
+                              "Lỗi đăng nhập",
+                              "Tên người dùng và mật khẩu không đúng");
     }
 }
 

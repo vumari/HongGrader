@@ -3,12 +3,11 @@
 
 quanlyhocsinh::quanlyhocsinh(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::quanlyhocsinh)
-{
+    , ui(new Ui::quanlyhocsinh) {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
-quanlyhocsinh::~quanlyhocsinh()
-{
+quanlyhocsinh::~quanlyhocsinh() {
     delete ui;
 }

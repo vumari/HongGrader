@@ -3,12 +3,11 @@
 
 quanlylophoc::quanlylophoc(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::quanlylophoc)
-{
+    , ui(new Ui::quanlylophoc) {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
-quanlylophoc::~quanlylophoc()
-{
+quanlylophoc::~quanlylophoc() {
     delete ui;
 }

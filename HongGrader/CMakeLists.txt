@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
         quanlytaikhoan.h quanlytaikhoan.cpp quanlytaikhoan.ui
         thongkediem.h thongkediem.cpp thongkediem.ui
         thongkehocsinh.h thongkehocsinh.cpp thongkehocsinh.ui
+        genderitemdelegate.h genderitemdelegate.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

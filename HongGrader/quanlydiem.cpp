@@ -1,57 +1,65 @@
 #include "quanlydiem.h"
-#include "dangnhap.h"
 #include "ui_quanlydiem.h"
+
+#include "dangnhap.h"
+
+#include <QTimer>
 
 quanlydiem::quanlydiem(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::quanlydiem) {
     ui->setupUi(this);
-    setAttribute(Qt::WA_DeleteOnClose, true);
+    // setAttribute(Qt::WA_DeleteOnClose, true);
+
+    QTimer::singleShot(0, this, &quanlydiem::login);
 }
 
 quanlydiem::~quanlydiem() {
     delete ui;
 }
 
+void quanlydiem::login() {
+    dangnhap formDangNhap(this);
+    int      result = formDangNhap.exec();
+
+    if (result == QDialog::Accepted) {
+        username = formDangNhap.username;
+    } else {
+        qApp->quit();
+    }
+}
+
 void quanlydiem::on_actionLog_out_triggered() {
-    hide();
-    formlogin = new dangnhap(this);
-    formlogin->show();
+    login();
 }
 
 
 void quanlydiem::on_actiongiaovien_triggered() {
-    formgiaovien = new quanlygiaovien(this);
-    formgiaovien->show();
+    (new quanlygiaovien(this))->show();
 }
 
 
 void quanlydiem::on_actionhocsinh_triggered() {
-    formhocsinh = new quanlyhocsinh(this);
-    formhocsinh->show();
+    (new quanlyhocsinh(this))->show();
 }
 
 
 void quanlydiem::on_actionlop_triggered() {
-    formlophoc = new quanlylophoc(this);
-    formlophoc->show();
+    (new quanlylophoc(this))->show();
 }
 
 
 void quanlydiem::on_actionEdit_triggered() {
-    formtaikhoan = new quanlytaikhoan(this);
-    formtaikhoan->show();
+    (new quanlytaikhoan(this))->show();
 }
 
 
 void quanlydiem::on_actionscoreboard_triggered() {
-    formtkdiem = new thongkediem(this);
-    formtkdiem->show();
+    (new thongkediem(this))->show();
 }
 
 
 void quanlydiem::on_actionstudentlist_triggered() {
-    formtkhocsinh = new thongkehocsinh(this);
-    formtkhocsinh->show();
+    (new thongkehocsinh(this))->show();
 }
 

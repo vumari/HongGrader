@@ -1,6 +1,8 @@
 #include "quanlygiaovien.h"
 #include "ui_quanlygiaovien.h"
 
+#include "genderitemdelegate.h"
+
 #include <QSqlRelationalTableModel>
 #include <QSqlRelationalDelegate>
 #include <QDataWidgetMapper>
@@ -41,15 +43,19 @@ quanlygiaovien::quanlygiaovien(QWidget *parent)
 
         ui->tablegiaovien->setModel(model);
         ui->tablegiaovien->setItemDelegate(
-            new QSqlRelationalDelegate(ui->tablegiaovien));
+            new QSqlRelationalDelegate(this));
+        ui->tablegiaovien->setItemDelegateForColumn(
+            3, new GenderItemDelegate(this));
         ui->tablegiaovien->hideColumn(0);
 
         mapper = new QDataWidgetMapper;
         mapper->setModel(model);
         mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
-        mapper->setItemDelegate(new QSqlRelationalDelegate(this));
+        mapper->setItemDelegate(
+            new GenderItemDelegate(this, ui->RBnam, ui->RBnu));
         mapper->addMapping(ui->LEtenGV, 1);
         mapper->addMapping(ui->DEngaysinh, 2);
+        mapper->addMapping(ui->RBnu, 3);
         mapper->addMapping(ui->LEdiachi, 4);
         mapper->addMapping(ui->LEdienthoai, 5);
         mapper->addMapping(ui->LEemail, 6);

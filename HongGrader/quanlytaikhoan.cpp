@@ -3,12 +3,11 @@
 
 quanlytaikhoan::quanlytaikhoan(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::quanlytaikhoan)
-{
+    , ui(new Ui::quanlytaikhoan) {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
-quanlytaikhoan::~quanlytaikhoan()
-{
+quanlytaikhoan::~quanlytaikhoan() {
     delete ui;
 }

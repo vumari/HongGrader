@@ -3,12 +3,11 @@
 
 thongkehocsinh::thongkehocsinh(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::thongkehocsinh)
-{
+    , ui(new Ui::thongkehocsinh) {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
-thongkehocsinh::~thongkehocsinh()
-{
+thongkehocsinh::~thongkehocsinh() {
     delete ui;
 }

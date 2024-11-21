@@ -3,12 +3,11 @@
 
 thongkediem::thongkediem(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::thongkediem)
-{
+    , ui(new Ui::thongkediem) {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose, true);
 }
 
-thongkediem::~thongkediem()
-{
+thongkediem::~thongkediem() {
     delete ui;
 }

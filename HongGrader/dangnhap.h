@@ -1,16 +1,15 @@
 #ifndef DANGNHAP_H
 #define DANGNHAP_H
 
-#include <QMainWindow>
-#include "quanlydiem.h"
+#include <QDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class dangnhap;
+    class dangnhap;
 }
 QT_END_NAMESPACE
 
-class dangnhap : public QMainWindow
+class dangnhap : public QDialog
 {
     Q_OBJECT
 
@@ -18,11 +17,12 @@ public:
     dangnhap(QWidget *parent = nullptr);
     ~dangnhap();
 
+    QString username;
+
 private slots:
     void on_btdangnhap_clicked();
 
 private:
     Ui::dangnhap *ui;
-    quanlydiem *formdiem;
 };
 #endif // DANGNHAP_H
