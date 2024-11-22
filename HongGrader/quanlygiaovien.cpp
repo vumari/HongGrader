@@ -2,6 +2,7 @@
 #include "ui_quanlygiaovien.h"
 
 #include "genderitemdelegate.h"
+#include "helper.h"
 
 #include <QSqlRelationalTableModel>
 #include <QSqlRelationalDelegate>
@@ -21,26 +22,17 @@ quanlygiaovien::quanlygiaovien(QWidget *parent)
         model = new QSqlRelationalTableModel(this, db);
         model->setTable("GiaoVien");
 
-        QSqlRecord &&record = model->record();
-        for (int i = 0; i < record.count(); ++i) {
-            QSqlField &&field = record.field(i);
-            if (i == 0) {
-                field.setAutoValue(true);
-            }
-            field.setTableName("GiaoVien");
-            recordToInsert.append(field);
-        }
+        // recordToInsert = model->record();
+        // Helper::initSqlRecord(recordToInsert, "GiaoVien");
 
         model->setRelation(7, QSqlRelation("Mon", "MaMon", "TenMon"));
         model->setEditStrategy(QSqlTableModel::OnManualSubmit);
         model->select();
-        model->setHeaderData(1, Qt::Horizontal, "Tên");
-        model->setHeaderData(2, Qt::Horizontal, "Ngày sinh");
-        model->setHeaderData(3, Qt::Horizontal, "Giới tính");
-        model->setHeaderData(4, Qt::Horizontal, "Địa chỉ");
-        model->setHeaderData(5, Qt::Horizontal, "Số điện thoại");
-        model->setHeaderData(6, Qt::Horizontal, "E-mail");
-        model->setHeaderData(7, Qt::Horizontal, "Môn dạy");
+        Helper::setModelColHeaders(model, {
+            QString(),
+            "Họ và tên", "Ngày sinh", "Giới tính",
+            "Địa chỉ", "Số điện thoại", "E-mail", "Môn dạy",
+        });
 
         ui->tablegiaovien->setModel(model);
         ui->tablegiaovien->setItemDelegate(
@@ -48,8 +40,10 @@ quanlygiaovien::quanlygiaovien(QWidget *parent)
         ui->tablegiaovien->setItemDelegateForColumn(
             3, new GenderItemDelegate(this));
         ui->tablegiaovien->hideColumn(0);
+        ui->tablegiaovien->horizontalHeader()->setSectionResizeMode(
+            QHeaderView::ResizeToContents);
 
-        mapper = new QDataWidgetMapper;
+        mapper = new QDataWidgetMapper(this);
         mapper->setModel(model);
         mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
         mapper->setItemDelegate(
@@ -129,7 +123,7 @@ void quanlygiaovien::onAddRow() {
     newRecord.setGenerated("MaGV", false);
     newRecord.setValue(1, ui->LEtenGV->text().trimmed());
     newRecord.setValue(2, ui->DEngaysinh->date());
-    newRecord.setValue(3, ui->RBnam->isChecked());
+    newRecord.setValue(3, ui->RBnu->isChecked());
     newRecord.setValue(4, ui->LEdiachi->text().trimmed());
     newRecord.setValue(5, ui->LEdienthoai->text().trimmed());
     newRecord.setValue(6, ui->LEemail->text().trimmed());
@@ -137,7 +131,7 @@ void quanlygiaovien::onAddRow() {
                            ui->CBmon->model()->index(
                                ui->CBmon->currentIndex(), 0)));
     if (!model->insertRecord(-1, newRecord) || !model->submitAll()) {
-        QMessageBox::critical(this, "Loi them dong", model->lastError().text());
+        QMessageBox::critical(this, "Lỗi thêm dòng", model->lastError().text());
         model->revertAll();
     }
 }
@@ -150,7 +144,7 @@ void quanlygiaovien::onEditCurrentRow() {
 
         if (!mapper->submit() || !model->submitAll()) {
             QMessageBox::critical(this,
-                                  "Loi sua dong",
+                                  "Lỗi sửa dòng",
                                   model->lastError().text());
             model->revertAll();
         }
@@ -158,15 +152,5 @@ void quanlygiaovien::onEditCurrentRow() {
 }
 
 void quanlygiaovien::onDeleteCurrentRow() {
-    const auto *selectionModel = ui->tablegiaovien->selectionModel();
-
-    if (selectionModel->hasSelection()) {
-        if (!model->removeRow(selectionModel->currentIndex().row())
-            || !model->submitAll()) {
-            QMessageBox::critical(this,
-                                  "Loi xoa dong",
-                                  model->lastError().text());
-            model->revertAll();
-        }
-    }
+    Helper::tryDeleteCurrentRow(model, ui->tablegiaovien);
 }

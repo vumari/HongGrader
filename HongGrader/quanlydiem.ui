@@ -372,7 +372,7 @@ selection-color: rgb(0, 0, 0);
    </property>
    <widget class="QMenu" name="menuTaikhoan">
     <property name="title">
-     <string>Tài Khoản</string>
+     <string>Tài khoản</string>
     </property>
     <addaction name="actionEdit"/>
     <addaction name="actionLog_out"/>
