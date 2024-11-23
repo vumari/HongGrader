@@ -34,7 +34,7 @@ namespace Helper {
         }
     }
 
-    void tryDeleteCurrentRow(QSqlTableModel *model, QTableView *view) {
+    void tryDeleteCurrentRow(QSqlTableModel *model, QAbstractItemView *view) {
         const auto *selectionModel = view->selectionModel();
 
         if (selectionModel->hasSelection()) {
@@ -76,7 +76,6 @@ namespace Helper {
     }
 
     QVariant getCurrIdFromComboBox(const QComboBox *combo, const int colIndex) {
-        return combo->model()->data(
-            combo->model()->index(combo->currentIndex(), 0));
+        return combo->model()->index(combo->currentIndex(), 0).data();
     }
 }

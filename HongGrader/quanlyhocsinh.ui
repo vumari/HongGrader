@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>863</width>
+    <width>749</width>
     <height>675</height>
    </rect>
   </property>
@@ -84,7 +84,11 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="LEten"/>
+        <widget class="QLineEdit" name="LEten">
+         <property name="maxLength">
+          <number>50</number>
+         </property>
+        </widget>
        </item>
        <item row="0" column="2" rowspan="5">
         <widget class="QGroupBox" name="groupBox_2">
@@ -144,7 +148,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QListWidget" name="listlop">
+           <widget class="QListView" name="listlop">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -156,6 +160,15 @@
               <width>0</width>
               <height>30</height>
              </size>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -172,7 +185,11 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QDateEdit" name="DEngaysinh"/>
+          <widget class="QDateEdit" name="DEngaysinh">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item row="0" column="2">
           <widget class="QLabel" name="label_5">
@@ -182,7 +199,11 @@
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QLineEdit" name="LEdantoc"/>
+          <widget class="QLineEdit" name="LEdantoc">
+           <property name="maxLength">
+            <number>16</number>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_3">
@@ -222,7 +243,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="LEnoisinh"/>
+        <widget class="QLineEdit" name="LEnoisinh">
+         <property name="maxLength">
+          <number>100</number>
+         </property>
+        </widget>
        </item>
        <item row="4" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -269,43 +294,22 @@
      </widget>
     </item>
     <item>
-     <widget class="QTableWidget" name="tablehocsinh">
+     <widget class="QTableView" name="tablehocsinh">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
         <verstretch>4</verstretch>
        </sizepolicy>
       </property>
-      <column>
-       <property name="text">
-        <string>Mã HS</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Họ Tên</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Ngày sinh</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Giới tính</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Nơi sinh</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Dân tộc</string>
-       </property>
-      </column>
+      <property name="editTriggers">
+       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+      </property>
      </widget>
     </item>
    </layout>
@@ -315,7 +319,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>863</width>
+     <width>749</width>
      <height>26</height>
     </rect>
    </property>

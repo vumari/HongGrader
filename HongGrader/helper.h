@@ -7,7 +7,7 @@
 QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
 class QSqlTableModel;
-class QTableView;
+class QAbstractItemView;
 class QComboBox;
 QT_END_NAMESPACE
 
@@ -18,7 +18,7 @@ namespace Helper {
                        const bool isFirstColAuto = true);
     void setModelColHeaders(QAbstractItemModel *model,
                             std::initializer_list<QString> headers);
-    void tryDeleteCurrentRow(QSqlTableModel *model, QTableView *view);
+    void tryDeleteCurrentRow(QSqlTableModel *model, QAbstractItemView *view);
     bool ifValueExistsInTable(const QSqlDatabase &db,
                               const QLatin1StringView table,
                               const QLatin1StringView column,

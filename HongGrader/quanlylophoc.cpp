@@ -171,7 +171,7 @@ void quanlylophoc::onDeleteSchoolYear() {
     } else {
         QSqlTableModel *relModel = model->relationModel(3);
 
-        auto &&matches = relModel->match(
+        const auto &&matches = relModel->match(
             relModel->index(0, 0), Qt::EditRole, schoolYear, 1,
             Qt::MatchExactly);
         if (!matches.empty()) {

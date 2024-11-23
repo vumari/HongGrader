@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-class QSqlRelationalTableModel;
+class QSqlTableModel;
 class QDataWidgetMapper;
 QT_END_NAMESPACE
 
@@ -23,8 +23,8 @@ public:
 private:
     Ui::quanlytaikhoan *ui;
 
-    QSqlRelationalTableModel *model = nullptr;
-    QDataWidgetMapper *mapper       = nullptr;
+    QSqlTableModel *model     = nullptr;
+    QDataWidgetMapper *mapper = nullptr;
 
     bool checkValidInputs(const bool isAddingNew);
     void onAddRow();

@@ -3,8 +3,7 @@
 
 #include "helper.h"
 
-#include <QSqlRelationalTableModel>
-#include <QSqlRelationalDelegate>
+#include <QSqlTableModel>
 #include <QDataWidgetMapper>
 #include <QSqlField>
 #include <QSqlError>
@@ -18,7 +17,7 @@ quanlytaikhoan::quanlytaikhoan(QWidget *parent)
 
     QSqlDatabase db = QSqlDatabase::database();
     if (db.open()) {
-        model = new QSqlRelationalTableModel(this, db);
+        model = new QSqlTableModel(this, db);
         model->setTable("TaiKhoan");
         model->setEditStrategy(QSqlTableModel::OnManualSubmit);
         model->select();
@@ -27,15 +26,12 @@ quanlytaikhoan::quanlytaikhoan(QWidget *parent)
         });
 
         ui->tabletaikhoan->setModel(model);
-        ui->tabletaikhoan->setItemDelegate(
-            new QSqlRelationalDelegate(this));
         ui->tabletaikhoan->horizontalHeader()->setSectionResizeMode(
             QHeaderView::ResizeToContents);
 
         mapper = new QDataWidgetMapper(this);
         mapper->setModel(model);
         mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
-        mapper->setItemDelegate(new QSqlRelationalDelegate(this));
         mapper->addMapping(ui->LEtentaikhoan, 0);
         mapper->addMapping(ui->LEmatkhau, 1);
 
