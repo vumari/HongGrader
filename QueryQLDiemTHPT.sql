@@ -31,7 +31,7 @@ TenMon nvarchar(50) not null
  HoTen nvarchar(50) not null,
  NgaySinh date not null,
  GioiTinh bit not null,
- DanToc nvarchar(10) not null,
+ DanToc nvarchar(16) not null,
  NoiSinh nvarchar(100) not null
  )
  CREATE TABLE ChiTietHocSinh_Lop (
