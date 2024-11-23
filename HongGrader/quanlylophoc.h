@@ -3,8 +3,13 @@
 
 #include <QMainWindow>
 
+QT_BEGIN_NAMESPACE
+class QSqlRelationalTableModel;
+class QDataWidgetMapper;
+QT_END_NAMESPACE
+
 namespace Ui {
-class quanlylophoc;
+    class quanlylophoc;
 }
 
 class quanlylophoc : public QMainWindow
@@ -17,6 +22,16 @@ public:
 
 private:
     Ui::quanlylophoc *ui;
+
+    QSqlRelationalTableModel *model = nullptr;
+    QDataWidgetMapper *mapper       = nullptr;
+
+    bool checkValidInputs();
+    void onAddRow();
+    void onEditCurrentRow();
+    void onDeleteCurrentRow();
+    void onAddSchoolYear();
+    void onDeleteSchoolYear();
 };
 
 #endif // QUANLYLOPHOC_H

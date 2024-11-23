@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QComboBox>
 
 namespace Helper {
     void initSqlRecord(QSqlRecord &record, const QString &tableName,
@@ -47,13 +48,17 @@ namespace Helper {
         }
     }
 
-    bool ifUsernameExists(const QSqlDatabase &db, const QString &username,
-                          QWidget *msgParent) {
+    bool ifValueExistsInTable(const QSqlDatabase &db,
+                              const QLatin1StringView table,
+                              const QLatin1StringView column,
+                              const QVariant &value, QWidget *msgParent) {
+        const static QLatin1StringView queryTemplate{
+            "IF EXISTS (SELECT 1 FROM %1 WHERE %2 = ?) SELECT 1 ELSE SELECT 0;" };
+
         QSqlQuery query{ db };
 
-        query.prepare(
-            "IF EXISTS (SELECT 1 FROM TaiKhoan WHERE userName = ?) SELECT 1 ELSE SELECT 0;");
-        query.addBindValue(username);
+        query.prepare(queryTemplate.arg(table, column));
+        query.addBindValue(value);
 
         if (query.exec() && query.next()) {
             return query.value(0).toBool();
@@ -62,5 +67,16 @@ namespace Helper {
                                   query.lastError().text());
         }
         return false;
+    }
+
+    bool ifUsernameExists(const QSqlDatabase &db, const QString &username,
+                          QWidget *msgParent) {
+        return ifValueExistsInTable(db, "TaiKhoan"_L1, "userName"_L1,
+                                    username, msgParent);
+    }
+
+    QVariant getCurrIdFromComboBox(const QComboBox *combo, const int colIndex) {
+        return combo->model()->data(
+            combo->model()->index(combo->currentIndex(), 0));
     }
 }

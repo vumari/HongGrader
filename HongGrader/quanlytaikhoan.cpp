@@ -65,7 +65,7 @@ bool quanlytaikhoan::checkValidInputs(const bool isAddingNew) {
         return false;
     }
 
-    if (Helper::ifUsernameExists(QSqlDatabase::database(), uname, this)) {
+    if (Helper::ifUsernameExists(model->database(), uname, this)) {
         const auto *selectionModel = ui->tabletaikhoan->selectionModel();
 
         bool changingUserName = true;

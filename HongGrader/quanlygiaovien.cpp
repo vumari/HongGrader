@@ -127,9 +127,7 @@ void quanlygiaovien::onAddRow() {
     newRecord.setValue(4, ui->LEdiachi->text().trimmed());
     newRecord.setValue(5, ui->LEdienthoai->text().trimmed());
     newRecord.setValue(6, ui->LEemail->text().trimmed());
-    newRecord.setValue(7, ui->CBmon->model()->data(
-                           ui->CBmon->model()->index(
-                               ui->CBmon->currentIndex(), 0)));
+    newRecord.setValue(7, Helper::getCurrIdFromComboBox(ui->CBmon));
     if (!model->insertRecord(-1, newRecord) || !model->submitAll()) {
         QMessageBox::critical(this, "Lỗi thêm dòng", model->lastError().text());
         model->revertAll();
