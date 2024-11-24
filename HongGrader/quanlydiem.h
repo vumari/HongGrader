@@ -32,6 +32,12 @@ private slots:
     void on_actionscoreboard_triggered();
     void on_actionstudentlist_triggered();
 
+    void on_BTsua_clicked();
+
+    void on_BThuy_clicked();
+
+    void on_BTluu_clicked();
+
 private:
     Ui::quanlydiem *ui;
 
