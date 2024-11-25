@@ -12,6 +12,17 @@ dangnhap::dangnhap(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::dangnhap) {
     ui->setupUi(this);
+    /*
+     *  Khi hộp thoại đăng nhập đóng lại thì đối tượng db sẽ đóng kết nối CSDL
+     *  mặc định lại, làm lỗi mấy cái lớp QSqlQueryTable cũng dùng kết nối
+     *  mặc định đó ở đối tượng hoptracuuhocsinh trong đối tượng quanlydiem.
+     *  Vì thế, ta sẽ sao chép kết nối mặc định thành "login"
+     *  và dùng kết nối "login" để tương tác với CSDL ở lớp này.
+     *
+     *  Tôi đã dành cả buổi chiều chỉ để sửa cái lỗi này. Trên mạng cũng không
+     *  có ai bị lỗi này cả.
+     */
+    QSqlDatabase::cloneDatabase(QSqlDatabase::defaultConnection, "login");
 }
 
 dangnhap::~dangnhap() {
@@ -22,7 +33,7 @@ void dangnhap::on_btdangnhap_clicked() {
     QString &&uname = ui->linetendangnhap->text().trimmed();
     QString &&pass  = ui->linematkhau->text().trimmed();
 
-    QSqlDatabase db = QSqlDatabase::database();
+    QSqlDatabase db = QSqlDatabase::database("login");
 
     bool loginSuccess = false;
 
@@ -39,7 +50,6 @@ void dangnhap::on_btdangnhap_clicked() {
             if (!Helper::ifUsernameExists(db, uname, this)) {
                 QMessageBox::critical(this, "Lỗi đăng nhập",
                                       "Tên người dùng không tồn tại.");
-                db.close();
                 return;
             }
 
@@ -53,7 +63,6 @@ void dangnhap::on_btdangnhap_clicked() {
                     QMessageBox::critical(this,
                                           "Lỗi đăng nhập",
                                           "Vui lòng nhập lại mật khẩu.");
-                    db.close();
                     return;
                 } else {
                     loginSuccess = true;
@@ -62,8 +71,6 @@ void dangnhap::on_btdangnhap_clicked() {
                 QMessageBox::critical(this, "Lỗi đăng nhập",
                                       query.lastError().text());
             }
-
-            db.close();
         }
     }
 

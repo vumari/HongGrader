@@ -16,7 +16,6 @@ int main(int argc, char *argv[]) {
     db.setDatabaseName(connectionString);
     if (db.open()) {
         db.close();
-
         quanlydiem w;
         w.show();
         return a.exec();

@@ -116,99 +116,44 @@
        <string>Thông tin Điểm của học sinh</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item row="4" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QPushButton" name="BThienthi">
            <property name="text">
-            <string>Mã học sinh</string>
+            <string>Hiển thị</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="LEmaHS">
-           <property name="autoFillBackground">
-            <bool>false</bool>
+          <widget class="QPushButton" name="BTthem">
+           <property name="text">
+            <string>Thêm</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Btxoa">
+           <property name="text">
+            <string>Xóa</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="0" column="1" rowspan="4">
-        <widget class="QGroupBox" name="groupBox_HS">
-         <property name="title">
-          <string>Tra cứu mã học sinh</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Năm học</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="CBtracuunamhoc"/>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="1" rowspan="2">
-           <widget class="QPushButton" name="BTtracuu">
-            <property name="text">
-             <string>Tra cứu 
- mã học sinh</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>Lớp</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="CBlop"/>
-            </item>
-           </layout>
-          </item>
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>Kết quả</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="CBketqua"/>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Tên học sinh</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="LETenHS"/>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
+       <item row="3" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Năm học</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="CBnamhoc"/>
+         </item>
+        </layout>
        </item>
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -249,44 +194,33 @@
          </item>
         </layout>
        </item>
-       <item row="3" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_12">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
          <item>
-          <widget class="QLabel" name="label_4">
+          <widget class="QLabel" name="label">
            <property name="text">
-            <string>Năm học</string>
+            <string>Mã học sinh</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="CBnamhoc"/>
+          <widget class="QLineEdit" name="LEmaHS">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
-       <item row="4" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QPushButton" name="BThienthi">
-           <property name="text">
-            <string>Hiển thị</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="BTthem">
-           <property name="text">
-            <string>Thêm</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Btxoa">
-           <property name="text">
-            <string>Xóa</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="0" column="1" rowspan="4">
+        <widget class="hoptracuuhocsinh" name="groupBox_HS">
+         <property name="title">
+          <string>Tra cứu mã học sinh</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -475,6 +409,14 @@ selection-color: rgb(0, 0, 0);
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hoptracuuhocsinh</class>
+   <extends>QGroupBox</extends>
+   <header>hoptracuuhocsinh.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

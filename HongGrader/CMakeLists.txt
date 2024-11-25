@@ -25,6 +25,7 @@ set(PROJECT_SOURCES
         thongkehocsinh.h thongkehocsinh.cpp thongkehocsinh.ui
         genderitemdelegate.h genderitemdelegate.cpp
         helper.h helper.cpp
+        hoptracuuhocsinh.h hoptracuuhocsinh.cpp hoptracuuhocsinh.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -77,3 +78,5 @@ install(TARGETS HongGrader
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(HongGrader)
 endif()
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})

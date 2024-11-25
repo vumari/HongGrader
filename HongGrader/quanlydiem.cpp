@@ -12,7 +12,7 @@ quanlydiem::quanlydiem(QWidget *parent)
     // setAttribute(Qt::WA_DeleteOnClose, true);
     ui->BThuy->hide();
     ui->BTluu->hide();
-    QTimer::singleShot(0, this, &quanlydiem::login);
+    QTimer::singleShot(20, this, &quanlydiem::login);
 }
 
 quanlydiem::~quanlydiem() {
@@ -65,8 +65,7 @@ void quanlydiem::on_actionstudentlist_triggered() {
 }
 
 
-void quanlydiem::on_BTsua_clicked()
-{
+void quanlydiem::on_BTsua_clicked() {
     ui->BTsua->hide();
     ui->BThuy->show();
     ui->BTluu->show();
@@ -75,8 +74,7 @@ void quanlydiem::on_BTsua_clicked()
 }
 
 
-void quanlydiem::on_BThuy_clicked()
-{
+void quanlydiem::on_BThuy_clicked() {
     ui->BThuy->hide();
     ui->BTluu->hide();
     ui->BTsua->show();
@@ -85,8 +83,7 @@ void quanlydiem::on_BThuy_clicked()
 }
 
 
-void quanlydiem::on_BTluu_clicked()
-{
+void quanlydiem::on_BTluu_clicked() {
     ui->BTluu->hide();
     ui->BThuy->hide();
     ui->BTsua->show();

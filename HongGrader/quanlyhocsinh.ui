@@ -81,6 +81,9 @@
          <property name="text">
           <string>Họ và tên</string>
          </property>
+         <property name="buddy">
+          <cstring>LEten</cstring>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
@@ -107,6 +110,9 @@
             <property name="text">
              <string>Năm học</string>
             </property>
+            <property name="buddy">
+             <cstring>CBnamhoc</cstring>
+            </property>
            </widget>
           </item>
           <item row="0" column="1">
@@ -116,6 +122,9 @@
            <widget class="QLabel" name="label_6">
             <property name="text">
              <string>Chọn lớp</string>
+            </property>
+            <property name="buddy">
+             <cstring>CBlop</cstring>
             </property>
            </widget>
           </item>
@@ -144,6 +153,9 @@
            <widget class="QLabel" name="label_8">
             <property name="text">
              <string>DS lớp</string>
+            </property>
+            <property name="buddy">
+             <cstring>listlop</cstring>
             </property>
            </widget>
           </item>
@@ -182,6 +194,9 @@
            <property name="text">
             <string>Ngày sinh</string>
            </property>
+           <property name="buddy">
+            <cstring>DEngaysinh</cstring>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
@@ -196,6 +211,9 @@
            <property name="text">
             <string>Dân tộc</string>
            </property>
+           <property name="buddy">
+            <cstring>LEdantoc</cstring>
+           </property>
           </widget>
          </item>
          <item row="0" column="3">
@@ -209,6 +227,9 @@
           <widget class="QLabel" name="label_3">
            <property name="text">
             <string>Giới tính</string>
+           </property>
+           <property name="buddy">
+            <cstring>RBnam</cstring>
            </property>
           </widget>
          </item>
@@ -239,6 +260,9 @@
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Nơi sinh</string>
+         </property>
+         <property name="buddy">
+          <cstring>LEnoisinh</cstring>
          </property>
         </widget>
        </item>
@@ -326,6 +350,23 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>LEten</tabstop>
+  <tabstop>DEngaysinh</tabstop>
+  <tabstop>LEdantoc</tabstop>
+  <tabstop>RBnam</tabstop>
+  <tabstop>RBnu</tabstop>
+  <tabstop>LEnoisinh</tabstop>
+  <tabstop>BTthem</tabstop>
+  <tabstop>BTsua</tabstop>
+  <tabstop>BTxoa</tabstop>
+  <tabstop>CBnamhoc</tabstop>
+  <tabstop>CBlop</tabstop>
+  <tabstop>BTthemlop</tabstop>
+  <tabstop>BTxoalop</tabstop>
+  <tabstop>listlop</tabstop>
+  <tabstop>tablehocsinh</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
