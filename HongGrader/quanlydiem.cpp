@@ -10,7 +10,8 @@ quanlydiem::quanlydiem(QWidget *parent)
     , ui(new Ui::quanlydiem) {
     ui->setupUi(this);
     // setAttribute(Qt::WA_DeleteOnClose, true);
-
+    ui->BThuy->hide();
+    ui->BTluu->hide();
     QTimer::singleShot(0, this, &quanlydiem::login);
 }
 
@@ -61,5 +62,35 @@ void quanlydiem::on_actionscoreboard_triggered() {
 
 void quanlydiem::on_actionstudentlist_triggered() {
     (new thongkehocsinh(this))->show();
+}
+
+
+void quanlydiem::on_BTsua_clicked()
+{
+    ui->BTsua->hide();
+    ui->BThuy->show();
+    ui->BTluu->show();
+    ui->BTthem->setDisabled(true);
+    ui->Btxoa->setDisabled(true);
+}
+
+
+void quanlydiem::on_BThuy_clicked()
+{
+    ui->BThuy->hide();
+    ui->BTluu->hide();
+    ui->BTsua->show();
+    ui->BTthem->setDisabled(false);
+    ui->Btxoa->setDisabled(false);
+}
+
+
+void quanlydiem::on_BTluu_clicked()
+{
+    ui->BTluu->hide();
+    ui->BThuy->hide();
+    ui->BTsua->show();
+    ui->BTthem->setDisabled(false);
+    ui->Btxoa->setDisabled(false);
 }
 
