@@ -2,6 +2,7 @@
 #define HOPTRACUUHOCSINH_H
 
 #include <QGroupBox>
+#include <QSqlDatabase>
 
 QT_BEGIN_NAMESPACE
 class QSqlQueryModel;
@@ -19,6 +20,9 @@ class hoptracuuhocsinh : public QGroupBox
 public:
     explicit hoptracuuhocsinh(QWidget *parent = nullptr);
     ~hoptracuuhocsinh();
+
+    void init(QSqlDatabase db);
+    QSqlDatabase db;
 
 signals:
     void lookupPerformed(const int resultId);

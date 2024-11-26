@@ -4,15 +4,21 @@
 #include "dangnhap.h"
 
 #include <QTimer>
+#include <QSqlDatabase>
 
 quanlydiem::quanlydiem(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::quanlydiem) {
     ui->setupUi(this);
-    // setAttribute(Qt::WA_DeleteOnClose, true);
     ui->BThuy->hide();
     ui->BTluu->hide();
-    QTimer::singleShot(20, this, &quanlydiem::login);
+
+    QSqlDatabase db = QSqlDatabase::cloneDatabase(
+        QSqlDatabase::defaultConnection, "main");
+
+    ui->groupBox_HS->init(db);
+
+    QTimer::singleShot(1, this, &quanlydiem::login);
 }
 
 quanlydiem::~quanlydiem() {

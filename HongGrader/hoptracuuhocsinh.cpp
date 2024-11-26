@@ -15,8 +15,14 @@ hoptracuuhocsinh::hoptracuuhocsinh(QWidget *parent)
     : QGroupBox(parent)
     , ui(new Ui::hoptracuuhocsinh) {
     ui->setupUi(this);
+}
 
-    QSqlDatabase db = QSqlDatabase::database();
+hoptracuuhocsinh::~hoptracuuhocsinh() {
+    delete ui;
+}
+
+void hoptracuuhocsinh::init(QSqlDatabase db) {
+    this->db = db;
     if (db.open()) {
         schoolYearModel = new QSqlQueryModel(this);
         schoolYearModel->setQuery("SELECT * FROM NamHoc", db);
@@ -45,10 +51,6 @@ hoptracuuhocsinh::hoptracuuhocsinh(QWidget *parent)
     }
 }
 
-hoptracuuhocsinh::~hoptracuuhocsinh() {
-    delete ui;
-}
-
 void hoptracuuhocsinh::changeEvent(QEvent *e) {
     QGroupBox::changeEvent(e);
     switch (e->type()) {
@@ -69,8 +71,7 @@ void hoptracuuhocsinh::onSchoolYearChanged(const int &index) {
 }
 
 void hoptracuuhocsinh::onClassChanged(const int &index) {
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery    query{ db };
+    QSqlQuery query{ db };
 
     if (!query.prepare(
             R"(SELECT HoTen FROM HocSinh
@@ -112,8 +113,7 @@ void hoptracuuhocsinh::find() {
         return;
     }
 
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery    query{ db };
+    QSqlQuery query{ db };
 
     if (!query.prepare(
             R"(SELECT HS.MaHS FROM HocSinh HS
