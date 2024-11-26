@@ -22,7 +22,9 @@ dangnhap::dangnhap(QWidget *parent)
      *  Tôi đã dành cả buổi chiều chỉ để sửa cái lỗi này. Trên mạng cũng không
      *  có ai bị lỗi này cả.
      */
-    QSqlDatabase::cloneDatabase(QSqlDatabase::defaultConnection, "login");
+    if (!QSqlDatabase::contains("login")) {
+        QSqlDatabase::cloneDatabase(QSqlDatabase::defaultConnection, "login");
+    }
 }
 
 dangnhap::~dangnhap() {

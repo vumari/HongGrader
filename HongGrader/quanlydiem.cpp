@@ -13,9 +13,11 @@ quanlydiem::quanlydiem(QWidget *parent)
     ui->BThuy->hide();
     ui->BTluu->hide();
 
-    QSqlDatabase db = QSqlDatabase::cloneDatabase(
-        QSqlDatabase::defaultConnection, "main");
+    if (!QSqlDatabase::contains("main")) {
+        QSqlDatabase::cloneDatabase(QSqlDatabase::defaultConnection, "main");
+    }
 
+    QSqlDatabase db = QSqlDatabase::database("main");
     ui->groupBox_HS->init(db);
 
     QTimer::singleShot(1, this, &quanlydiem::login);

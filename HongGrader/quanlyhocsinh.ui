@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>quanlyhocsinh</class>
  <widget class="QMainWindow" name="quanlyhocsinh">
+  <property name="windowModality">
+   <enum>Qt::WindowModality::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
