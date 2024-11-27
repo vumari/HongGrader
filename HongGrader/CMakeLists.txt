@@ -26,6 +26,7 @@ set(PROJECT_SOURCES
         genderitemdelegate.h genderitemdelegate.cpp
         helper.h helper.cpp
         hoptracuuhocsinh.h hoptracuuhocsinh.cpp hoptracuuhocsinh.ui
+        tableexporter.h tableexporter.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

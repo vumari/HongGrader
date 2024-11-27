@@ -2,6 +2,7 @@
 #include "ui_thongkehocsinh.h"
 
 #include "helper.h"
+#include "tableexporter.h"
 
 #include <QSqlQueryModel>
 #include <QSqlField>
@@ -112,85 +113,7 @@ ON Lop.MaLop = Diem.MaLop)" };
 }
 
 void thongkehocsinh::exportFile() {
-    const static QLatin1StringView quotedString{ R"("%1")" };
-    const static QString           filters =
-        u"CSV ngăn cách bằng dấu phẩy (*.csv);;CSV tương thích với Excel (*.csv)"_s;
-
-    QString selectedFilter =
-        u"CSV tương thích với Excel (*.csv)"_s;
-    const QString &&filePath = QFileDialog::getSaveFileName(
-        this, "Chọn vị trí xuất tệp", QString(),
-        filters, &selectedFilter);
-
-    QString     output;
-    QTextStream tout(&output, QTextStream::WriteOnly);
-
-    tout.setRealNumberPrecision(2);
-    bool forceUtf8 = false;
-
-    while (model->canFetchMore())
-        model->fetchMore();
-
-    if (selectedFilter.startsWith("CSV"_L1)) {
-        bool  excelCompat = selectedFilter.contains("Excel"_L1);
-        QChar sep         = excelCompat ? ';' : ',';
-        if (excelCompat) {
-            forceUtf8 = true;
-            tout << R"(Mã;"Họ và tên";Lớp;ĐTB)";
-            tout.setLocale(QLocale(QLocale::Vietnamese));
-        } else {
-            tout << R"(Mã,"Họ và tên",Lớp,ĐTB)";
-        }
-        for (int i = 0; i < model->rowCount(); ++i) {
-            tout << '\n';
-            QSqlRecord &&record = model->record(i);
-            for (int j = 0; j < record.count(); ++j) {
-                if (j > 0) {
-                    tout << sep;
-                }
-                QSqlField &&field = record.field(j);
-                switch (field.metaType().id()) {
-                    case QMetaType::Float: {
-                        tout << field.value().toFloat();
-                        break;
-                    }
-                    case QMetaType::Double: {
-                        tout << field.value().toDouble();
-                        break;
-                    }
-                    case QMetaType::Int:
-                    case QMetaType::Long:
-                    case QMetaType::LongLong:
-                    case QMetaType::UInt:
-                    case QMetaType::ULong:
-                    case QMetaType::ULongLong: {
-                        tout << field.value().toString();
-                        break;
-                    }
-                    case QMetaType::QString: {
-                        tout << quotedString.arg(
-                            field.value().toString().replace('"', R"("")"));
-                        break;
-                    }
-                    default: {
-                        tout << field.value().toString();
-                    }
-                }
-            }
-        }
-    }
-
-    QSaveFile data(filePath);
-    if (data.open(QFile::WriteOnly | QFile::Truncate | QFile::Text)) {
-        if (forceUtf8) {
-            data.write("\uFEFF"); // Byte Order Mark (BOM)
-        }
-        data.write(output.toUtf8());
-        if (!data.commit()) {
-            QMessageBox::critical(this, "Error saving file",
-                                  data.errorString());
-        }
-    } else {
-        QMessageBox::critical(this, "Error saving file", data.errorString());
+    if (TableExporter(model, this).startExport()) {
+        QMessageBox::information(this, "Thành công", "Đã xuất tệp xong.");
     }
 }

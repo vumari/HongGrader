@@ -2,6 +2,7 @@
 #include "ui_thongkediem.h"
 
 #include "helper.h"
+#include "tableexporter.h"
 
 #include <QSqlQueryModel>
 #include <QSqlQuery>
@@ -74,7 +75,10 @@ ON Mon.MaMon = Diem.MaMon)" };
     query.addBindValue(studentId);
     query.addBindValue(ui->RBHK1->isChecked() ? 1 : 2);
     query.addBindValue(ui->CBnamhoc->currentText());
-    query.exec();
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Lỗi CSDL",
+                              model->lastError().text());
+    }
 
     model->setQuery(std::move(query));
     if (model->lastError().isValid()) {
@@ -87,4 +91,7 @@ ON Mon.MaMon = Diem.MaMon)" };
 }
 
 void thongkediem::exportFile() {
+    if (TableExporter(model, this).startExport()) {
+        QMessageBox::information(this, "Thành công", "Đã xuất tệp xong.");
+    }
 }
