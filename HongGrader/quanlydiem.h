@@ -8,6 +8,7 @@
 #include "quanlytaikhoan.h"
 #include "thongkediem.h"
 #include "thongkehocsinh.h"
+#include "quanlynamhoc.h"
 
 namespace Ui {
     class quanlydiem;
@@ -37,6 +38,8 @@ private slots:
     void on_BThuy_clicked();
 
     void on_BTluu_clicked();
+
+    void on_actionnamhoc_2_triggered();
 
 private:
     Ui::quanlydiem *ui;

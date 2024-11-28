@@ -340,6 +340,7 @@ selection-color: rgb(0, 0, 0);
     <addaction name="actiongiaovien"/>
     <addaction name="actionhocsinh"/>
     <addaction name="actionlop"/>
+    <addaction name="actionnamhoc_2"/>
    </widget>
    <widget class="QMenu" name="menuthongke">
     <property name="title">
@@ -406,6 +407,11 @@ selection-color: rgb(0, 0, 0);
   <action name="actionnamhoc">
    <property name="text">
     <string/>
+   </property>
+  </action>
+  <action name="actionnamhoc_2">
+   <property name="text">
+    <string>Danh mục năm học</string>
    </property>
   </action>
  </widget>

@@ -99,3 +99,9 @@ void quanlydiem::on_BTluu_clicked() {
     ui->Btxoa->setDisabled(false);
 }
 
+
+void quanlydiem::on_actionnamhoc_2_triggered()
+{
+    (new quanlynamhoc(this))->show();
+}
+

@@ -147,22 +147,6 @@
     <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Policy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>1</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QGroupBox" name="groupBox_2">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -173,25 +157,36 @@
         <property name="title">
          <string>Thông tin năm học</string>
         </property>
-        <layout class="QFormLayout" name="formLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_4">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Năm học</string>
+             </property>
+             <property name="buddy">
+              <cstring>LEnamhocmoi</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="LEnamhocmoi">
+             <property name="maxLength">
+              <number>30</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox">
            <property name="text">
-            <string>Năm học</string>
-           </property>
-           <property name="buddy">
-            <cstring>LEnamhocmoi</cstring>
+            <string>Vô hiệu</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="LEnamhocmoi">
-           <property name="maxLength">
-            <number>30</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="2">
+         <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <widget class="QPushButton" name="BTthemnamhoc">
@@ -209,24 +204,24 @@
            </item>
           </layout>
          </item>
+         <item>
+          <widget class="QListWidget" name="listWidget">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>2000000</width>
+             <height>2000000</height>
+            </size>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Policy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>1</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </item>
