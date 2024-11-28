@@ -17,7 +17,8 @@ TenMon nvarchar(50) not null
  MaMon varchar(20) not null references Mon(MaMon)
  )
  create table NamHoc(
- TenNamHoc varchar(30) primary key not null
+ TenNamHoc varchar(30) primary key not null,
+ TrangThai bit not null
  )
  create table Lop (
  MaLop int IDENTITY PRIMARY KEY not null,
@@ -114,10 +115,10 @@ INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email,MaMon) VALUE
 (N'Nguyễn Thị L', '1980-10-30', 1, N'Đà Lạt', '1234567801', 'nguyenthil@gmail.com','Van'),
 (N'Bùi Văn M', '1983-03-03', 0, N'Phú Thọ', '1234567802', 'buivanm@gmail.com','QPAN');
 -- Thêm các năm học vào bảng NamHoc
-INSERT INTO NamHoc (TenNamHoc) VALUES
-('2024-2025'),
-('2025-2026'),
-('2026-2027');
+INSERT INTO NamHoc (TenNamHoc,TrangThai) VALUES
+('2024-2025',0),
+('2025-2026',0),
+('2026-2027',0);
 
 --Lớp
 -- Lớp 10
