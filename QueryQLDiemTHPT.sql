@@ -64,7 +64,7 @@ CREATE TABLE DiemTongHop (
 
 
 create table TaiKhoan (
-userName varchar(50) primary key not null unique,
+userName varchar(50) primary key not null ,
 passWord varchar(50) not null
 )
 
