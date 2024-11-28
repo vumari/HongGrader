@@ -51,7 +51,7 @@ CREATE TABLE DiemTongHop (
     MaHS int NOT NULL REFERENCES HocSinh(MaHS),
     MaMon varchar(20) NOT NULL REFERENCES Mon(MaMon),
     MaHK int NOT NULL REFERENCES HocKi(MaHK),
-	MaLop int not null references Lop(MaLop),
+    TenNamHoc varchar(30) not null references NamHoc(TenNamHoc),
     tx1 float NULL,  -- Điểm thường xuyên lần 1
     tx2 float NULL,  -- Điểm thường xuyên lần 2
     tx3 float NULL,  -- Điểm thường xuyên lần 3
@@ -60,7 +60,7 @@ CREATE TABLE DiemTongHop (
     ck float NULL,  -- Cuoi Ki
     DiemTB float NULL,     -- Điểm trung bình
     KetQua nvarchar(10) CHECK (KetQua IN ('Dat', 'Khong Dat')),  -- Kết quả đạt/không đạt
-    PRIMARY KEY (MaHS, MaMon, MaHK,MaLop)
+    PRIMARY KEY (MaHS, MaMon, MaHK,TenNamHoc)
 );
 
 
@@ -173,12 +173,12 @@ INSERT INTO TaiKhoan (userName, passWord) VALUES
 ('1', '1')
 --Thêm điểm
 -- Them diem cho hoc sinh vao bang DiemTongHop
-INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, MaLop, tx1, tx2, tx3, gk, ck, DiemTB, KetQua) VALUES
-(1, 'Toan', 1, 1, 7.5, 8.0, NULL, 6.5, 7.0, 7.25, 'Dat'),
-(2, 'Ly', 1, 2, 8.0, 7.5, 9.0, 8.5, 7.0, 7.75, 'Dat'),
-(3, 'Hoa', 1, 3, NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
-(4, 'Sinh', 2, 4, 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
-(5, 'Su', 2, 5, 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
+INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, TenNamHoc, tx1, tx2, tx3, gk, ck, DiemTB, KetQua) VALUES
+(1, 'Toan', 1, '2024-2025', 7.5, 8.0, NULL, 6.5, 7.0, 7.25, 'Dat'),
+(2, 'Ly', 1,'2024-2025', 8.0, 7.5, 9.0, 8.5, 7.0, 7.75, 'Dat'),
+(3, 'Hoa', 1,'2024-2025', NULL, 6.5, 7.0, 8.0, 7.5, 7.0, 'Dat'),
+(4, 'Sinh', 2,'2024-2025', 6.0, 7.0, NULL, 7.5, 8.0, 7.25, 'Khong Dat'),
+(5, 'Su', 2,'2024-2025', 8.5, 9.0, 7.5, 7.0, 8.0, 8.0, 'Dat');
 
 --
 -- Học sinh 1
