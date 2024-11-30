@@ -53,58 +53,38 @@ INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email,MaMon) VALUE
 --Lớp
 -- Lớp 10 - Năm học 2022-2023
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('10C1', 1, '2022-2023'),
-('10C2', 2, '2022-2023'),
-('10C3', 3, '2022-2023');
+('10C1', 1, '2022-2023');
 
 -- Lớp 11 - Năm học 2022-2023
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('11B1', 6, '2022-2023'),
-('11B2', 7, '2022-2023'),
-('11B3', 8, '2022-2023');
+('11B1', 6, '2022-2023');
 
 -- Lớp 12 - Năm học 2022-2023
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('12A1', 6, '2022-2023'),
-('12A2', 7, '2022-2023'),
-('12A3', 8, '2022-2023');
+('12A1', 6, '2022-2023');
 
 -- Lớp 10 - Năm học 2023-2024
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('10C1', 1, '2023-2024'),
-('10C2', 2, '2023-2024'),
-('10C3', 3, '2023-2024');
+('10C1', 1, '2023-2024');
 
 -- Lớp 11 - Năm học 2023-2024
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('11B1', 6, '2023-2024'),
-('11B2', 7, '2023-2024'),
-('11B3', 8, '2023-2024');
+('11B1', 6, '2023-2024');
 
 -- Lớp 12 - Năm học 2023-2024
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('12A1', 6, '2023-2024'),
-('12A2', 7, '2023-2024'),
-('12A3', 8, '2023-2024');
--- Lớp 10
+('12A1', 6, '2023-2024');
+-- Lớp 10 -24-25
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('10C1', 1, '2024-2025'),
-('10C2', 2, '2024-2025'),
-('10C3', 3, '2024-2025');
+('10C1', 1, '2024-2025');
 
-
--- Lớp 11
+-- Lớp 11 - 24-25
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('11B1', 6, '2024-2025'),
-('11B2', 7, '2024-2025'),
-('11B3', 8, '2024-2025');
+('11B1', 6, '2024-2025');
 
-
--- Lớp 12
+-- Lớp 12 -24-25
 INSERT INTO Lop (TenLop, MaGVCN, TenNamHoc) VALUES
-('12A1', 6, '2024-2025'),
-('12A2', 7, '2024-2025'),
-('12A3', 8, '2024-2025');
+('12A1', 6, '2024-2025');
 --=======================================================================================================================================================
 --Học kì
 INSERT INTO HocKi (TenHK) VALUES
@@ -127,26 +107,26 @@ INSERT INTO HocSinh (HoTen, NgaySinh, GioiTinh, DanToc, NoiSinh) VALUES
 (N'Nguyễn Thị H', '2007-08-18', 1, N'Kinh', N'Quảng Ninh'),
 (N'Nguyễn Thị I', '2007-09-10', 0, N'Kinh', N'Hà Nội'),
 (N'Nguyễn Thị J', '2007-10-02', 1, N'Kinh', N'Hưng Yên'),
-(N'Nguyễn Thị K', '2007-11-20', 0, N'Kinh', N'Phú Thọ'),
-(N'Nguyễn Thị L', '2007-12-25', 1, N'Kinh', N'Thái Bình'),
-(N'Nguyễn Thị M', '2007-01-30', 0, N'Kinh', N'TP.HCM'),
-(N'Nguyễn Thị N', '2007-02-08', 1, N'Kinh', N'Hà Nội'),
-(N'Nguyễn Thị O', '2007-03-14', 0, N'Kinh', N'Vĩnh Phúc'),
-(N'Nguyễn Thị P', '2007-04-18', 1, N'Kinh', N'Bắc Ninh'),
-(N'Nguyễn Thị Q', '2007-05-22', 0, N'Kinh', N'Nam Định'),
-(N'Nguyễn Thị R', '2007-06-26', 1, N'Kinh', N'Thái Nguyên'),
-(N'Nguyễn Thị S', '2007-07-19', 0, N'Kinh', N'Phú Yên'),
-(N'Nguyễn Thị T', '2007-08-14', 1, N'Kinh', N'Bà Rịa - Vũng Tàu'),
-(N'Nguyễn Thị U', '2007-09-23', 0, N'Kinh', N'Cần Thơ'),
-(N'Nguyễn Thị V', '2007-10-06', 1, N'Kinh', N'Quảng Nam'),
-(N'Nguyễn Thị W', '2007-11-09', 0, N'Kinh', N'Tuyên Quang'),
-(N'Nguyễn Thị X', '2007-12-05', 1, N'Kinh', N'Hà Tĩnh'),
-(N'Nguyễn Thị Y', '2007-01-19', 0, N'Kinh', N'Bắc Giang'),
-(N'Nguyễn Thị Z', '2007-02-25', 1, N'Kinh', N'Lạng Sơn'),
-(N'Nguyễn Thị AA', '2007-03-08', 0, N'Kinh', N'Gia Lai'),
-(N'Nguyễn Thị AB', '2007-04-11', 1, N'Kinh', N'Quảng Bình'),
-(N'Nguyễn Thị AC', '2007-05-03', 0, N'Kinh', N'Sóc Trăng'),
-(N'Nguyễn Thị AD', '2007-06-20', 1, N'Kinh', N'Thừa Thiên Huế');
+(N'Nguyễn Thị K', '2006-11-20', 0, N'Kinh', N'Phú Thọ'),
+(N'Nguyễn Thị L', '2006-12-25', 1, N'Kinh', N'Thái Bình'),
+(N'Nguyễn Thị M', '2006-01-30', 0, N'Kinh', N'TP.HCM'),
+(N'Nguyễn Thị N', '2006-02-08', 1, N'Kinh', N'Hà Nội'),
+(N'Nguyễn Thị O', '2006-03-14', 0, N'Kinh', N'Vĩnh Phúc'),
+(N'Nguyễn Thị P', '2006-04-18', 1, N'Kinh', N'Bắc Ninh'),
+(N'Nguyễn Thị Q', '2006-05-22', 0, N'Kinh', N'Nam Định'),
+(N'Nguyễn Thị R', '2006-06-26', 1, N'Kinh', N'Thái Nguyên'),
+(N'Nguyễn Thị S', '2006-07-19', 0, N'Kinh', N'Phú Yên'),
+(N'Nguyễn Thị T', '2006-08-14', 1, N'Kinh', N'Bà Rịa - Vũng Tàu'),
+(N'Nguyễn Thị U', '2005-09-23', 0, N'Kinh', N'Cần Thơ'),
+(N'Nguyễn Thị V', '2005-10-06', 1, N'Kinh', N'Quảng Nam'),
+(N'Nguyễn Thị W', '2005-11-09', 0, N'Kinh', N'Tuyên Quang'),
+(N'Nguyễn Thị X', '2005-12-05', 1, N'Kinh', N'Hà Tĩnh'),
+(N'Nguyễn Thị Y', '2005-01-19', 0, N'Kinh', N'Bắc Giang'),
+(N'Nguyễn Thị Z', '2005-02-25', 1, N'Kinh', N'Lạng Sơn'),
+(N'Nguyễn Thị AA', '2005-03-08', 0, N'Kinh', N'Gia Lai'),
+(N'Nguyễn Thị AB', '2005-04-11', 1, N'Kinh', N'Quảng Bình'),
+(N'Nguyễn Thị AC', '2005-05-03', 0, N'Kinh', N'Sóc Trăng'),
+(N'Nguyễn Thị AD', '2005-06-20', 1, N'Kinh', N'Thừa Thiên Huế');
 -- chi tiết học sinh - lớp
 -- Thêm 10 học sinh đầu vào lớp 10C1 năm học 2022-2023
 INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop)
