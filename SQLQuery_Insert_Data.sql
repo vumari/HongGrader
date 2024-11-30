@@ -144,29 +144,29 @@ VALUES
 -- Thêm 10 học sinh tiếp theo vào lớp 10C2 năm học 2022-2023
 INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop)
 VALUES
-(11, 2),  -- MaHS = 11, MaLop = 2 (10C2 năm 2022-2023)
-(12, 2),  -- MaHS = 12, MaLop = 2 (10C2 năm 2022-2023)
-(13, 2),  -- MaHS = 13, MaLop = 2 (10C2 năm 2022-2023)
-(14, 2),  -- MaHS = 14, MaLop = 2 (10C2 năm 2022-2023)
-(15, 2),  -- MaHS = 15, MaLop = 2 (10C2 năm 2022-2023)
-(16, 2),  -- MaHS = 16, MaLop = 2 (10C2 năm 2022-2023)
-(17, 2),  -- MaHS = 17, MaLop = 2 (10C2 năm 2022-2023)
-(18, 2),  -- MaHS = 18, MaLop = 2 (10C2 năm 2022-2023)
-(19, 2),  -- MaHS = 19, MaLop = 2 (10C2 năm 2022-2023)
-(20, 2); -- MaHS = 20, MaLop = 2 (10C2 năm 2022-2023)
+(11, 2),  -- MaHS = 11, MaLop = 2 
+(12, 2),  -- MaHS = 12, MaLop = 2 
+(13, 2),  -- MaHS = 13, MaLop = 2 
+(14, 2),  -- MaHS = 14, MaLop = 2 
+(15, 2),  -- MaHS = 15, MaLop = 2 
+(16, 2),  -- MaHS = 16, MaLop = 2 
+(17, 2),  -- MaHS = 17, MaLop = 2 
+(18, 2),  -- MaHS = 18, MaLop = 2 
+(19, 2),  -- MaHS = 19, MaLop = 2 
+(20, 2); -- MaHS = 20, MaLop = 2 
 -- Thêm 10 học sinh còn lại vào lớp 10C3 năm học 2022-2023
 INSERT INTO ChiTietHocSinh_Lop (MaHS, MaLop)
 VALUES
-(21, 3),  -- MaHS = 21, MaLop = 3 (10C3 năm 2022-2023)
-(22, 3),  -- MaHS = 22, MaLop = 3 (10C3 năm 2022-2023)
-(23, 3),  -- MaHS = 23, MaLop = 3 (10C3 năm 2022-2023)
-(24, 3),  -- MaHS = 24, MaLop = 3 (10C3 năm 2022-2023)
-(25, 3),  -- MaHS = 25, MaLop = 3 (10C3 năm 2022-2023)
-(26, 3),  -- MaHS = 26, MaLop = 3 (10C3 năm 2022-2023)
-(27, 3),  -- MaHS = 27, MaLop = 3 (10C3 năm 2022-2023)
-(28, 3),  -- MaHS = 28, MaLop = 3 (10C3 năm 2022-2023)
-(29, 3),  -- MaHS = 29, MaLop = 3 (10C3 năm 2022-2023)
-(30, 3); -- MaHS = 30, MaLop = 3 (10C3 năm 2022-2023)
+(21, 3),  -- MaHS = 21, MaLop = 3 
+(22, 3),  -- MaHS = 22, MaLop = 3 
+(23, 3),  -- MaHS = 23, MaLop = 3 
+(24, 3),  -- MaHS = 24, MaLop = 3 
+(25, 3),  -- MaHS = 25, MaLop = 3 
+(26, 3),  -- MaHS = 26, MaLop = 3 
+(27, 3),  -- MaHS = 27, MaLop = 3 
+(28, 3),  -- MaHS = 28, MaLop = 3 
+(29, 3),  -- MaHS = 29, MaLop = 3 
+(30, 3); -- MaHS = 30, MaLop = 3 
 -- Thêm điểm tổng hợp cho học sinh MaHS = 1 trong lớp 10C1, năm học 2022-2023
 -- Học kỳ I
 INSERT INTO DiemTongHop (MaHS, MaMon, MaHK, TenNamHoc, tx1, tx2, tx3, tx4, gk, ck, DiemTB, KetQua)
