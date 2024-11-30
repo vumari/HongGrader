@@ -27,13 +27,14 @@ set(PROJECT_SOURCES
         helper.h helper.cpp
         hoptracuuhocsinh.h hoptracuuhocsinh.cpp hoptracuuhocsinh.ui
         tableexporter.h tableexporter.cpp
+        quanlynamhoc.h quanlynamhoc.cpp quanlynamhoc.ui
+        boolitemdelegate.h boolitemdelegate.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(HongGrader
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        quanlynamhoc.h quanlynamhoc.cpp quanlynamhoc.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET HongGrader APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

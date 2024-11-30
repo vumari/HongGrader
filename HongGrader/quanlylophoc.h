@@ -30,8 +30,6 @@ private:
     void onAddRow();
     void onEditCurrentRow();
     void onDeleteCurrentRow();
-    void onAddSchoolYear();
-    void onDeleteSchoolYear();
 };
 
 #endif // QUANLYLOPHOC_H

@@ -9,16 +9,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>455</width>
+    <height>613</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Quản lý lớp học – HongGrader</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="palette">
        <palette>
@@ -144,88 +144,7 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="title">
-         <string>Thông tin năm học</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Năm học</string>
-             </property>
-             <property name="buddy">
-              <cstring>LEnamhocmoi</cstring>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="LEnamhocmoi">
-             <property name="maxLength">
-              <number>30</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBox">
-           <property name="text">
-            <string>Vô hiệu</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QPushButton" name="BTthemnamhoc">
-             <property name="text">
-              <string>Thêm</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="BTxoanamhoc">
-             <property name="text">
-              <string>Xóa</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QListWidget" name="listWidget">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>2000000</width>
-             <height>2000000</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0" colspan="2">
+    <item>
      <widget class="QTableView" name="tablelophoc">
       <property name="editTriggers">
        <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
@@ -245,7 +164,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>455</width>
      <height>26</height>
     </rect>
    </property>
@@ -259,9 +178,6 @@
   <tabstop>BTthem</tabstop>
   <tabstop>BTsua</tabstop>
   <tabstop>BTxoa</tabstop>
-  <tabstop>LEnamhocmoi</tabstop>
-  <tabstop>BTthemnamhoc</tabstop>
-  <tabstop>BTxoanamhoc</tabstop>
   <tabstop>tablelophoc</tabstop>
  </tabstops>
  <resources/>

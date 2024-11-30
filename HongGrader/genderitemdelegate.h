@@ -17,14 +17,14 @@ public:
                        QRadioButton *femaleBtn);
 
     virtual QString displayText(const QVariant &value,
-                                const QLocale &locale) const override;
+                                const QLocale &locale) const final;
 
     virtual void setModelData(QWidget *editor,
                               QAbstractItemModel *model,
-                              const QModelIndex &index) const override;
+                              const QModelIndex &index) const final;
 
     virtual void setEditorData(QWidget *editor,
-                               const QModelIndex &index) const override;
+                               const QModelIndex &index) const final;
 
     QRadioButton *maleButton   = nullptr;
     QRadioButton *femaleButton = nullptr;

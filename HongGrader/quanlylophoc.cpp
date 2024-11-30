@@ -62,10 +62,6 @@ quanlylophoc::quanlylophoc(QWidget *parent)
             this, &quanlylophoc::onEditCurrentRow);
     connect(ui->BTxoa, &QPushButton::clicked,
             this, &quanlylophoc::onDeleteCurrentRow);
-    connect(ui->BTthemnamhoc, &QPushButton::clicked,
-            this, &quanlylophoc::onAddSchoolYear);
-    connect(ui->BTxoanamhoc, &QPushButton::clicked,
-            this, &quanlylophoc::onDeleteSchoolYear);
 }
 
 quanlylophoc::~quanlylophoc() {
@@ -124,66 +120,4 @@ void quanlylophoc::onEditCurrentRow() {
 
 void quanlylophoc::onDeleteCurrentRow() {
     Helper::tryDeleteCurrentRow(model, ui->tablelophoc);
-}
-
-void quanlylophoc::onAddSchoolYear() {
-    const QString &&schoolYear = ui->LEnamhocmoi->text().trimmed();
-
-    if (schoolYear.isEmpty()) {
-        QMessageBox::critical(this, "Lỗi thêm năm học",
-                              "Vui lòng nhập năm học.");
-        return;
-    }
-    if (Helper::ifValueExistsInTable(
-            model->database(), "NamHoc"_L1, "TenNamHoc"_L1, schoolYear, this)) {
-        QMessageBox::critical(this,
-                              "Lỗi thêm năm học",
-                              "Năm học này đã tồn tại, nên không thể thêm được.");
-        return;
-    }
-
-    QSqlTableModel *relModel = model->relationModel(3);
-
-    QSqlRecord newRecord = relModel->record();
-    newRecord.setValue(0, ui->LEnamhocmoi->text().trimmed());
-    if (!relModel->insertRecord(-1, newRecord) || !relModel->submitAll()) {
-        QMessageBox::critical(this,
-                              "Lỗi thêm năm học",
-                              relModel->lastError().text());
-        relModel->revertAll();
-    }
-}
-
-void quanlylophoc::onDeleteSchoolYear() {
-    const QString &&schoolYear = ui->LEnamhocmoi->text().trimmed();
-
-    if (schoolYear.isEmpty()) {
-        QMessageBox::critical(this, "Lỗi nhập liệu",
-                              "Vui lòng nhập tên.");
-        return;
-    }
-
-    if (!Helper::ifValueExistsInTable(
-            model->database(), "NamHoc"_L1, "TenNamHoc"_L1, schoolYear, this)) {
-        QMessageBox::critical(this,
-                              "Lỗi xoá năm học",
-                              "Năm học này không tồn tại, nên không thể xoá được.");
-    } else {
-        QSqlTableModel *relModel = model->relationModel(3);
-
-        const auto &&matches = relModel->match(
-            relModel->index(0, 0), Qt::EditRole, schoolYear, 1,
-            Qt::MatchExactly);
-        if (!matches.empty()) {
-            if (!relModel->removeRow(matches[0].row())
-                || !relModel->submitAll()) {
-                QMessageBox::critical(this,
-                                      "Lỗi xoá dòng",
-                                      relModel->lastError().text());
-                relModel->revertAll();
-            } else {
-                relModel->select();
-            }
-        }
-    }
 }
