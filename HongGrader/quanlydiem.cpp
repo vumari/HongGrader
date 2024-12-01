@@ -11,12 +11,15 @@
 #include "dangnhap.h"
 #include "helper.h"
 #include "scoremodel.h"
+#include "scoreitemdelegate.h"
 
 #include <QTimer>
 #include <QSqlDatabase>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QItemSelectionModel>
+#include <QMouseEvent>
+
 
 quanlydiem::quanlydiem(QWidget *parent)
     : QMainWindow(parent)
@@ -47,6 +50,8 @@ quanlydiem::quanlydiem(QWidget *parent)
     model = new ScoreModel(this);
     model->select();
     ui->tablediem->setModel(model);
+    ui->tablediem->setItemDelegate(new ScoreItemDelegate(ui->tablediem));
+    ui->tablediem->viewport()->installEventFilter(this);
     setupTable();
 
     connect(ui->BTthem, &QPushButton::clicked, this, &quanlydiem::onAddRow);
@@ -58,6 +63,32 @@ quanlydiem::quanlydiem(QWidget *parent)
 
 quanlydiem::~quanlydiem() {
     delete ui;
+}
+
+bool quanlydiem::eventFilter(QObject *obj, QEvent *event) {
+    if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+
+        if (obj->parent() != ui->tablediem) {
+            return QObject::eventFilter(obj, event);
+        }
+        if (mouseEvent->button() != Qt::RightButton) {
+            return QObject::eventFilter(obj, event);
+        }
+        if (ui->tablediem->editTriggers() ==
+            QAbstractItemView::NoEditTriggers) {
+            return QObject::eventFilter(obj, event);
+        }
+        QModelIndex index = ui->tablediem->indexAt(mouseEvent->pos());
+        if (index.isValid()) {
+            const int col = index.column();
+            if (((col >= 7) && (col <= 7 + 5)) || (col == 14)) {
+                model->setData(index, QVariant(QMetaType::fromType<float>()));
+            }
+        }
+    }
+
+    return QObject::eventFilter(obj, event);
 }
 
 void quanlydiem::login() {
@@ -188,5 +219,3 @@ void quanlydiem::onDeleteCurrentRow() {
         setupTable();
     }
 }
-
-

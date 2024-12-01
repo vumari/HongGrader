@@ -153,7 +153,7 @@ bool ScoreModel::submitAll() {
 
 void ScoreModel::applyHeaders() {
     Helper::setModelColHeaders(this, {
-        "Mã học sinh", "Họ và tên", "Mã môn", "Môn học", "Mã học kì", "Học kì",
+        "Mã HS", "Họ và tên", "Mã môn", "Môn học", "Mã học kì", "Học kì",
         "Năm học", "TX 1", "TX 2", "TX 3", "TX 4", "GK", "CK", "TB",
         "Kết quả" });
 }
@@ -186,9 +186,16 @@ QVariant ScoreModel::data(const QModelIndex &index, int role) const {
 bool ScoreModel::setData(const QModelIndex &index, const QVariant &value,
                          int role) {
     if (data(index, role) != value) {
+        const int col = index.column();
+        if (col == 14) {
+            const QString &strValue = value.toString();
+            if ((strValue != "Dat") && (strValue != "Khong Dat")) {
+                return false;
+            }
+        }
         changedCells.insert(QPersistentModelIndex(index), value);
         emit dataChanged(index, index, { role });
-        if ((index.column() >= 7) && (index.column() <= 7 + 5)) {
+        if ((col >= 7) && (col <= 7 + 5)) {
             updateAvgScore(index);
         }
         return true;
@@ -288,7 +295,11 @@ void ScoreModel::updateAvgScore(const QModelIndex &index) {
         factor += 3; // Hệ số 3
     }
 
-    const double avg = std::round(sum * 100 / (double)factor) / 100.0;
     curIndex = index.siblingAtColumn(13);
-    setData(curIndex, avg);
+    if (factor > 0) {
+        const double avg = std::round(sum * 100 / (double)factor) / 100.0;
+        setData(curIndex, avg);
+    } else {
+        setData(curIndex, QVariant(QMetaType::fromType<float>())); // NULL
+    }
 }

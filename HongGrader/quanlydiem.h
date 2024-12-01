@@ -17,6 +17,9 @@ public:
     explicit quanlydiem(QWidget *parent = nullptr);
     ~quanlydiem();
 
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) final;
+
 private slots:
     void login();
 
