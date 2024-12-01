@@ -58,6 +58,7 @@ bool quanlytaikhoan::checkValidInputs(const bool isAddingNew) {
     if (uname.isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập tên tài khoản.");
+        ui->LEtentaikhoan->setFocus(Qt::OtherFocusReason);
         return false;
     }
 
@@ -67,9 +68,8 @@ bool quanlytaikhoan::checkValidInputs(const bool isAddingNew) {
         bool changingUserName = true;
         if (!isAddingNew && selectionModel->hasSelection()) {
             const QString &&currUname =
-                model->data(model->index(
-                                selectionModel->currentIndex().row(),
-                                0)).toString();
+                model->index(selectionModel->currentIndex().row(),
+                             0).data().toString();
 
             if (currUname == uname) {
                 changingUserName = false;
@@ -79,6 +79,7 @@ bool quanlytaikhoan::checkValidInputs(const bool isAddingNew) {
         if (changingUserName) {
             QMessageBox::critical(this, "Lỗi nhập liệu",
                                   "Tên người dùng đã tồn tại.");
+            ui->LEtentaikhoan->setFocus(Qt::OtherFocusReason);
             return false;
         }
     }
@@ -86,6 +87,7 @@ bool quanlytaikhoan::checkValidInputs(const bool isAddingNew) {
     if (ui->LEmatkhau->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập mật khẩu.");
+        ui->LEmatkhau->setFocus(Qt::OtherFocusReason);
         return false;
     }
     return true;

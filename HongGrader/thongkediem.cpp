@@ -50,20 +50,12 @@ thongkediem::~thongkediem() {
 }
 
 void thongkediem::displayPoints() {
-    bool      ok        = false;
-    const int studentId = ui->LEmaHS->text().trimmed().toInt(&ok);
-
-    if (!ok) {
-        QMessageBox::critical(this, "Lỗi nhập liệu",
-                              "Vui lòng nhập mã học sinh hợp lệ");
-        ui->LEmaHS->setFocus(Qt::OtherFocusReason);
-        return;
-    }
+    const int studentId = ui->SBmaHS->value();
 
     if (!Helper::ifStudentIdExists(db, studentId, this)) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Mã học sinh không tồn tại.");
-        ui->LEmaHS->setFocus(Qt::OtherFocusReason);
+        ui->SBmaHS->setFocus(Qt::OtherFocusReason);
     }
 
     const static QLatin1StringView queryTemplate{

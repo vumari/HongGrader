@@ -60,6 +60,7 @@ bool quanlynamhoc::checkValidInputs() {
     if (ui->LEnamhocmoi->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập năm học.");
+        ui->LEnamhocmoi->setFocus(Qt::OtherFocusReason);
         return false;
     }
     return true;
@@ -82,6 +83,7 @@ void quanlynamhoc::onEditCurrentRow() {
                 QMessageBox::critical(this,
                                       "Lỗi sửa năm học",
                                       "Năm học này đã tồn tại, nên không thể sửa được.");
+                ui->LEnamhocmoi->setFocus(Qt::OtherFocusReason);
                 return;
             }
         }
@@ -96,17 +98,16 @@ void quanlynamhoc::onEditCurrentRow() {
 }
 
 void quanlynamhoc::onAddSchoolYear() {
-    const QString &&schoolYear = ui->LEnamhocmoi->text().trimmed();
-
-    if (schoolYear.isEmpty()) {
-        QMessageBox::critical(this, "Lỗi thêm năm học",
-                              "Vui lòng nhập năm học.");
+    if (!checkValidInputs()) {
         return;
     }
+
+    const QString &&schoolYear = ui->LEnamhocmoi->text().trimmed();
     if (Helper::ifSchoolYearExists(model->database(), schoolYear, this)) {
         QMessageBox::critical(this,
                               "Lỗi thêm năm học",
                               "Năm học này đã tồn tại, nên không thể thêm được.");
+        ui->LEnamhocmoi->setFocus(Qt::OtherFocusReason);
         return;
     }
 

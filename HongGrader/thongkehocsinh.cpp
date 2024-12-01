@@ -65,6 +65,17 @@ ON Diem.MaHS = HS.MaHS)" };
     const static QLatin1StringView groupByClause{
         "GROUP BY HS.MaHS, HS.HoTen" };
 
+    if (ui->CBmonhoc->currentIndex() == -1) {
+        QMessageBox::critical(this, "Lỗi nhập liệu", "Vui lòng chọn môn học");
+        ui->CBmonhoc->setFocus(Qt::OtherFocusReason);
+        return;
+    }
+    if (ui->CBnamhoc->currentIndex() == -1) {
+        QMessageBox::critical(this, "Lỗi nhập liệu", "Vui lòng chọn năm học");
+        ui->CBnamhoc->setFocus(Qt::OtherFocusReason);
+        return;
+    }
+
     QStringList whereFilters;
 
     if (ui->CBmonhoc->currentIndex() > 0) {

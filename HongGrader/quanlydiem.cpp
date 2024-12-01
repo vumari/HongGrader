@@ -156,20 +156,12 @@ void quanlydiem::setupTable() {
 }
 
 bool quanlydiem::checkValidInputs() {
-    bool      ok        = false;
-    const int studentId = ui->LEmaHS->text().trimmed().toInt(&ok);
-
-    if (!ok) {
-        QMessageBox::critical(this, "Lỗi nhập liệu",
-                              "Vui lòng nhập mã học sinh hợp lệ");
-        ui->LEmaHS->setFocus(Qt::OtherFocusReason);
-        return false;
-    }
+    const int studentId = ui->SBmaHS->value();
 
     if (!Helper::ifStudentIdExists(model->database(), studentId, this)) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Mã học sinh không tồn tại.");
-        ui->LEmaHS->setFocus(Qt::OtherFocusReason);
+        ui->SBmaHS->setFocus(Qt::OtherFocusReason);
         return false;
     }
 
@@ -181,7 +173,7 @@ void quanlydiem::onAddRow() {
         return;
     }
 
-    model->appendRow(ui->LEmaHS->text().trimmed().toInt(),
+    model->appendRow(ui->SBmaHS->value(),
                      Helper::getCurrIdFromComboBox(ui->CBmonhoc).toString(),
                      ui->RBHK1->isChecked() ? 1 : 2,
                      ui->CBnamhoc->currentText());

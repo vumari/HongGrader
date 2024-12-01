@@ -159,16 +159,19 @@ bool quanlyhocsinh::checkValidInputs() {
     if (ui->LEten->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập họ và tên.");
+        ui->LEten->setFocus(Qt::OtherFocusReason);
         return false;
     }
     if (ui->LEnoisinh->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
-                              "Vui lòng nhập địa chỉ.");
+                              "Vui lòng nhập nơi sinh.");
+        ui->LEnoisinh->setFocus(Qt::OtherFocusReason);
         return false;
     }
     if (ui->LEdantoc->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập dân tộc");
+        ui->LEdantoc->setFocus(Qt::OtherFocusReason);
         return false;
     }
     return true;
@@ -224,7 +227,7 @@ void quanlyhocsinh::onDeleteCurrentRow() {
 void quanlyhocsinh::onAddClass() {
     if (ui->CBlop->currentIndex() == -1) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
-                              "Vui lòng chọn lop.");
+                              "Vui lòng chọn lớp.");
         return;
     }
 

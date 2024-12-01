@@ -92,16 +92,19 @@ bool hoptracuuhocsinh::checkValidInputs() {
     if (ui->LETenHS->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập họ và tên.");
+        ui->LETenHS->setFocus(Qt::OtherFocusReason);
         return false;
     }
     if (ui->CBnamhoc->currentIndex() == -1) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng chọn năm học.");
+        ui->CBnamhoc->setFocus(Qt::OtherFocusReason);
         return false;
     }
     if (ui->CBlop->currentIndex() == -1) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng chọn lớp học.");
+        ui->CBlop->setFocus(Qt::OtherFocusReason);
         return false;
     }
 

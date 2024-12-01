@@ -86,30 +86,41 @@ bool quanlygiaovien::checkValidInputs() {
     if (ui->LEtenGV->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập họ và tên.");
+        ui->LEtenGV->setFocus(Qt::OtherFocusReason);
         return false;
     }
     if (ui->LEdiachi->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập địa chỉ.");
+        ui->LEdiachi->setFocus(Qt::OtherFocusReason);
         return false;
     }
     if (ui->LEdienthoai->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập số điện thoại");
+        ui->LEdienthoai->setFocus(Qt::OtherFocusReason);
         return false;
     } else if (!ui->LEdienthoai->hasAcceptableInput()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Số điện thoại không hợp lệ");
+        ui->LEdienthoai->setFocus(Qt::OtherFocusReason);
         return false;
     }
     if (ui->LEemail->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập địa chỉ e-mail.");
+        ui->LEemail->setFocus(Qt::OtherFocusReason);
         return false;
     } else if (!ui->LEemail->hasAcceptableInput()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Địa chỉ e-mail không hợp lệ.");
+        ui->LEemail->setFocus(Qt::OtherFocusReason);
         return false;
+    }
+    if (ui->CBmon->currentIndex() == -1) {
+        QMessageBox::critical(this, "Lỗi nhập liệu",
+                              "Vui lòng chọn môn dạy.");
+        ui->CBmon->setFocus(Qt::OtherFocusReason);
     }
     return true;
 }

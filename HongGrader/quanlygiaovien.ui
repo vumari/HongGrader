@@ -80,6 +80,9 @@
            <property name="text">
             <string>Họ Tên</string>
            </property>
+           <property name="buddy">
+            <cstring>LEtenGV</cstring>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
@@ -94,6 +97,9 @@
            <property name="text">
             <string>Ngày sinh</string>
            </property>
+           <property name="buddy">
+            <cstring>DEngaysinh</cstring>
+           </property>
           </widget>
          </item>
          <item row="1" column="1">
@@ -107,6 +113,9 @@
           <widget class="QLabel" name="label_3">
            <property name="text">
             <string>Giới tính</string>
+           </property>
+           <property name="buddy">
+            <cstring>RBnam</cstring>
            </property>
           </widget>
          </item>
@@ -140,6 +149,9 @@
            <property name="text">
             <string>Địa chỉ</string>
            </property>
+           <property name="buddy">
+            <cstring>LEdiachi</cstring>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
@@ -153,6 +165,9 @@
           <widget class="QLabel" name="label_5">
            <property name="text">
             <string>Điện thoại</string>
+           </property>
+           <property name="buddy">
+            <cstring>LEdienthoai</cstring>
            </property>
           </widget>
          </item>
@@ -171,6 +186,9 @@
            <property name="text">
             <string>Email</string>
            </property>
+           <property name="buddy">
+            <cstring>LEemail</cstring>
+           </property>
           </widget>
          </item>
          <item row="2" column="1">
@@ -184,6 +202,9 @@
           <widget class="QLabel" name="label_7">
            <property name="text">
             <string>Môn dạy</string>
+           </property>
+           <property name="buddy">
+            <cstring>CBmon</cstring>
            </property>
           </widget>
          </item>
