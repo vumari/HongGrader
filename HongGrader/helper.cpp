@@ -75,6 +75,18 @@ namespace Helper {
                                     username, msgParent);
     }
 
+
+    bool ifSchoolYearExists(const QSqlDatabase &db, const QString &schoolYear,
+                            QWidget *msgParent) {
+        return ifValueExistsInTable(db, "NamHoc"_L1, "TenNamHoc"_L1,
+                                    schoolYear, msgParent);
+    }
+
+    bool ifStudentIdExists(const QSqlDatabase &db, const int id,
+                           QWidget *msgParent) {
+        return ifValueExistsInTable(db, "HocSinh"_L1, "MaHS"_L1, id, msgParent);
+    }
+
     QVariant getCurrIdFromComboBox(const QComboBox *combo, const int colIndex) {
         return combo->model()->index(combo->currentIndex(), 0).data();
     }

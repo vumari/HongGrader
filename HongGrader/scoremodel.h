@@ -12,6 +12,7 @@ public:
     explicit ScoreModel(QObject *parent = nullptr);
     ~ScoreModel() override;
 
+    QSqlDatabase database() const;
     void select();
     void appendRow(const int studentId, const QString &subjectId,
                    const int &termId, const QString &schoolYear);

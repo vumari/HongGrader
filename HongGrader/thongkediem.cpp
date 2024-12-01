@@ -60,6 +60,12 @@ void thongkediem::displayPoints() {
         return;
     }
 
+    if (!Helper::ifStudentIdExists(db, studentId, this)) {
+        QMessageBox::critical(this, "Lỗi nhập liệu",
+                              "Mã học sinh không tồn tại.");
+        ui->LEmaHS->setFocus(Qt::OtherFocusReason);
+    }
+
     const static QLatin1StringView queryTemplate{
         R"(SELECT Mon.TenMon, tx1, tx2, tx3, tx4, gk, ck, DiemTB, KetQua
 FROM DiemTongHop AS Diem

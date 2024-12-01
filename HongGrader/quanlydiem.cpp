@@ -166,6 +166,13 @@ bool quanlydiem::checkValidInputs() {
         return false;
     }
 
+    if (!Helper::ifStudentIdExists(model->database(), studentId, this)) {
+        QMessageBox::critical(this, "Lỗi nhập liệu",
+                              "Mã học sinh không tồn tại.");
+        ui->LEmaHS->setFocus(Qt::OtherFocusReason);
+        return false;
+    }
+
     return true;
 }
 

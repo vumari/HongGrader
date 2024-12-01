@@ -77,10 +77,8 @@ void quanlynamhoc::onEditCurrentRow() {
         const QString &&newSchoolYear = ui->LEnamhocmoi->text().trimmed();
 
         if (schoolYear != newSchoolYear) {
-            if (Helper::ifValueExistsInTable(
-                    model->database(), "NamHoc"_L1, "TenNamHoc"_L1,
-                    newSchoolYear,
-                    this)) {
+            if (Helper::ifSchoolYearExists(model->database(), newSchoolYear,
+                                           this)) {
                 QMessageBox::critical(this,
                                       "Lỗi sửa năm học",
                                       "Năm học này đã tồn tại, nên không thể sửa được.");
@@ -105,8 +103,7 @@ void quanlynamhoc::onAddSchoolYear() {
                               "Vui lòng nhập năm học.");
         return;
     }
-    if (Helper::ifValueExistsInTable(
-            model->database(), "NamHoc"_L1, "TenNamHoc"_L1, schoolYear, this)) {
+    if (Helper::ifSchoolYearExists(model->database(), schoolYear, this)) {
         QMessageBox::critical(this,
                               "Lỗi thêm năm học",
                               "Năm học này đã tồn tại, nên không thể thêm được.");

@@ -91,17 +91,17 @@
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
+            <red>184</red>
+            <green>205</green>
+            <blue>231</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>255</red>
-            <green>255</green>
+            <red>203</red>
+            <green>226</green>
             <blue>255</blue>
            </color>
           </brush>

@@ -23,9 +23,12 @@ namespace Helper {
                               const QLatin1StringView table,
                               const QLatin1StringView column,
                               const QVariant &value, QWidget *msgParent);
-    bool ifUsernameExists(const QSqlDatabase &db,
-                          const QString &username,
+    bool ifUsernameExists(const QSqlDatabase &db, const QString &username,
                           QWidget *msgParent);
+    bool ifSchoolYearExists(const QSqlDatabase &db, const QString &schoolYear,
+                            QWidget *msgParent);
+    bool ifStudentIdExists(const QSqlDatabase &db, const int id,
+                           QWidget *msgParent);
     QVariant getCurrIdFromComboBox(const QComboBox *combo,
                                    const int colIndex = 0);
 }

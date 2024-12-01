@@ -24,6 +24,10 @@ ScoreModel::~ScoreModel() {
     db.close();
 }
 
+QSqlDatabase ScoreModel::database() const {
+    return db;
+}
+
 void ScoreModel::select() {
     const static QLatin1StringView queryStr{
         R"(SELECT Diem.MaHS AS MaHS, HS.HoTen AS HoTen,
