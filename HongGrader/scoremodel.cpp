@@ -188,6 +188,9 @@ bool ScoreModel::setData(const QModelIndex &index, const QVariant &value,
     if (data(index, role) != value) {
         changedCells.insert(QPersistentModelIndex(index), value);
         emit dataChanged(index, index, { role });
+        if ((index.column() >= 7) && (index.column() <= 7 + 5)) {
+            updateAvgScore(index);
+        }
         return true;
     }
     return false;
@@ -248,4 +251,44 @@ bool ScoreModel::updateItem(const int studentId, const QString &subjectId,
         return false;
     }
     return true;
+}
+
+void ScoreModel::updateAvgScore(const QModelIndex &index) {
+    double      sum      = 0;
+    int         factor   = 0;
+    QModelIndex curIndex = index.siblingAtColumn(7);
+
+    if (curIndex.isValid() && !curIndex.data().isNull()) {
+        sum += curIndex.data().toDouble();
+        ++factor; // Hệ số 1
+    }
+    curIndex = index.siblingAtColumn(8);
+    if (curIndex.isValid() && !curIndex.data().isNull()) {
+        sum += curIndex.data().toDouble();
+        ++factor; // Hệ số 1
+    }
+    curIndex = index.siblingAtColumn(9);
+    if (curIndex.isValid() && !curIndex.data().isNull()) {
+        sum += curIndex.data().toDouble();
+        ++factor; // Hệ số 1
+    }
+    curIndex = index.siblingAtColumn(10);
+    if (curIndex.isValid() && !curIndex.data().isNull()) {
+        sum += curIndex.data().toDouble();
+        ++factor; // Hệ số 1
+    }
+    curIndex = index.siblingAtColumn(11);
+    if (curIndex.isValid() && !curIndex.data().isNull()) {
+        sum    += curIndex.data().toDouble() * 2;
+        factor += 2; // Hệ số 2
+    }
+    curIndex = index.siblingAtColumn(12);
+    if (curIndex.isValid() && !curIndex.data().isNull()) {
+        sum    += curIndex.data().toDouble() * 3;
+        factor += 3; // Hệ số 3
+    }
+
+    const double avg = std::round(sum * 100 / (double)factor) / 100.0;
+    curIndex = index.siblingAtColumn(13);
+    setData(curIndex, avg);
 }

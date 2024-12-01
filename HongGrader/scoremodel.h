@@ -46,6 +46,7 @@ private:
     bool updateItem(const int studentId, const QString &subjectId,
                     const int &termId, const QString &schoolYear,
                     const QPersistentModelIndex &index, const QVariant &value);
+    void updateAvgScore(const QModelIndex &index);
 };
 
 #endif // SCOREMODEL_H
