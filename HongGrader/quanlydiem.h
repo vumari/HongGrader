@@ -2,13 +2,8 @@
 #define QUANLYDIEM_H
 
 #include <QMainWindow>
-#include "quanlygiaovien.h"
-#include "quanlyhocsinh.h"
-#include "quanlylophoc.h"
-#include "quanlytaikhoan.h"
-#include "thongkediem.h"
-#include "thongkehocsinh.h"
-#include "quanlynamhoc.h"
+
+class ScoreModel;
 
 namespace Ui {
     class quanlydiem;
@@ -32,18 +27,21 @@ private slots:
     void on_actionEdit_triggered();
     void on_actionscoreboard_triggered();
     void on_actionstudentlist_triggered();
+    void on_actionnamhoc_2_triggered();
 
     void on_BTsua_clicked();
-
     void on_BThuy_clicked();
-
     void on_BTluu_clicked();
 
-    void on_actionnamhoc_2_triggered();
+    void setupTable();
+    bool checkValidInputs();
+    void onAddRow();
+    void onDeleteCurrentRow();
 
 private:
     Ui::quanlydiem *ui;
 
+    ScoreModel *model = nullptr;
     QString username;
 };
 

@@ -58,14 +58,12 @@ thongkehocsinh::~thongkehocsinh() {
 
 void thongkehocsinh::displayPoints() {
     const static QLatin1StringView selectClause{
-        R"(SELECT HS.MaHS, HS.HoTen, Lop.TenLop, AVG(Diem.DiemTB)
+        R"(SELECT HS.MaHS, HS.HoTen, AVG(Diem.DiemTB)
 FROM DiemTongHop Diem
 INNER JOIN HocSinh HS
-ON Diem.MaHS = HS.MaHS
-INNER JOIN Lop
-ON Lop.MaLop = Diem.MaLop)" };
+ON Diem.MaHS = HS.MaHS)" };
     const static QLatin1StringView groupByClause{
-        "GROUP BY HS.MaHS, HS.HoTen, Lop.TenLop" };
+        "GROUP BY HS.MaHS, HS.HoTen" };
 
     QStringList whereFilters;
 
@@ -74,7 +72,7 @@ ON Lop.MaLop = Diem.MaLop)" };
             Helper::getCurrIdFromComboBox(ui->CBmonhoc).toString());
     }
     if (ui->CBnamhoc->currentIndex() != -1) {
-        whereFilters << "Lop.TenNamHoc = '%1'"_L1.arg(
+        whereFilters << "Diem.TenNamHoc = '%1'"_L1.arg(
             ui->CBnamhoc->currentText());
     }
 
@@ -107,8 +105,12 @@ ON Lop.MaLop = Diem.MaLop)" };
     QSqlDatabase db = QSqlDatabase::database();
 
     model->setQuery(queryParts.join(' '), db);
+    if (model->lastError().isValid()) {
+        QMessageBox::critical(this, "Lỗi CSDL",
+                              model->lastError().text());
+    }
     Helper::setModelColHeaders(model, {
-        "Mã học sinh", "Họ và tên", "Lớp", "Điểm trung bình", "Xếp loại"
+        "Mã học sinh", "Họ và tên", "Điểm trung bình", "Xếp loại"
     });
 }
 

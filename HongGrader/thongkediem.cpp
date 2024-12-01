@@ -61,13 +61,11 @@ void thongkediem::displayPoints() {
     }
 
     const static QLatin1StringView queryTemplate{
-        R"(SELECT TenMon, tx1, tx2, tx3, tx4, gk, ck, DiemTB, KetQua
+        R"(SELECT Mon.TenMon, tx1, tx2, tx3, tx4, gk, ck, DiemTB, KetQua
 FROM DiemTongHop AS Diem
-INNER JOIN Lop
-ON Lop.MaLop = Diem.MaLop
-AND Diem.MaHS = ? AND Diem.MaHK = ? AND Lop.TenNamHoc = ?
 RIGHT JOIN Mon
-ON Mon.MaMon = Diem.MaMon)" };
+ON Mon.MaMon = Diem.MaMon
+AND MaHS = ? AND MaHK = ? AND TenNamHoc = ?)" };
 
     QSqlQuery query{ db };
 
@@ -77,7 +75,7 @@ ON Mon.MaMon = Diem.MaMon)" };
     query.addBindValue(ui->CBnamhoc->currentText());
     if (!query.exec()) {
         QMessageBox::critical(this, "Lỗi CSDL",
-                              model->lastError().text());
+                              query.lastError().text());
     }
 
     model->setQuery(std::move(query));
