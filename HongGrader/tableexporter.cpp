@@ -61,16 +61,17 @@ bool TableExporter::exportToCsv(const QString &filePath,
     const int rows = model->rowCount();
     const int cols = model->columnCount();
 
-    QChar sep = excelCompat ? ';' : ',';
+    QChar sep = ',';
+    if (excelCompat) {
+        forceUtf8 = true;
+        tout.setLocale(widget->locale());
+        sep = (widget->locale().decimalPoint() == ',') ? ';' : ',';
+    }
     for (int i = 0; i < cols; ++i) {
         if (i > 0) {
             tout << sep;
         }
         tout << quoteString(model->headerData(i, Qt::Horizontal));
-    }
-    if (excelCompat) {
-        forceUtf8 = true;
-        tout.setLocale(QLocale(QLocale::Vietnamese));
     }
     for (int i = 0; i < rows; ++i) {
         tout << '\n';
