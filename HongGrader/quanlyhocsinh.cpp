@@ -4,7 +4,6 @@
 #include "genderitemdelegate.h"
 #include "helper.h"
 
-#include <QSqlRelationalTableModel>
 #include <QDataWidgetMapper>
 #include <QSqlField>
 #include <QSqlError>
@@ -110,15 +109,11 @@ quanlyhocsinh::quanlyhocsinh(QWidget *parent)
                 &QItemSelectionModel::currentRowChanged,
                 this, &quanlyhocsinh::onCurrRowChanged);
 
-        classDetailsModel = new QSqlRelationalTableModel(this, db);
-        classDetailsModel->setTable("ChiTietHocSinh_Lop");
+        classDetailsModel = new QSqlQueryModel(this);
 
-        classDetailsModel->setRelation(1,
-                                       QSqlRelation("Lop", "MaLop", "TenLop"));
-        classDetailsModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
         ui->listlop->setModel(classDetailsModel);
-        ui->listlop->setModelColumn(1);
-        ui->listlop->setItemDelegate(new QSqlRelationalDelegate(this));
+        ui->listlop->horizontalHeader()->setSectionResizeMode(
+            QHeaderView::ResizeToContents);
 
         QSqlQueryModel *schoolYearModel = new QSqlQueryModel(this);
         schoolYearModel->setQuery("SELECT * FROM NamHoc", db);
@@ -133,6 +128,8 @@ quanlyhocsinh::quanlyhocsinh(QWidget *parent)
         ui->CBlop->setModel(classModel);
         ui->CBlop->setModelColumn(1);
         onSchoolYearChanged(0);
+        ui->tablehocsinh->selectRow(0);
+        loadClassDetails();
     }
 
     QCompleter *completer = new QCompleter(this);
@@ -177,14 +174,40 @@ bool quanlyhocsinh::checkValidInputs() {
     return true;
 }
 
+void quanlyhocsinh::loadClassDetails() {
+    const static QLatin1StringView queryTemplate{
+        R"(SELECT CT.MaLop, Lop.TenLop, Lop.TenNamHoc FROM ChiTietHocSinh_Lop CT
+INNER JOIN Lop
+ON Lop.MaLop = CT.MaLop
+WHERE MaHS = ?)"
+    };
+
+    auto *selectionModel = ui->tablehocsinh->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        const int &&currId = selectionModel->
+                             currentIndex().siblingAtColumn(0).data().toInt();
+
+        QSqlQuery query{ model->database() };
+        query.prepare(queryTemplate);
+        query.addBindValue(currId);
+        if (!query.exec() || !query.first()) {
+            QMessageBox::critical(this, "Lỗi CSDL",
+                                  query.lastError().text());
+        }
+
+        classDetailsModel->setQuery(std::move(query));
+        ui->listlop->hideColumn(0);
+    } else {
+        classDetailsModel->clear();
+    }
+}
+
 void quanlyhocsinh::onCurrRowChanged(const QModelIndex &current,
                                      const QModelIndex &previous) {
     mapper->setCurrentModelIndex(current);
 
-    const int &&currId = current.siblingAtColumn(0).data().toInt();
-
-    classDetailsModel->setFilter(u"MaHS = %1"_s.arg(currId));
-    classDetailsModel->select();
+    loadClassDetails();
 }
 
 void quanlyhocsinh::onAddRow() {
@@ -233,38 +256,50 @@ void quanlyhocsinh::onAddClass() {
 
     QItemSelectionModel *selectionModel = ui->tablehocsinh->selectionModel();
     if (selectionModel->hasSelection()) {
-        const int &&currId = ui->tablehocsinh->selectionModel()->
-                             currentIndex().siblingAtColumn(0).data().toInt();
+        const int currId = ui->tablehocsinh->selectionModel()->
+                           currentIndex().siblingAtColumn(0).data().toInt();
+        const int classId = Helper::getCurrIdFromComboBox(ui->CBlop).toInt();
 
-        QSqlRecord newRecord = classDetailsModel->record();
-        newRecord.setValue(0, currId);
-        newRecord.setValue(1, Helper::getCurrIdFromComboBox(ui->CBlop));
-        if (!classDetailsModel->insertRecord(-1, newRecord)
-            || !classDetailsModel->submitAll()) {
-            QMessageBox::critical(this,
-                                  "Lỗi thêm học sinh vào lớp",
-                                  classDetailsModel->lastError().text());
-            classDetailsModel->revertAll();
+        QSqlQuery query{ model->database() };
+        query.prepare(
+            "IF EXISTS (SELECT 1 FROM ChiTietHocSinh_Lop WHERE MaHS = ? AND MaLop = ?) SELECT 1 ELSE SELECT 0;");
+        query.addBindValue(currId);
+        query.addBindValue(classId);
+        if (query.exec() && query.next()) {
+            if (query.value(0).toBool()) {
+                QMessageBox::critical(this,
+                                      "Lỗi thêm học sinh vào lớp",
+                                      "Học sinh này đã được thêm vào lớp này rồi.");
+                return;
+            }
+        } else {
+            QMessageBox::critical(this, "Lỗi thêm học sinh vào lớp",
+                                  query.lastError().text());
+            return;
         }
+
+        query.prepare(
+            "INSERT INTO ChiTietHocSinh_Lop VALUES(?, ?)");
+        query.addBindValue(currId);
+        query.addBindValue(classId);
+        if (!query.exec()) {
+            QMessageBox::critical(this, "Lỗi thêm học sinh vào lớp",
+                                  query.lastError().text());
+        }
+
+        loadClassDetails();
     }
 }
 
 void quanlyhocsinh::onDeleteClass() {
     QItemSelectionModel *selectionModel = ui->listlop->selectionModel();
-    QSqlTableModel      *relModel       = classDetailsModel->relationModel(1);
 
     if (selectionModel->hasSelection()) {
         const int studentId = ui->tablehocsinh->selectionModel()->
                               currentIndex().siblingAtColumn(0).data().toInt();
 
-        const auto &&matches = relModel->match(
-            relModel->index(0, 1), Qt::EditRole,
-            selectionModel->currentIndex().siblingAtColumn(1).data(),
-            1, Qt::MatchExactly);
-        int classId = -1;
-        if (!matches.empty()) {
-            classId = matches[0].siblingAtColumn(0).data().toInt();
-        }
+        int classId =
+            selectionModel->currentIndex().siblingAtColumn(0).data().toInt();
 
         QSqlQuery query{ model->database() };
         query.prepare(
@@ -275,9 +310,9 @@ void quanlyhocsinh::onDeleteClass() {
             QMessageBox::critical(this, "Lỗi xoá học sinh ra khỏi lớp",
                                   query.lastError().text());
         }
-
-        classDetailsModel->setFilter(u"MaHS = %1"_s.arg(studentId));
     }
+
+    loadClassDetails();
 }
 
 void quanlyhocsinh::onSchoolYearChanged(const int &index) {

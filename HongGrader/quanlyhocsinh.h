@@ -5,7 +5,7 @@
 
 QT_BEGIN_NAMESPACE
 class QSqlTableModel;
-class QSqlRelationalTableModel;
+class QSqlQueryModel;
 class QDataWidgetMapper;
 QT_END_NAMESPACE
 
@@ -24,13 +24,14 @@ public:
 private:
     Ui::quanlyhocsinh *ui;
 
-    QSqlTableModel *model                       = nullptr;
-    QSqlRelationalTableModel *classDetailsModel = nullptr;
-    QSqlTableModel *classModel                  = nullptr;
+    QSqlTableModel *model             = nullptr;
+    QSqlQueryModel *classDetailsModel = nullptr;
+    QSqlTableModel *classModel        = nullptr;
 
     QDataWidgetMapper *mapper = nullptr;
 
     bool checkValidInputs();
+    void loadClassDetails();
     void onCurrRowChanged(const QModelIndex &current,
                           const QModelIndex &previous);
     void onAddRow();

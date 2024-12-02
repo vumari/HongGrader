@@ -163,7 +163,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QListView" name="listlop">
+           <widget class="QTableView" name="listlop">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -179,12 +179,24 @@
             <property name="editTriggers">
              <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
             </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+            </property>
             <property name="selectionBehavior">
              <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
             </property>
-            <property name="wordWrap">
+            <property name="showGrid">
              <bool>true</bool>
             </property>
+            <property name="gridStyle">
+             <enum>Qt::PenStyle::DotLine</enum>
+            </property>
+            <attribute name="horizontalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
            </widget>
           </item>
          </layout>
