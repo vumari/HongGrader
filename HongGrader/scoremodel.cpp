@@ -7,6 +7,12 @@
 #include <QSqlField>
 #include <QSqlError>
 
+const int lockedCol     = 7;
+const int scoreStartCol = 8;
+const int scoreEndCol   = scoreStartCol + 5;
+const int avgScoreCol   = scoreEndCol + 1;
+const int passCol       = avgScoreCol + 1;
+
 ScoreModel::ScoreModel(QObject *parent)
     : QSqlQueryModel(parent) {
     parentWidget = qobject_cast<QWidget *>(parent);
@@ -33,7 +39,7 @@ void ScoreModel::select() {
         R"(SELECT Diem.MaHS AS MaHS, HS.HoTen AS HoTen,
        Diem.MaMon AS MaMon, Mon.TenMon AS TenMon,
        Diem.MaHK AS MaHK, HK.TenHK AS TenHK,
-       TenNamHoc,
+       NH.TenNamHoc, NH.TrangThai,
        tx1, tx2, tx3, tx4, gk, ck, DiemTB, KetQua
 FROM DiemTongHop AS Diem
 INNER JOIN HocSinh AS HS
@@ -41,7 +47,9 @@ ON HS.MaHS = Diem.MaHS
 INNER JOIN Mon
 ON Mon.MaMon = Diem.MaMon
 INNER JOIN HocKi AS HK
-ON HK.MaHK = Diem.MaHK)" };
+ON HK.MaHK = Diem.MaHK
+INNER JOIN NamHoc AS NH
+ON NH.TenNamHoc = Diem.TenNamHoc)" };
 
     QSqlQuery query{ db };
 
@@ -154,7 +162,7 @@ bool ScoreModel::submitAll() {
 void ScoreModel::applyHeaders() {
     Helper::setModelColHeaders(this, {
         "Mã HS", "Họ và tên", "Mã môn", "Môn học", "Mã học kì", "Học kì",
-        "Năm học", "TX 1", "TX 2", "TX 3", "TX 4", "GK", "CK", "TB",
+        "Năm học", "Bị khoá", "TX 1", "TX 2", "TX 3", "TX 4", "GK", "CK", "TB",
         "Kết quả" });
 }
 
@@ -170,6 +178,16 @@ QVariant ScoreModel::data(const QModelIndex &index, int role) const {
     QPersistentModelIndex &&pIndex = index;
 
     if (pIndex.isValid()) {
+        const int col = index.column();
+        if (((col >= scoreStartCol) && (col <= scoreEndCol))
+            || (col == passCol)) {
+            if (index.siblingAtColumn(lockedCol).data().toBool()) {
+                if (role == Qt::ForegroundRole) {
+                    return QColor{ 90, 74, 74 }; // màu xám
+                }
+            }
+        }
+
         if (changedCells.contains(pIndex)) {
             if ((role == Qt::DisplayRole) || (role == Qt::EditRole)) {
                 return changedCells.value(pIndex);
@@ -187,7 +205,10 @@ bool ScoreModel::setData(const QModelIndex &index, const QVariant &value,
                          int role) {
     if (data(index, role) != value) {
         const int col = index.column();
-        if (col == 14) {
+        if (index.siblingAtColumn(lockedCol).data().toBool()) {
+            return false;
+        }
+        if (col == passCol) {
             const QString &strValue = value.toString();
             if ((strValue != "Dat") && (strValue != "Khong Dat")) {
                 return false;
@@ -195,7 +216,7 @@ bool ScoreModel::setData(const QModelIndex &index, const QVariant &value,
         }
         changedCells.insert(QPersistentModelIndex(index), value);
         emit dataChanged(index, index, { role });
-        if ((col >= 7) && (col <= 7 + 5)) {
+        if ((col >= scoreStartCol) && (col <= scoreEndCol)) {
             updateAvgScore(index);
         }
         return true;
@@ -210,8 +231,10 @@ Qt::ItemFlags ScoreModel::flags(const QModelIndex &index) const {
     Qt::ItemFlags flags = QSqlQueryModel::flags(index);
 
     const int col = index.column();
-    if (((col >= 7) && (col <= 7 + 5)) || (col == 14)) {
-        flags |= Qt::ItemIsEditable;
+    if (((col >= scoreStartCol) && (col <= scoreEndCol)) || (col == passCol)) {
+        if (!index.siblingAtColumn(lockedCol).data().toBool()) {
+            flags |= Qt::ItemIsEditable;
+        }
     }
 
     return flags;
@@ -263,46 +286,53 @@ bool ScoreModel::updateItem(const int studentId, const QString &subjectId,
 void ScoreModel::updateAvgScore(const QModelIndex &index) {
     double      sum      = 0;
     int         factor   = 0;
-    QModelIndex curIndex = index.siblingAtColumn(7);
+    int         col      = scoreStartCol;
+    QModelIndex curIndex = index.siblingAtColumn(col);
 
     if (curIndex.isValid() && !curIndex.data().isNull()) {
         sum += curIndex.data().toDouble();
         ++factor; // Hệ số 1
     }
-    curIndex = index.siblingAtColumn(8);
+    ++col;
+    curIndex = index.siblingAtColumn(col);
     if (curIndex.isValid() && !curIndex.data().isNull()) {
         sum += curIndex.data().toDouble();
         ++factor; // Hệ số 1
     }
-    curIndex = index.siblingAtColumn(9);
+    ++col;
+    curIndex = index.siblingAtColumn(col);
     if (curIndex.isValid() && !curIndex.data().isNull()) {
         sum += curIndex.data().toDouble();
         ++factor; // Hệ số 1
     }
-    curIndex = index.siblingAtColumn(10);
+    ++col;
+    curIndex = index.siblingAtColumn(col);
     if (curIndex.isValid() && !curIndex.data().isNull()) {
         sum += curIndex.data().toDouble();
         ++factor; // Hệ số 1
     }
-    curIndex = index.siblingAtColumn(11);
+    ++col;
+    curIndex = index.siblingAtColumn(col);
     if (curIndex.isValid() && !curIndex.data().isNull()) {
         sum    += curIndex.data().toDouble() * 2;
         factor += 2; // Hệ số 2
     }
-    curIndex = index.siblingAtColumn(12);
+    ++col;
+    curIndex = index.siblingAtColumn(col);
     if (curIndex.isValid() && !curIndex.data().isNull()) {
         sum    += curIndex.data().toDouble() * 3;
         factor += 3; // Hệ số 3
     }
 
-    curIndex = index.siblingAtColumn(13);
+    ++col;
+    curIndex = index.siblingAtColumn(col);
     if (factor > 0) {
         const double avg = std::round(sum * 100 / (double)factor) / 100.0;
         setData(curIndex, avg);
         QString &&passStr = (avg >= 5) ? "Dat"_L1 : "Khong Dat"_L1;
-        setData(curIndex.siblingAtColumn(14), std::move(passStr));
+        setData(curIndex.siblingAtColumn(passCol), std::move(passStr));
     } else {
         setData(curIndex, QVariant(QMetaType::fromType<float>())); // NULL
-        setData(curIndex.siblingAtColumn(14), "Khong Dat"_L1);
+        setData(curIndex.siblingAtColumn(passCol), "Khong Dat"_L1);
     }
 }

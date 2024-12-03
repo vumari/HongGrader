@@ -151,6 +151,7 @@ void quanlydiem::on_BTsua_clicked() {
     ui->tablediem->setEditTriggers(
         QTableView::DoubleClicked | QTableView::SelectedClicked |
         QTableView::EditKeyPressed);
+    ui->menubar->setDisabled(true);
 }
 
 
@@ -164,6 +165,7 @@ void quanlydiem::on_BThuy_clicked() {
     ui->groupBox->setDisabled(false);
     ui->BTxoa->setDisabled(false);
     ui->tablediem->setEditTriggers(QTableView::NoEditTriggers);
+    ui->menubar->setDisabled(false);
 }
 
 
@@ -177,6 +179,7 @@ void quanlydiem::on_BTluu_clicked() {
     ui->groupBox->setDisabled(false);
     ui->BTxoa->setDisabled(false);
     ui->tablediem->setEditTriggers(QTableView::NoEditTriggers);
+    ui->menubar->setDisabled(false);
 }
 
 void quanlydiem::setupTable() {
@@ -184,6 +187,7 @@ void quanlydiem::setupTable() {
         QHeaderView::ResizeToContents);
     ui->tablediem->hideColumn(2);
     ui->tablediem->hideColumn(4);
+    ui->tablediem->hideColumn(7);
 }
 
 bool quanlydiem::checkValidInputs() {
