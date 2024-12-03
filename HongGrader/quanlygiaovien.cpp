@@ -161,5 +161,18 @@ void quanlygiaovien::onEditCurrentRow() {
 }
 
 void quanlygiaovien::onDeleteCurrentRow() {
-    Helper::tryDeleteCurrentRow(model, ui->tablegiaovien);
+    const auto *selectionModel = ui->tablegiaovien->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        if (Helper::ifValueExistsInTable(
+                model->database(), "Lop"_L1, "MaGVCN"_L1,
+                selectionModel->currentIndex().siblingAtColumn(0).data(),
+                this)) {
+            QMessageBox::critical(this,
+                                  "Lỗi xoá giáo viên",
+                                  "Không thể xoá giáo viên do giáo viên này làm chủ nhiệm của ít nhất một lớp.");
+            return;
+        }
+        Helper::tryDeleteCurrentRow(model, ui->tablegiaovien);
+    }
 }
