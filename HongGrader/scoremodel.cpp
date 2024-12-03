@@ -222,7 +222,7 @@ bool ScoreModel::removeRows(int row, int count, const QModelIndex &parent) {
     bool      ok = true;
 
     for (int i = to - 1; i >= row; --i) {
-        QSqlRecord curRecord = record(row + i);
+        QSqlRecord curRecord = record(row);
         ok = deleteRow(curRecord.value(0).toInt(),
                        curRecord.value(2).toString(),
                        curRecord.value(4).toInt(),
@@ -299,7 +299,10 @@ void ScoreModel::updateAvgScore(const QModelIndex &index) {
     if (factor > 0) {
         const double avg = std::round(sum * 100 / (double)factor) / 100.0;
         setData(curIndex, avg);
+        QString &&passStr = (avg >= 5) ? "Dat"_L1 : "Khong Dat"_L1;
+        setData(curIndex.siblingAtColumn(14), std::move(passStr));
     } else {
         setData(curIndex, QVariant(QMetaType::fromType<float>())); // NULL
+        setData(curIndex.siblingAtColumn(14), "Khong Dat"_L1);
     }
 }
