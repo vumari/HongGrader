@@ -123,5 +123,27 @@ void quanlynamhoc::onAddSchoolYear() {
 }
 
 void quanlynamhoc::onDeleteSchoolYear() {
-    Helper::tryDeleteCurrentRow(model, ui->tablenamhoc);
+    const auto *selectionModel = ui->tablenamhoc->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        if (Helper::ifValueExistsInTable(
+                model->database(), "Lop"_L1, "TenNamHoc"_L1,
+                selectionModel->currentIndex().siblingAtColumn(0).data(),
+                this)) {
+            QMessageBox::critical(this,
+                                  "Lỗi xoá năm học",
+                                  "Không thể xoá năm học do có lớp liên kết với năm học này.");
+            return;
+        }
+        if (Helper::ifValueExistsInTable(
+                model->database(), "DiemTongHop"_L1, "TenNamHoc"_L1,
+                selectionModel->currentIndex().siblingAtColumn(0).data(),
+                this)) {
+            QMessageBox::critical(this,
+                                  "Lỗi xoá năm học",
+                                  "Không thể xoá năm học do có điểm liên kết với năm học này.");
+            return;
+        }
+        Helper::tryDeleteCurrentRow(model, ui->tablenamhoc);
+    }
 }

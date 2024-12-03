@@ -191,7 +191,7 @@ WHERE MaHS = ?)"
         QSqlQuery query{ model->database() };
         query.prepare(queryTemplate);
         query.addBindValue(currId);
-        if (!query.exec() || !query.first()) {
+        if (!query.exec() || query.lastError().isValid()) {
             QMessageBox::critical(this, "Lỗi CSDL",
                                   query.lastError().text());
         }
@@ -244,7 +244,29 @@ void quanlyhocsinh::onEditCurrentRow() {
 }
 
 void quanlyhocsinh::onDeleteCurrentRow() {
-    Helper::tryDeleteCurrentRow(model, ui->tablehocsinh);
+    const auto *selectionModel = ui->tablehocsinh->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        if (Helper::ifValueExistsInTable(
+                model->database(), "ChiTietHocSinh_Lop"_L1, "MaHS"_L1,
+                selectionModel->currentIndex().siblingAtColumn(0).data(),
+                this)) {
+            QMessageBox::critical(this,
+                                  "Lỗi xoá học sinh",
+                                  "Không thể xoá học sinh do có lớp liên kết với học sinh này.");
+            return;
+        }
+        if (Helper::ifValueExistsInTable(
+                model->database(), "DiemTongHop"_L1, "MaHS"_L1,
+                selectionModel->currentIndex().siblingAtColumn(0).data(),
+                this)) {
+            QMessageBox::critical(this,
+                                  "Lỗi xoá học sinh",
+                                  "Không thể xoá học sinh do có điểm liên kết với học sinh này.");
+            return;
+        }
+        Helper::tryDeleteCurrentRow(model, ui->tablehocsinh);
+    }
 }
 
 void quanlyhocsinh::onAddClass() {

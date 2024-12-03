@@ -119,5 +119,18 @@ void quanlylophoc::onEditCurrentRow() {
 }
 
 void quanlylophoc::onDeleteCurrentRow() {
-    Helper::tryDeleteCurrentRow(model, ui->tablelophoc);
+    const auto *selectionModel = ui->tablelophoc->selectionModel();
+
+    if (selectionModel->hasSelection()) {
+        if (Helper::ifValueExistsInTable(
+                model->database(), "ChiTietHocSinh_Lop"_L1, "MaLop"_L1,
+                selectionModel->currentIndex().siblingAtColumn(0).data(),
+                this)) {
+            QMessageBox::critical(this,
+                                  "Lỗi xoá lớp",
+                                  "Không thể xoá lớp do có học sinh liên kết với lớp này.");
+            return;
+        }
+        Helper::tryDeleteCurrentRow(model, ui->tablelophoc);
+    }
 }
