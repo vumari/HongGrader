@@ -12,6 +12,7 @@
 #include "helper.h"
 #include "scoremodel.h"
 #include "scoreitemdelegate.h"
+#include "chuyenlop.h"
 
 #include <QTimer>
 #include <QSqlDatabase>
@@ -35,7 +36,7 @@ quanlydiem::quanlydiem(QWidget *parent)
     QSqlDatabase db = QSqlDatabase::database("main");
 
     if (db.open()) {
-        ui->groupBox_HS->init(db);
+        //ui->groupBox_HS->init(db);
 
         QSqlQueryModel *schoolYearModel = new QSqlQueryModel(this);
         schoolYearModel->setQuery("SELECT * FROM NamHoc", db);
@@ -223,3 +224,9 @@ void quanlydiem::onDeleteCurrentRow() {
         setupTable();
     }
 }
+
+void quanlydiem::on_actionchuyenlop_triggered()
+{
+    (new chuyenlop(this))->show();
+}
+

@@ -41,6 +41,8 @@ private slots:
     void onAddRow();
     void onDeleteCurrentRow();
 
+    void on_actionchuyenlop_triggered();
+
 private:
     Ui::quanlydiem *ui;
 

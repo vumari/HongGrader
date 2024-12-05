@@ -60,8 +60,8 @@
    <string>Quản lý điểm – HongGrader</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox">
       <property name="palette">
        <palette>
@@ -113,113 +113,112 @@
        <bool>true</bool>
       </property>
       <property name="title">
-       <string>Thông tin điểm của học sinh</string>
+       <string>Thông tin điểm</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout">
+      <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Mã học sinh</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Môn học</string>
-           </property>
-           <property name="buddy">
-            <cstring>CBmonhoc</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="CBmonhoc"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Học kì</string>
-           </property>
-           <property name="buddy">
-            <cstring>RBHK1</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QRadioButton" name="RBHK1">
-             <property name="text">
-              <string>Học kì I</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="RBHK2">
-             <property name="text">
-              <string>Học kì II</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Năm học</string>
-           </property>
-           <property name="buddy">
-            <cstring>CBnamhoc</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QComboBox" name="CBnamhoc"/>
-         </item>
-         <item row="0" column="1">
-          <widget class="QSpinBox" name="SBmaHS">
-           <property name="maximum">
-            <number>999999999</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="1">
-        <widget class="hoptracuuhocsinh" name="groupBox_HS">
-         <property name="title">
-          <string>Tra cứu mã học sinh</string>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Môn học</string>
+         </property>
+         <property name="buddy">
+          <cstring>CBmonhoc</cstring>
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="CBmonhoc"/>
+       </item>
        <item row="1" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Học kì</string>
+         </property>
+         <property name="buddy">
+          <cstring>RBHK1</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QPushButton" name="BTthem">
+          <widget class="QRadioButton" name="RBHK1">
            <property name="text">
-            <string>Thêm</string>
+            <string>Học kì I</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="BTxoa">
+          <widget class="QRadioButton" name="RBHK2">
            <property name="text">
-            <string>Xóa</string>
+            <string>Học kì II</string>
            </property>
           </widget>
          </item>
         </layout>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Năm học</string>
+         </property>
+         <property name="buddy">
+          <cstring>CBnamhoc</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="CBnamhoc"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Lớp</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="CBlop"/>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QPushButton" name="BTloc">
+         <property name="text">
+          <string>Lọc</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="2" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QPushButton" name="BTsua">
+        <property name="text">
+         <string>Sửa</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BThuy">
+        <property name="text">
+         <string>Hủy</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BTluu">
+        <property name="text">
+         <string>Lưu</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0" colspan="2">
      <widget class="QTableView" name="tablediem">
       <property name="palette">
        <palette>
@@ -698,30 +697,62 @@
       </property>
      </widget>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QPushButton" name="BTsua">
-        <property name="text">
-         <string>Sửa</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="BThuy">
-        <property name="text">
-         <string>Hủy</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="BTluu">
-        <property name="text">
-         <string>Lưu</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="title">
+       <string>Quản lý điểm của học sinh</string>
+      </property>
+      <layout class="QFormLayout" name="formLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Mã học sinh</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="SBmaHS">
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Năm học</string>
+         </property>
+         <property name="buddy">
+          <cstring>CBnamhoc</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="CBnamhoc_ql"/>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QPushButton" name="BTthem">
+           <property name="text">
+            <string>Thêm</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="BTxoa">
+           <property name="text">
+            <string>Xóa</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -765,9 +796,16 @@ selection-color: rgb(0, 0, 0);
     <addaction name="actionstudentlist"/>
     <addaction name="actionscoreboard"/>
    </widget>
+   <widget class="QMenu" name="menuchucnang">
+    <property name="title">
+     <string>Chức năng</string>
+    </property>
+    <addaction name="actionchuyenlop"/>
+   </widget>
    <addaction name="menuTaikhoan"/>
    <addaction name="menuquanly"/>
    <addaction name="menuthongke"/>
+   <addaction name="menuchucnang"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionEdit">
@@ -830,15 +868,12 @@ selection-color: rgb(0, 0, 0);
     <string>Danh mục năm học</string>
    </property>
   </action>
+  <action name="actionchuyenlop">
+   <property name="text">
+    <string>Chuyển lớp</string>
+   </property>
+  </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>hoptracuuhocsinh</class>
-   <extends>QGroupBox</extends>
-   <header>hoptracuuhocsinh.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>CBmonhoc</tabstop>
   <tabstop>RBHK1</tabstop>
