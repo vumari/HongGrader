@@ -118,18 +118,26 @@ quanlyhocsinh::quanlyhocsinh(QWidget *parent)
         QSqlQueryModel *schoolYearModel = new QSqlQueryModel(this);
         schoolYearModel->setQuery("SELECT * FROM NamHoc", db);
         ui->CBnamhoc->setModel(schoolYearModel);
+        ui->CBlocnamhoc->setModel(schoolYearModel);
 
         connect(ui->CBnamhoc, &QComboBox::currentIndexChanged,
                 this, &quanlyhocsinh::onSchoolYearChanged);
+        connect(ui->CBlocnamhoc, &QComboBox::currentIndexChanged,
+                this, &quanlyhocsinh::onSchoolYearFilterChanged);
 
         classModel = new QSqlTableModel(this, db);
         classModel->setTable("Lop");
         classModel->select();
         ui->CBlop->setModel(classModel);
         ui->CBlop->setModelColumn(1);
-        onSchoolYearChanged(0);
-        ui->tablehocsinh->selectRow(0);
-        loadClassDetails();
+
+        classModel2 = new QSqlTableModel(this, db);
+        classModel2->setTable("Lop");
+        classModel2->select();
+        ui->CBloclop->setModel(classModel2);
+        ui->CBloclop->setModelColumn(1);
+
+        onFilter();
     }
 
     QCompleter *completer = new QCompleter(this);
@@ -146,6 +154,8 @@ quanlyhocsinh::quanlyhocsinh(QWidget *parent)
             this, &quanlyhocsinh::onAddClass);
     connect(ui->BTxoalop, &QPushButton::clicked,
             this, &quanlyhocsinh::onDeleteClass);
+    connect(ui->BTloc, &QPushButton::clicked,
+            this, &quanlyhocsinh::onFilter);
 }
 
 quanlyhocsinh::~quanlyhocsinh() {
@@ -171,6 +181,32 @@ bool quanlyhocsinh::checkValidInputs() {
         ui->LEdantoc->setFocus(Qt::OtherFocusReason);
         return false;
     }
+
+    const static QLatin1StringView queryTemplate{
+        "IF EXISTS(SELECT * FROM HocSinh WHERE HoTen = ? AND NgaySinh = ? AND GioiTinh = ? AND DanToc = ? AND NoiSinh = ?) SELECT 1 ELSE SELECT 0" };
+
+    QSqlQuery query{ model->database() };
+
+    query.prepare(queryTemplate);
+    query.addBindValue(ui->LEten->text().trimmed());
+    query.addBindValue(ui->DEngaysinh->date());
+    query.addBindValue(ui->RBnu->isChecked());
+    query.addBindValue(ui->LEdantoc->text().trimmed());
+    query.addBindValue(ui->LEnoisinh->text().trimmed());
+
+    if (!query.exec() || !query.first()) {
+        QMessageBox::critical(this, "Lỗi CSDL",
+                              query.lastError().text());
+        return false;
+    }
+    if (query.record().value(0).toBool()) {
+        QMessageBox::critical(this,
+                              "Lỗi trùng học sinh",
+                              "Đã có học sinh trùng với các thuộc tính này rồi.");
+
+        return false;
+    }
+
     return true;
 }
 
@@ -309,6 +345,7 @@ void quanlyhocsinh::onAddClass() {
                                   query.lastError().text());
         }
 
+        onFilter();
         loadClassDetails();
     }
 }
@@ -334,9 +371,33 @@ void quanlyhocsinh::onDeleteClass() {
         }
     }
 
+    onFilter();
     loadClassDetails();
 }
 
 void quanlyhocsinh::onSchoolYearChanged(const int &index) {
     classModel->setFilter(u"TenNamHoc = '%1'"_s.arg(ui->CBnamhoc->currentText()));
+}
+
+void quanlyhocsinh::onSchoolYearFilterChanged(const int &index) {
+    classModel2->setFilter(u"TenNamHoc = '%1'"_s.arg(ui->CBlocnamhoc->
+                                                     currentText()));
+}
+
+void quanlyhocsinh::onFilter() {
+    if (ui->RBtatca->isChecked()) {
+        model->setFilter(QString());
+    } else if (ui->RBchuacolop->isChecked()) {
+        model->setFilter(
+            u"NOT EXISTS(SELECT * FROM ChiTietHocSinh_Lop CT WHERE CT.MaHS = HocSinh.MaHS)"_s);
+    } else {
+        model->setFilter("EXISTS(SELECT * FROM ChiTietHocSinh_Lop AS CT WHERE CT.MaHS = HocSinh.MaHS AND CT.MaLop = %1)"_L1.arg(
+                             Helper::getCurrIdFromComboBox(
+                                 ui->CBloclop).toString()));
+    }
+
+    onSchoolYearChanged(0);
+    onSchoolYearFilterChanged(0);
+    ui->tablehocsinh->selectRow(0);
+    loadClassDetails();
 }

@@ -27,6 +27,7 @@ private:
     QSqlTableModel *model             = nullptr;
     QSqlQueryModel *classDetailsModel = nullptr;
     QSqlTableModel *classModel        = nullptr;
+    QSqlTableModel *classModel2       = nullptr;
 
     QDataWidgetMapper *mapper = nullptr;
 
@@ -40,6 +41,8 @@ private:
     void onAddClass();
     void onDeleteClass();
     void onSchoolYearChanged(const int &index);
+    void onSchoolYearFilterChanged(const int &index);
+    void onFilter();
 };
 
 #endif // QUANLYHOCSINH_H
