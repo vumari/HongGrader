@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>756</width>
+    <width>753</width>
     <height>615</height>
    </rect>
   </property>
@@ -147,13 +147,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="CBlop">
-           <item>
-            <property name="text">
-             <string>Toàn bộ</string>
-            </property>
-           </item>
-          </widget>
+          <widget class="QComboBox" name="CBlop"/>
          </item>
         </layout>
        </item>
@@ -173,7 +167,7 @@
          </property>
         </spacer>
        </item>
-       <item row="2" column="0">
+       <item row="2" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QPushButton" name="BThienthi">
@@ -224,7 +218,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>756</width>
+     <width>753</width>
      <height>26</height>
     </rect>
    </property>

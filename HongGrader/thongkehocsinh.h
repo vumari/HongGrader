@@ -24,8 +24,10 @@ private:
 
     QSqlQueryModel *subjectModel    = nullptr;
     QSqlQueryModel *schoolYearModel = nullptr;
+    QSqlQueryModel *classModel      = nullptr;
     QSqlQueryModel *model           = nullptr;
 
+    void onSchoolYearChanged();
     void displayPoints();
     void exportFile();
 };

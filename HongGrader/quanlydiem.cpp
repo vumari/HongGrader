@@ -20,6 +20,7 @@
 #include <QSqlError>
 #include <QItemSelectionModel>
 #include <QMouseEvent>
+#include <QSqlQuery>
 
 
 quanlydiem::quanlydiem(QWidget *parent)
@@ -33,16 +34,25 @@ quanlydiem::quanlydiem(QWidget *parent)
         QSqlDatabase::cloneDatabase(QSqlDatabase::defaultConnection, "main");
     }
 
-    QSqlDatabase db = QSqlDatabase::database("main");
+    db = QSqlDatabase::database("main");
 
     if (db.open()) {
         //ui->groupBox_HS->init(db);
 
-        QSqlQueryModel *schoolYearModel = new QSqlQueryModel(this);
+        schoolYearModel = new QSqlQueryModel(this);
         schoolYearModel->setQuery("SELECT * FROM NamHoc", db);
         ui->CBnamhoc->setModel(schoolYearModel);
 
-        QSqlQueryModel *subjectModel = new QSqlQueryModel(this);
+        connect(ui->CBnamhoc, &QComboBox::currentIndexChanged,
+                this, &quanlydiem::onSchoolYearChanged);
+
+        classModel = new QSqlQueryModel(this);
+        classModel->setQuery("SELECT MaLop, TenLop FROM Lop", db);
+        ui->CBlop->setModel(classModel);
+        ui->CBlop->setModelColumn(1);
+        QTimer::singleShot(10, this, &quanlydiem::onSchoolYearChanged);
+
+        subjectModel = new QSqlQueryModel(this);
         subjectModel->setQuery("SELECT * FROM Mon", db);
         ui->CBmonhoc->setModel(subjectModel);
         ui->CBmonhoc->setModelColumn(1);
@@ -191,6 +201,9 @@ void quanlydiem::setupTable() {
     ui->tablediem->hideColumn(7);
 }
 
+void quanlydiem::loadTables() {
+}
+
 bool quanlydiem::checkValidInputs() {
     const int studentId = ui->SBmaHS->value();
 
@@ -225,8 +238,25 @@ void quanlydiem::onDeleteCurrentRow() {
     }
 }
 
-void quanlydiem::on_actionchuyenlop_triggered()
-{
+void quanlydiem::on_actionchuyenlop_triggered() {
     (new chuyenlop(this))->show();
+}
+
+void quanlydiem::onSchoolYearChanged() {
+    if (ui->CBnamhoc->currentIndex() > -1) {
+        QSqlQuery query{ db };
+        query.prepare(
+            R"(SELECT Malop, TenLop FROM Lop WHERE TenNamHoc = ?)"_L1);
+        query.addBindValue(ui->CBnamhoc->currentText());
+        if (!query.exec()) {
+            QMessageBox::critical(this, "Lỗi CSDL",
+                                  query.lastError().text());
+        } else {
+            classModel->setQuery(std::move(query));
+            return;
+        }
+    }
+
+    classModel->clear();
 }
 

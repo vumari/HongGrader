@@ -2,6 +2,11 @@
 #define QUANLYDIEM_H
 
 #include <QMainWindow>
+#include <QSqlDatabase>
+
+QT_BEGIN_NAMESPACE
+class QSqlQueryModel;
+QT_END_NAMESPACE
 
 class ScoreModel;
 
@@ -37,16 +42,22 @@ private slots:
     void on_BTluu_clicked();
 
     void setupTable();
+    void loadTables();
     bool checkValidInputs();
     void onAddRow();
     void onDeleteCurrentRow();
 
     void on_actionchuyenlop_triggered();
+    void onSchoolYearChanged();
 
 private:
     Ui::quanlydiem *ui;
 
-    ScoreModel *model = nullptr;
+    QSqlDatabase db;
+    QSqlQueryModel *schoolYearModel = nullptr;
+    QSqlQueryModel *subjectModel    = nullptr;
+    QSqlQueryModel *classModel      = nullptr;
+    ScoreModel *model               = nullptr;
     QString username;
 };
 
