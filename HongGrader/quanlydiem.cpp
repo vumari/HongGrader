@@ -65,6 +65,7 @@ quanlydiem::quanlydiem(QWidget *parent)
     ui->tablediem->viewport()->installEventFilter(this);
     setupTable();
 
+    connect(ui->BTloc, &QPushButton::clicked, this, &quanlydiem::onFilter);
     connect(ui->BTthem, &QPushButton::clicked, this, &quanlydiem::onAddRow);
     connect(ui->BTxoa, &QPushButton::clicked,
             this, &quanlydiem::onDeleteCurrentRow);
@@ -108,6 +109,7 @@ void quanlydiem::login() {
 
     if (result == QDialog::Accepted) {
         username = formDangNhap.username;
+        loadTables();
     } else {
         qApp->quit();
     }
@@ -119,36 +121,36 @@ void quanlydiem::on_actionLog_out_triggered() {
 
 
 void quanlydiem::on_actiongiaovien_triggered() {
-    (new quanlygiaovien(this))->show();
+    showMainWindow(new quanlygiaovien(this));
 }
 
 
 void quanlydiem::on_actionhocsinh_triggered() {
-    (new quanlyhocsinh(this))->show();
+    showMainWindow(new quanlyhocsinh(this));
 }
 
 
 void quanlydiem::on_actionlop_triggered() {
-    (new quanlylophoc(this))->show();
+    showMainWindow(new quanlylophoc(this));
 }
 
 
 void quanlydiem::on_actionEdit_triggered() {
-    (new quanlytaikhoan(this))->show();
+    showMainWindow(new quanlytaikhoan(this));
 }
 
 
 void quanlydiem::on_actionscoreboard_triggered() {
-    (new thongkediem(this))->show();
+    showMainWindow(new thongkediem(this));
 }
 
 
 void quanlydiem::on_actionstudentlist_triggered() {
-    (new thongkehocsinh(this))->show();
+    showMainWindow(new thongkehocsinh(this));
 }
 
 void quanlydiem::on_actionnamhoc_2_triggered() {
-    (new quanlynamhoc(this))->show();
+    showMainWindow(new quanlynamhoc(this));
 }
 
 
@@ -193,6 +195,11 @@ void quanlydiem::on_BTluu_clicked() {
     ui->menubar->setDisabled(false);
 }
 
+void quanlydiem::showMainWindow(QMainWindow *window) const {
+    connect(window, &QMainWindow::destroyed, this, &quanlydiem::loadTables);
+    window->show();
+}
+
 void quanlydiem::setupTable() {
     ui->tablediem->horizontalHeader()->resizeSections(
         QHeaderView::ResizeToContents);
@@ -202,6 +209,9 @@ void quanlydiem::setupTable() {
 }
 
 void quanlydiem::loadTables() {
+    schoolYearModel->setQuery("SELECT * FROM NamHoc", db);
+    subjectModel->setQuery("SELECT * FROM Mon", db);
+    model->select();
 }
 
 bool quanlydiem::checkValidInputs() {
@@ -215,6 +225,14 @@ bool quanlydiem::checkValidInputs() {
     }
 
     return true;
+}
+
+void quanlydiem::onFilter() {
+    model->setFilters(Helper::getCurrIdFromComboBox(ui->CBlop).toInt(),
+                      Helper::getCurrIdFromComboBox(ui->CBmonhoc).toString(),
+                      ui->RBHK1->isChecked() ? 1 : 2);
+    model->select();
+    setupTable();
 }
 
 void quanlydiem::onAddRow() {
@@ -239,7 +257,7 @@ void quanlydiem::onDeleteCurrentRow() {
 }
 
 void quanlydiem::on_actionchuyenlop_triggered() {
-    (new chuyenlop(this))->show();
+    showMainWindow(new chuyenlop(this));
 }
 
 void quanlydiem::onSchoolYearChanged() {

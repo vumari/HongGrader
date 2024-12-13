@@ -143,7 +143,7 @@ ON Diem.TenNamHoc = Lop.TenNamHoc)" };
     queryParts << "ORDER BY AVG(Diem.DiemTB) DESC";
 
     QSqlDatabase db = QSqlDatabase::database();
-    qDebug() << queryParts.join(' ');
+    // qDebug() << queryParts.join(' ');
     model->setQuery(queryParts.join(' '), db);
     if (model->lastError().isValid()) {
         QMessageBox::critical(this, "Lỗi CSDL",

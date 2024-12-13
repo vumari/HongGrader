@@ -41,9 +41,12 @@ private slots:
     void on_BThuy_clicked();
     void on_BTluu_clicked();
 
+    void showMainWindow(QMainWindow *window) const;
+
     void setupTable();
     void loadTables();
     bool checkValidInputs();
+    void onFilter();
     void onAddRow();
     void onDeleteCurrentRow();
 

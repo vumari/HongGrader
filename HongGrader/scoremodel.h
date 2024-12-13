@@ -13,9 +13,16 @@ public:
     ~ScoreModel() override;
 
     QSqlDatabase database() const;
+
+    void setFilters(const int &classId, const QString &subjectId,
+                    const int &termId);
+    void clearFilters();
+
     void select();
-    void appendRow(const int studentId, const QString &subjectId,
-                   const int &termId, const QString &schoolYear);
+
+    bool appendRow(const int studentId, const QString &subjectId,
+                   const int &termId, const QString &schoolYear,
+                   const bool reload = true);
     bool deleteRow(const int studentId, const QString &subjectId,
                    const int &termId, const QString &schoolYear,
                    bool refresh = true);
@@ -39,10 +46,24 @@ public:
                     const QModelIndex &parent = QModelIndex()) override;
 
 private:
-    QSqlDatabase db;
-    QMap<QPersistentModelIndex, QVariant> changedCells;
-    QWidget *parentWidget = nullptr;
+    enum RowExistsResult {
+        Error     = -1,
+        NotExists = 0,
+        Exists    = 1,
+    };
 
+    QSqlDatabase db;
+    QMap<int, QMap<QPersistentModelIndex, QVariant> > changedCells;
+    QWidget *parentWidget = nullptr;
+    int filterClassId     = -1;
+    int filterTermId      = -1;
+    QString filterSubjectId;
+
+    void selectAll();
+    void selectWithFilter(const int &classId, const QString &subjectId,
+                          const int &termId);
+    RowExistsResult rowExists(const int studentId, const QString &subjectId,
+                              const int &termId, const QString &schoolYear);
     bool updateItem(const int studentId, const QString &subjectId,
                     const int &termId, const QString &schoolYear,
                     const QPersistentModelIndex &index, const QVariant &value);
