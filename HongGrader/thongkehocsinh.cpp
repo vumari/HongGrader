@@ -5,7 +5,6 @@
 #include "tableexporter.h"
 
 #include <QSqlQueryModel>
-#include <QSqlField>
 #include <QSqlError>
 #include <QMessageBox>
 #include <QSqlQuery>

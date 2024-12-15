@@ -347,6 +347,9 @@ void quanlyhocsinh::onAddClass() {
 
         onFilter();
         loadClassDetails();
+    } else {
+        QMessageBox::information(this, "Hãy chọn học sinh",
+                                 "Xin vui lòng chọn 1 học sinh để thêm vào lớp");
     }
 }
 
@@ -369,6 +372,9 @@ void quanlyhocsinh::onDeleteClass() {
             QMessageBox::critical(this, "Lỗi xoá học sinh ra khỏi lớp",
                                   query.lastError().text());
         }
+    } else {
+        QMessageBox::information(this, "Hãy chọn học sinh",
+                                 "Xin vui lòng chọn 1 học sinh để xoá trong lớp");
     }
 
     onFilter();
