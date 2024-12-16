@@ -109,35 +109,36 @@ void chuyenlop::loadClassTable(QSqlQueryModel *model,
                                QComboBox *schoolYearCombo,
                                QComboBox *classCombo) {
     const static QLatin1StringView queryTemplate{
-        R"(SELECT HS.MaHS, HS.HoTen,
-Lop.TenNamHoc,
-AVG(DiemHK1) AS HK1, AVG(DiemHK2) AS HK2,
-(AVG(DiemHK1) + AVG(DiemHK2) * 2) / 3 AS TBN
-FROM HocSinh AS HS
-INNER JOIN ChiTietHocSinh_Lop AS CT
-ON CT.MaHS = HS.MaHS
-INNER JOIN Lop
-ON Lop.MaLop = CT.MaLop
-AND Lop.MaLop = ?
-INNER JOIN (
-    SELECT MaHS, AVG(DiemTB) AS DiemHK1
-    FROM DiemTongHop AS Diem
-    WHERE MaHK = 1
-    AND Diem.MaHS = MaHS
-    AND Diem.TenNamHoc = TenNamHoc
-    GROUP BY MaHS
-) AS HK1
-ON HK1.MaHS = HS.MaHS
-INNER JOIN (
-    SELECT MaHS, AVG(DiemTB) AS DiemHK2
-    FROM DiemTongHop AS Diem
-    WHERE MaHK = 2
-    AND Diem.MaHS = MaHS
-    AND Diem.TenNamHoc = TenNamHoc
-    GROUP BY MaHS
-) AS HK2
-ON HK1.MaHS = HS.MaHS
-GROUP BY HS.MaHS, HoTen, Lop.TenNamHoc)" };
+        R"(WITH T AS (
+    SELECT HS.MaHS, HS.HoTen,
+    (
+        SELECT AVG(DiemTB) AS DiemHK1
+        FROM DiemTongHop AS Diem
+        WHERE MaHK = 1
+        AND Diem.MaHS = HS.MaHS
+        AND Diem.TenNamHoc = Lop.TenNamHoc
+        GROUP BY MaHS
+    ) AS DiemHK1,
+    (
+        SELECT AVG(DiemTB) AS DiemHK2
+        FROM DiemTongHop AS Diem
+        WHERE MaHK = 2
+        AND Diem.MaHS = HS.MaHS
+        AND Diem.TenNamHoc = Lop.TenNamHoc
+        GROUP BY MaHS
+    ) AS DiemHK2
+    FROM HocSinh AS HS
+    INNER JOIN ChiTietHocSinh_Lop AS CT
+    ON CT.MaHS = HS.MaHS
+    AND CT.MaLop = ?
+    INNER JOIN Lop
+    ON Lop.MaLop = CT.MaLop
+    GROUP BY HS.MaHS, HoTen, Lop.TenNamHoc
+)
+SELECT MaHS, HoTen,
+ROUND(DiemHK1, 2) AS TBHK1, ROUND(DiemHK2, 2) AS TBHK1,
+ROUND((DiemHK1 + DiemHK2 * 2) / 3, 2) AS TBCN
+FROM T)" };
 
     if (schoolYearCombo->currentIndex() == -1) {
         QMessageBox::critical(this, "Lỗi nhập liệu", "Vui lòng chọn năm học");

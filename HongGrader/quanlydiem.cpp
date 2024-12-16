@@ -92,11 +92,8 @@ bool quanlydiem::eventFilter(QObject *obj, QEvent *event) {
             return QObject::eventFilter(obj, event);
         }
         QModelIndex index = ui->tablediem->indexAt(mouseEvent->pos());
-        if (index.isValid()) {
-            const int col = index.column();
-            if (((col >= 7) && (col <= 7 + 5)) || (col == 14)) {
-                model->setData(index, QVariant(QMetaType::fromType<float>()));
-            }
+        if (index.isValid() && (model->flags(index) & Qt::ItemIsEditable)) {
+            model->setData(index, QVariant(QMetaType::fromType<float>()));
         }
     }
 
