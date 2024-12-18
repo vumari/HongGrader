@@ -1,8 +1,6 @@
 ﻿use QLDiemTHPT
 go
 --=======================================================================================================================================================
-INSERT INTO TaiKhoan (userName, passWord) VALUES
-('1','1')
 --Môn
 INSERT INTO Mon (MaMon, TenMon) VALUES
 -- 7 môn bắt buộc
@@ -38,19 +36,19 @@ INSERT INTO NamHoc (TenNamHoc,TrangThai) VALUES
 --=======================================================================================================================================================
 --Giáo viên
 INSERT INTO GiaoVien (TenGV, NgaySinh, GioiTinh, DiaChi, SDT, Email,MaMon) VALUES
-(N'Nguyễn Văn A', '1980-03-12', 0, N'Hà Nội', '1234567890', 'nguyenvana@gmail.com','Toan'),
-(N'Trần Thị B', '1985-07-23', 1, N'Hà Nội', '1234567891', 'tranthib@gmail.com','Ly'),
-(N'Lê Văn C', '1978-11-02', 0, N'Hải Phòng', '1234567892', 'levanc@gmail.com','Hoa'),
-(N'Hoàng Thị D', '1983-09-05', 1, N'Đà Nẵng', '1234567893', 'hoangthid@gmail.com','Sinh'),
-(N'Phạm Văn E', '1979-06-20', 0, N'TP.HCM', '1234567894', 'phamvane@gmail.com','Su'),
-(N'Đỗ Thị F', '1986-02-14', 1, N'Hà Nội', '1234567895', 'dothif@gmail.com','Dia'),
-(N'Nguyễn Thị G', '1981-01-01', 1, N'Huế', '1234567896', 'nguyenthig@gmail.com','KTPL'),
-(N'Trương Văn H', '1977-12-11', 0, N'Cần Thơ', '1234567897', 'truongvanh@gmail.com','Tin'),
-(N'Vũ Văn I', '1982-05-18', 0, N'Quảng Ninh', '1234567898', 'vuvani@gmail.com','CN'),
-(N'Lường Thị J', '1984-08-29', 1, N'Hà Nội', '1234567899', 'luongthij@gmail.com','NN1'),
-(N'Phan Văn K', '1987-04-22', 0, N'Hà Tĩnh', '1234567800', 'phanvank@gmail.com','TD'),
-(N'Nguyễn Thị L', '1980-10-30', 1, N'Đà Lạt', '1234567801', 'nguyenthil@gmail.com','Van'),
-(N'Bùi Văn M', '1983-03-03', 0, N'Phú Thọ', '1234567802', 'buivanm@gmail.com','QPAN');
+(N'Nguyễn Văn A', '1980-03-12', 0, N'Hà Nội', '0123456789', 'nguyenvana@gmail.com','Toan'),
+(N'Trần Thị B', '1985-07-23', 1, N'Hà Nội', '0234567808', 'tranthib@gmail.com','Ly'),
+(N'Lê Văn C', '1978-11-02', 0, N'Hải Phòng', '0234567892', 'levanc@gmail.com','Hoa'),
+(N'Hoàng Thị D', '1983-09-05', 1, N'Đà Nẵng', '0234567893', 'hoangthid@gmail.com','Sinh'),
+(N'Phạm Văn E', '1979-06-20', 0, N'TP.HCM', '0234567894', 'phamvane@gmail.com','Su'),
+(N'Đỗ Thị F', '1986-02-14', 1, N'Hà Nội', '0234567895', 'dothif@gmail.com','Dia'),
+(N'Nguyễn Thị G', '1981-01-01', 1, N'Huế', '0234567896', 'nguyenthig@gmail.com','KTPL'),
+(N'Trương Văn H', '1977-12-11', 0, N'Cần Thơ', '0234567897', 'truongvanh@gmail.com','Tin'),
+(N'Vũ Văn I', '1982-05-18', 0, N'Quảng Ninh', '0234567898', 'vuvani@gmail.com','CN'),
+(N'Lường Thị J', '1984-08-29', 1, N'Hà Nội', '0234567899', 'luongthij@gmail.com','NN1'),
+(N'Phan Văn K', '1987-04-22', 0, N'Hà Tĩnh', '0234567800', 'phanvank@gmail.com','TD'),
+(N'Nguyễn Thị L', '1980-10-30', 1, N'Đà Lạt', '0234567801', 'nguyenthil@gmail.com','Van'),
+(N'Bùi Văn M', '1983-03-03', 0, N'Phú Thọ', '0234567802', 'buivanm@gmail.com','QPAN');
 --=======================================================================================================================================================
 --Lớp
 -- Lớp 10 - Năm học 2022-2023
