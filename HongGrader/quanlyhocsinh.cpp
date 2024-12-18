@@ -162,7 +162,7 @@ quanlyhocsinh::~quanlyhocsinh() {
     delete ui;
 }
 
-bool quanlyhocsinh::checkValidInputs() {
+bool quanlyhocsinh::checkValidInputs(const bool adding) {
     if (ui->LEten->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập họ và tên.");
@@ -183,7 +183,7 @@ bool quanlyhocsinh::checkValidInputs() {
     }
 
     const static QLatin1StringView queryTemplate{
-        "IF EXISTS(SELECT * FROM HocSinh WHERE HoTen = ? AND NgaySinh = ? AND GioiTinh = ? AND DanToc = ? AND NoiSinh = ?) SELECT 1 ELSE SELECT 0" };
+        "SELECT * FROM HocSinh WHERE HoTen = ? AND NgaySinh = ? AND GioiTinh = ? AND DanToc = ? AND NoiSinh = ?" };
 
     QSqlQuery query{ model->database() };
 
@@ -194,17 +194,33 @@ bool quanlyhocsinh::checkValidInputs() {
     query.addBindValue(ui->LEdantoc->text().trimmed());
     query.addBindValue(ui->LEnoisinh->text().trimmed());
 
-    if (!query.exec() || !query.first()) {
+    if (!query.exec()) {
         QMessageBox::critical(this, "Lỗi CSDL",
                               query.lastError().text());
         return false;
     }
-    if (query.record().value(0).toBool()) {
-        QMessageBox::critical(this,
-                              "Lỗi trùng học sinh",
-                              "Đã có học sinh trùng với các thuộc tính này rồi.");
+    if (query.first()) {
+        const auto &&result = query.record().value(0);
+        if (adding) {
+            QMessageBox::critical(this,
+                                  "Lỗi trùng học sinh",
+                                  "Đã có học sinh trùng với các thuộc tính này rồi.");
 
-        return false;
+            return false;
+        } else if (ui->tablehocsinh->selectionModel()->hasSelection()) {
+            const int currId =
+                ui->tablehocsinh->selectionModel()->currentIndex().
+                siblingAtColumn(0).data().toInt();
+            if (result.toInt() != currId) {
+                QMessageBox::critical(this,
+                                      "Lỗi trùng học sinh",
+                                      "Đã có học sinh trùng với các thuộc tính này rồi.");
+
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     return true;
@@ -247,7 +263,7 @@ void quanlyhocsinh::onCurrRowChanged(const QModelIndex &current,
 }
 
 void quanlyhocsinh::onAddRow() {
-    if (!checkValidInputs()) {
+    if (!checkValidInputs(true)) {
         return;
     }
 
@@ -266,7 +282,7 @@ void quanlyhocsinh::onAddRow() {
 
 void quanlyhocsinh::onEditCurrentRow() {
     if (ui->tablehocsinh->selectionModel()->hasSelection()) {
-        if (!checkValidInputs()) {
+        if (!checkValidInputs(false)) {
             return;
         }
 

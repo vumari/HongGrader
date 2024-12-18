@@ -10,6 +10,7 @@
 #include <QSqlField>
 #include <QSqlError>
 #include <QMessageBox>
+#include <QSqlQuery>
 #include <QRegularExpressionValidator>
 
 quanlygiaovien::quanlygiaovien(QWidget *parent)
@@ -82,7 +83,7 @@ quanlygiaovien::~quanlygiaovien() {
     delete ui;
 }
 
-bool quanlygiaovien::checkValidInputs() {
+bool quanlygiaovien::checkValidInputs(const bool adding) {
     if (ui->LEtenGV->text().trimmed().isEmpty()) {
         QMessageBox::critical(this, "Lỗi nhập liệu",
                               "Vui lòng nhập họ và tên.");
@@ -122,11 +123,55 @@ bool quanlygiaovien::checkValidInputs() {
                               "Vui lòng chọn môn dạy.");
         ui->CBmon->setFocus(Qt::OtherFocusReason);
     }
+
+    const static QLatin1StringView queryTemplate{
+        "SELECT * FROM GiaoVien WHERE TenGV = ? AND NgaySinh = ? AND GioiTinh = ? AND DiaChi = ? AND Email = ?" };
+
+    QSqlQuery query{ model->database() };
+
+    query.prepare(queryTemplate);
+    query.addBindValue(ui->LEtenGV->text().trimmed());
+    query.addBindValue(ui->DEngaysinh->date());
+    query.addBindValue(ui->RBnu->isChecked());
+    query.addBindValue(ui->LEdiachi->text().trimmed());
+    // query.addBindValue(ui->LEdienthoai->text().trimmed());
+    query.addBindValue(ui->LEemail->text().trimmed());
+    qDebug() << query.boundValues();
+
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Lỗi CSDL",
+                              query.lastError().text());
+        return false;
+    }
+    if (query.first()) {
+        const auto &&result = query.record().value(0);
+        if (adding) {
+            QMessageBox::critical(this,
+                                  "Lỗi trùng giáo viên",
+                                  "Đã có giáo viên trùng với các thuộc tính này rồi.");
+
+            return false;
+        } else if (ui->tablegiaovien->selectionModel()->hasSelection()) {
+            const int currId =
+                ui->tablegiaovien->selectionModel()->currentIndex().
+                siblingAtColumn(0).data().toInt();
+            if (result.toInt() != currId) {
+                QMessageBox::critical(this,
+                                      "Lỗi trùng giáo viên",
+                                      "Đã có giáo viên trùng với các thuộc tính này rồi.");
+
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     return true;
 }
 
 void quanlygiaovien::onAddRow() {
-    if (!checkValidInputs()) {
+    if (!checkValidInputs(true)) {
         return;
     }
 
@@ -147,7 +192,7 @@ void quanlygiaovien::onAddRow() {
 
 void quanlygiaovien::onEditCurrentRow() {
     if (ui->tablegiaovien->selectionModel()->hasSelection()) {
-        if (!checkValidInputs()) {
+        if (!checkValidInputs(false)) {
             return;
         }
 

@@ -31,7 +31,7 @@ private:
 
     QDataWidgetMapper *mapper = nullptr;
 
-    bool checkValidInputs();
+    bool checkValidInputs(const bool adding);
     void loadClassDetails();
     void onCurrRowChanged(const QModelIndex &current,
                           const QModelIndex &previous);

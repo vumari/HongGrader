@@ -27,7 +27,7 @@ private:
     QDataWidgetMapper *mapper       = nullptr;
     QSqlRecord recordToInsert;
 
-    bool checkValidInputs();
+    bool checkValidInputs(const bool adding);
     void onAddRow();
     void onEditCurrentRow();
     void onDeleteCurrentRow();
