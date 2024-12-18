@@ -136,7 +136,7 @@ bool quanlygiaovien::checkValidInputs(const bool adding) {
     query.addBindValue(ui->LEdiachi->text().trimmed());
     // query.addBindValue(ui->LEdienthoai->text().trimmed());
     query.addBindValue(ui->LEemail->text().trimmed());
-    qDebug() << query.boundValues();
+    // qDebug() << query.boundValues();
 
     if (!query.exec()) {
         QMessageBox::critical(this, "Lỗi CSDL",

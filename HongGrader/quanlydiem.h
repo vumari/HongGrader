@@ -45,10 +45,7 @@ private slots:
 
     void setupTable();
     void loadTables();
-    bool checkValidInputs();
     void onFilter();
-    void onAddRow();
-    void onDeleteCurrentRow();
 
     void on_actionchuyenlop_triggered();
     void onSchoolYearChanged();

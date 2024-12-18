@@ -66,9 +66,6 @@ quanlydiem::quanlydiem(QWidget *parent)
     setupTable();
 
     connect(ui->BTloc, &QPushButton::clicked, this, &quanlydiem::onFilter);
-    connect(ui->BTthem, &QPushButton::clicked, this, &quanlydiem::onAddRow);
-    connect(ui->BTxoa, &QPushButton::clicked,
-            this, &quanlydiem::onDeleteCurrentRow);
 
     QTimer::singleShot(1, this, &quanlydiem::login);
 }
@@ -150,14 +147,11 @@ void quanlydiem::on_actionnamhoc_2_triggered() {
     showMainWindow(new quanlynamhoc(this));
 }
 
-
 void quanlydiem::on_BTsua_clicked() {
     ui->BTsua->hide();
     ui->BThuy->show();
     ui->BTluu->show();
-    ui->BTthem->setDisabled(true);
     ui->groupBox->setDisabled(true);
-    ui->BTxoa->setDisabled(true);
     ui->tablediem->setEditTriggers(
         QTableView::DoubleClicked | QTableView::SelectedClicked |
         QTableView::EditKeyPressed);
@@ -171,9 +165,7 @@ void quanlydiem::on_BThuy_clicked() {
     ui->BThuy->hide();
     ui->BTluu->hide();
     ui->BTsua->show();
-    ui->BTthem->setDisabled(false);
     ui->groupBox->setDisabled(false);
-    ui->BTxoa->setDisabled(false);
     ui->tablediem->setEditTriggers(QTableView::NoEditTriggers);
     ui->menubar->setDisabled(false);
 }
@@ -185,9 +177,7 @@ void quanlydiem::on_BTluu_clicked() {
     ui->BTluu->hide();
     ui->BThuy->hide();
     ui->BTsua->show();
-    ui->BTthem->setDisabled(false);
     ui->groupBox->setDisabled(false);
-    ui->BTxoa->setDisabled(false);
     ui->tablediem->setEditTriggers(QTableView::NoEditTriggers);
     ui->menubar->setDisabled(false);
 }
@@ -211,46 +201,12 @@ void quanlydiem::loadTables() {
     model->select();
 }
 
-bool quanlydiem::checkValidInputs() {
-    const int studentId = ui->SBmaHS->value();
-
-    if (!Helper::ifStudentIdExists(model->database(), studentId, this)) {
-        QMessageBox::critical(this, "Lỗi nhập liệu",
-                              "Mã học sinh không tồn tại.");
-        ui->SBmaHS->setFocus(Qt::OtherFocusReason);
-        return false;
-    }
-
-    return true;
-}
-
 void quanlydiem::onFilter() {
     model->setFilters(Helper::getCurrIdFromComboBox(ui->CBlop).toInt(),
                       Helper::getCurrIdFromComboBox(ui->CBmonhoc).toString(),
                       ui->RBHK1->isChecked() ? 1 : 2);
     model->select();
     setupTable();
-}
-
-void quanlydiem::onAddRow() {
-    if (!checkValidInputs()) {
-        return;
-    }
-
-    model->appendRow(ui->SBmaHS->value(),
-                     Helper::getCurrIdFromComboBox(ui->CBmonhoc).toString(),
-                     ui->RBHK1->isChecked() ? 1 : 2,
-                     ui->CBnamhoc->currentText());
-    setupTable();
-}
-
-void quanlydiem::onDeleteCurrentRow() {
-    auto *selectionModel = ui->tablediem->selectionModel();
-
-    if (selectionModel->hasSelection()) {
-        model->removeRow(selectionModel->currentIndex().row());
-        setupTable();
-    }
 }
 
 void quanlydiem::on_actionchuyenlop_triggered() {
