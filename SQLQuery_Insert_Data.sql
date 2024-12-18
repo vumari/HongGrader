@@ -1,8 +1,6 @@
 ﻿use QLDiemTHPT
 go
 --=======================================================================================================================================================
-INSERT INTO TaiKhoan (userName, passWord) VALUES
-('1','1')
 --Môn
 INSERT INTO Mon (MaMon, TenMon) VALUES
 -- 7 môn bắt buộc
